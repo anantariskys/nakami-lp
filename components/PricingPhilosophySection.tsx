@@ -1,6 +1,6 @@
 import React from "react";
 import { createWhatsAppUrl } from "@/lib/constants";
-import { ShieldCheck, FileCheck, Layers, ArrowRight, CheckCircle2, Coins } from "lucide-react";
+import { ShieldCheck, FileCheck, Layers, ArrowRight, CheckCircle2 } from "lucide-react";
 
 export function PricingPhilosophySection() {
   return (
@@ -8,10 +8,6 @@ export function PricingPhilosophySection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C1E24] border border-[#2E323B] text-xs font-mono text-[#F9B637] mb-4">
-            <Coins className="w-3.5 h-3.5" />
-            <span>SKEMA BIAYA & ALUR KERJA</span>
-          </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-4">
             Biaya Pasti Berdasarkan Lingkup Kerja,{" "}
             <span className="text-sunset-gradient">
@@ -32,7 +28,7 @@ export function PricingPhilosophySection() {
             </div>
             <h3 className="text-lg font-bold text-white mb-2">Audit Gratis 15 Menit</h3>
             <p className="text-sm text-[#94A3B8] leading-relaxed">
-              Diskusi eksplorasi mendalam untuk membedah problem nyata bisnis/skripsi sebelum Anda mengeluarkan komitmen finansial apa pun.
+              Diskusi eksplorasi mendalam untuk membedah problem nyata bisnis atau skripsi sebelum Anda mengeluarkan komitmen finansial apa pun.
             </p>
           </div>
 
@@ -42,7 +38,7 @@ export function PricingPhilosophySection() {
             </div>
             <h3 className="text-lg font-bold text-white mb-2">Fixed-Scope Agreement</h3>
             <p className="text-sm text-[#94A3B8] leading-relaxed">
-              Spesifikasi modul, fitur, deliverables, dan jadwal selesai dikunci transparan dalam dokumen kesepakatan resmi.
+              Spesifikasi modul, fitur, deliverables, dan jadwal selesai dikunci transparan dalam dokumen kesepakatan tertulis.
             </p>
           </div>
 
@@ -58,7 +54,7 @@ export function PricingPhilosophySection() {
         </div>
 
         {/* 3-Milestone Payment Flow */}
-        <div className="rounded-3xl bg-[#17181C] border border-[#2E323B] p-8 sm:p-12 mb-12 shadow-glow-warm">
+        <div className="rounded-3xl bg-[#17181C] border border-[#2E323B] p-8 sm:p-12 mb-12 shadow-card-subtle">
           <div className="text-center max-w-xl mx-auto mb-10">
             <span className="text-xs font-mono uppercase tracking-widest text-[#FB6C00]">
               SKEMA 3 TERMIN PEMBAYARAN UMKM (50 - 30 - 20)
@@ -98,14 +94,14 @@ export function PricingPhilosophySection() {
                   </span>
                   <span className="text-2xl font-black text-white font-[var(--font-display)]">30%</span>
                 </div>
-                <h4 className="text-base font-bold text-white mb-2">Milestone Fungsional Inti</h4>
+                <h4 className="text-base font-bold text-white mb-2">Demo Staging & Testing</h4>
                 <p className="text-xs text-[#94A3B8] leading-relaxed mb-4">
-                  Fitur utama selesai dikembangkan dan didemokan secara live di server staging untuk pengujian langsung oleh Anda.
+                  Fitur inti selesai dikembangkan dan dideploy di server staging pribadi. Klien menguji langsung alur transaksi & data.
                 </p>
               </div>
-              <div className="pt-3 border-t border-[#2E323B] text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
+              <div className="pt-3 border-t border-[#2E323B] text-[11px] font-mono text-amber-400 flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Uji coba fungsi aktif</span>
+                <span>Verifikasi fitur sebelum peluncuran</span>
               </div>
             </div>
 
@@ -118,39 +114,31 @@ export function PricingPhilosophySection() {
                   </span>
                   <span className="text-2xl font-black text-white font-[var(--font-display)]">20%</span>
                 </div>
-                <h4 className="text-base font-bold text-white mb-2">Peluncuran & Handover Penuh</h4>
+                <h4 className="text-base font-bold text-white mb-2">Peluncuran & Serah Terima</h4>
                 <p className="text-xs text-[#94A3B8] leading-relaxed mb-4">
-                  Deployment live ke domain utama, penyerahan full source code tanpa vendor lock-in, dan pelatihan staf sampai mahir.
+                  Deploy ke domain & server produksi resmi, penyerahan full source code repo, panduan admin, serta aktivasi garansi 30 hari.
                 </p>
               </div>
               <div className="pt-3 border-t border-[#2E323B] text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Garansi 30 hari aktif</span>
+                <span>Aset 100% milik klien penuh</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Footer Guarantee Strip */}
-        <div className="p-6 rounded-2xl bg-[#1C1E24] border border-[#2E323B] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-sm font-bold text-white">Garansi Perbaikan Bug Gratis 30 Hari Pascapeluncuran</p>
-              <p className="text-xs text-[#94A3B8]">Kami mendampingi stabilitas sistem hingga bisnis Anda beroperasi lancar tanpa kendala.</p>
-            </div>
-          </div>
-
+        {/* CTA Bar */}
+        <div className="text-center">
           <a
-            href={createWhatsAppUrl("Halo Nakami Studio, saya ingin menanyakan skema pembayaran dan estimasi proyek saya...")}
+            href={createWhatsAppUrl(
+              "Halo Nakami Studio, saya ingin konsultasi skema fixed-scope dan estimasi biaya proyek saya..."
+            )}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cta-gradient text-white text-xs sm:text-sm font-bold shadow-glow-warm hover:scale-105 transition-all shrink-0"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#1C1E24] hover:bg-[#22252C] text-white border border-[#2E323B] hover:border-[#FB6C00]/50 font-semibold text-sm transition-all active:translate-y-px"
           >
-            <span>Tanya Estimasi Proyek</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <span>Tanya Rincian Biaya via WhatsApp</span>
+            <ArrowRight className="w-4 h-4 text-[#FB6C00]" />
           </a>
         </div>
       </div>

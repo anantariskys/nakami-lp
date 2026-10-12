@@ -27,7 +27,7 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-emerald-400" />
-                <span>Senin – Sabtu • 09:00 – 21:00 WIB</span>
+                <span>Senin - Sabtu | 09:00 - 21:00 WIB</span>
               </div>
             </div>
 

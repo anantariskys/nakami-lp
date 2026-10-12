@@ -73,19 +73,19 @@ body {
 }
 
 .shadow-glow-warm {
-  box-shadow: 0 0 25px -4px rgba(251, 108, 0, 0.35);
+  box-shadow: 0 4px 16px -2px rgba(251, 108, 0, 0.22);
 }
 
 .shadow-glow-crimson {
-  box-shadow: 0 0 25px -4px rgba(231, 63, 30, 0.35);
+  box-shadow: 0 4px 16px -2px rgba(231, 63, 30, 0.22);
 }
 
 .shadow-glow-card {
-  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.6), 0 0 1px 1px rgba(251, 108, 0, 0.25);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(251, 108, 0, 0.18);
 }
 
 .shadow-card-subtle {
-  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.5);
 }
 
 /* Reduced motion support */

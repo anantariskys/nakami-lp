@@ -68,41 +68,33 @@ const EDU_OPTIONS: ProblemOption[] = [
     id: "edu_debug",
     label: "Stuck Error Debugging Berhari-hari",
     recommendedCode: "EDU-01",
-    recommendedTitle: "Live Debugging 1-on-1 & Code Review Intensif",
+    recommendedTitle: "Live 1-on-1 Code Debugging & Problem Solving",
     recommendationNote:
-      "Sesi live screen-share mencari akar error bersama mentor dan pemahaman logika pencegahannya.",
+      "Screen-share intensif untuk membedah bug, stack trace error, dan pemahaman logika perbaikan.",
   },
   {
-    id: "edu_db",
-    label: "Bingung Arsitektur Database / Relasi ERD & API",
+    id: "edu_arch",
+    label: "Bingung Desain Database & Alur API Skripsi",
     recommendedCode: "EDU-02",
-    recommendedTitle: "Mentoring Arsitektur Database & Backend API",
+    recommendedTitle: "Bimbingan Arsitektur Software & Skema Database",
     recommendationNote:
-      "Perancangan relasi database terstruktur normalisasi dan standarisasi REST API siap sidang.",
+      "Pendampingan perancangan ERD normalisasi, clean architecture API, dan flow diagram sistem.",
   },
   {
-    id: "edu_exam",
-    label: "Cemas Menghadapi Sidang Skripsi & Pertanyaan Dosen",
+    id: "edu_defense",
+    label: "Takut Tidak Bisa Jawab Pertanyaan Dosen Penguji",
     recommendedCode: "EDU-03",
-    recommendedTitle: "Simulasi Sidang Skripsi IT & Bedah Kode Menyeluruh",
+    recommendedTitle: "Simulasi Ujian Sidang & Bedah Logika Source Code",
     recommendationNote:
-      "Latihan tanya-jawab teknis khas penguji skripsi dan bedah alur kode baris demi baris.",
-  },
-  {
-    id: "edu_logic",
-    label: "Butuh Pemahaman Logika Kode Baris demi Baris",
-    recommendedCode: "EDU-01",
-    recommendedTitle: "Live Code Walkthrough & Mentoring Logika 1-on-1",
-    recommendationNote:
-      "Eksplorasi setiap baris algoritma agar Anda menguasai penuh karya ciptaan Anda sendiri.",
+      "Bedah baris per baris kode sumber aplikasi agar Anda menguasai jawaban pertanyaan teknis penguji.",
   },
   {
     id: "edu_other",
-    label: "Konsultasi Topik Riset / Tugas Akhir Lainnya",
+    label: "Konsultasi Masalah Teknis Coding Lainnya",
     recommendedCode: "EDU-AUDIT",
-    recommendedTitle: "Konsultasi Arah Riset Perangkat Lunak Etis",
+    recommendedTitle: "Sesi Konsultasi & Roadmap Belajar Mandiri",
     recommendationNote:
-      "Validasi metodologi software engineering dan kepatuhan integritas akademik tanpa joki.",
+      "Pemetaan problem teknis coding Anda dan saran metodologi yang paling relevan untuk dipelajari.",
   },
 ];
 
@@ -158,10 +150,6 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C1E24] border border-[#2E323B] text-xs font-mono text-[#FB6C00] mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>SIMULASI KEBUTUHAN</span>
-          </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-4">
             Cek Solusi yang Sesuai{" "}
             <span className="text-sunset-gradient">
@@ -174,7 +162,7 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
         </div>
 
         {/* Card Form */}
-        <div className="rounded-3xl bg-[#1C1E24] border border-[#2E323B] p-6 sm:p-10 shadow-glow-card relative">
+        <div className="rounded-3xl bg-[#1C1E24] border border-[#2E323B] p-6 sm:p-10 shadow-card-subtle relative">
           <form onSubmit={handleSubmit} noValidate>
             {/* Step 1: Segment Toggle */}
             <div className="mb-8">
@@ -187,7 +175,7 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
                   onClick={() => handleSegmentChange("biz")}
                   className={`flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl border text-sm font-bold transition-all ${
                     segment === "biz"
-                      ? "bg-cta-gradient text-white border-transparent shadow-glow-warm"
+                      ? "bg-cta-gradient text-white border-transparent shadow-sm"
                       : "bg-[#121316] text-[#94A3B8] border-[#2E323B] hover:text-white hover:border-[#3F4450]"
                   }`}
                 >
@@ -199,7 +187,7 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
                   onClick={() => handleSegmentChange("edu")}
                   className={`flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl border text-sm font-bold transition-all ${
                     segment === "edu"
-                      ? "bg-cta-gradient text-white border-transparent shadow-glow-warm"
+                      ? "bg-cta-gradient text-white border-transparent shadow-sm"
                       : "bg-[#121316] text-[#94A3B8] border-[#2E323B] hover:text-white hover:border-[#3F4450]"
                   }`}
                 >
@@ -224,7 +212,7 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
                       onClick={() => setSelectedProblemId(opt.id)}
                       className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border text-left transition-all ${
                         isSelected
-                          ? "bg-[#FB6C00]/15 text-white border-[#FB6C00] shadow-[0_0_12px_rgba(251,108,0,0.25)] font-semibold"
+                          ? "bg-[#FB6C00]/15 text-white border-[#FB6C00] font-semibold shadow-sm"
                           : "bg-[#121316] text-[#94A3B8] border-[#2E323B] hover:text-white hover:border-[#3F4450]"
                       }`}
                     >
@@ -288,11 +276,11 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
             )}
 
             {/* Live Recommendation Preview Box */}
-            <div className="mb-8 p-5 rounded-2xl bg-[#121316] border border-[#FB6C00]/40 relative overflow-hidden">
+            <div className="mb-8 p-5 rounded-2xl bg-[#121316] border border-[#FB6C00]/30 relative overflow-hidden">
               <div className="flex items-center justify-between gap-2 mb-2">
                 <span className="text-xs font-mono text-[#F9B637] font-semibold flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Rekomendasi Paket Sistem Otomatis:</span>
+                  <Sparkles className="w-3.5 h-3.5 text-[#FB6C00]" />
+                  <span>Rekomendasi Paket Solusi:</span>
                 </span>
                 <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#1C1E24] text-[#FB6C00] border border-[#FB6C00]/30">
                   {currentSelectedOption.recommendedCode}
@@ -319,7 +307,7 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
 
               <button
                 type="submit"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-cta-gradient text-white font-bold text-sm sm:text-base hover:opacity-95 shadow-glow-warm transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-cta-gradient text-white font-bold text-sm sm:text-base hover:opacity-95 shadow-sm transition-all active:translate-y-px"
               >
                 <MessageCircle className="w-5 h-5" />
                 <span>Kirim & Mulai Konsultasi WhatsApp</span>

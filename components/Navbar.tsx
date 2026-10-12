@@ -51,13 +51,10 @@ export function Navbar() {
           </Link>
 
           {/* System Availability Status Pill (Desktop & Tablet) */}
-          <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C1E24] border border-[#2E323B] text-xs font-mono text-[#94A3B8]">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
+          <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-[#17181C] border border-[#2E323B] text-xs font-mono text-[#94A3B8]">
+            <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]"></span>
             <span className="text-white font-medium">Slot Proyek Q4:</span>
-            <span className="text-emerald-400">Aktif & Siap Mulai</span>
+            <span className="text-emerald-400">Siap Mulai</span>
           </div>
 
           {/* Desktop Navigation Links */}
@@ -204,7 +201,7 @@ export function Navbar() {
               <span>Mulai Konsultasi WhatsApp (Gratis)</span>
             </a>
             <p className="text-center text-xs text-[#64748B]">
-              Respon cepat setiap Senin – Sabtu • 09:00 – 21:00 WIB
+              Respon cepat setiap Senin - Sabtu | 09:00 - 21:00 WIB
             </p>
           </div>
         </div>

@@ -5,24 +5,13 @@ import { ShieldCheck, GraduationCap, CheckCircle2, ArrowRight, Award } from "luc
 export function NonJokiManifesto() {
   return (
     <section id="non-joki" className="py-20 md:py-28 bg-[#17181C] relative border-y border-[#2E323B] scroll-mt-24">
-      {/* Background glow subtle amber */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-amber-500/5 blur-[140px] pointer-events-none rounded-full"
-        aria-hidden="true"
-      />
-
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Banner Card */}
-        <div className="rounded-3xl bg-[#1C1E24] border-2 border-amber-500/40 p-8 sm:p-12 shadow-[0_0_40px_-10px_rgba(249,182,55,0.15)] relative overflow-hidden">
-          {/* Subtle watermark badge */}
-          <div className="absolute -top-10 -right-10 text-amber-500/5 pointer-events-none select-none">
-            <ShieldCheck className="w-80 h-80" />
-          </div>
-
+        <div className="rounded-3xl bg-[#1C1E24] border border-amber-500/30 p-8 sm:p-12 shadow-card-subtle relative overflow-hidden">
           {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-xs font-mono font-bold text-amber-400 mb-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/25 text-xs font-mono font-bold text-amber-400 mb-6">
             <ShieldCheck className="w-4 h-4" />
-            <span>INTEGRITAS AKADEMIK // MENTORING ETIS</span>
+            <span>INTEGRITAS AKADEMIK · MENTORING ETIS</span>
           </div>
 
           {/* Headline */}
@@ -38,12 +27,12 @@ export function NonJokiManifesto() {
             <p>
               Banyak jasa joki menawarkan klaim &quot;terima beres&quot; dengan kode tempelan.
               Saat dosen penguji meminta menjelaskan logika di baris tertentu, mahasiswa tidak bisa menjawab
-              atau bahkan tersangkut masalah plagiarisme.
+              atau bahkan tersangkut masalah integritas dan sanksi akademik.
             </p>
             <p>
               Kami mendampingi lewat <strong className="text-white font-semibold">Live Mentoring & Code Review 1-on-1</strong>.
               Kami bantu membedah struktur database, menelusuri sumber error, dan latihan simulasi tanya-jawab agar Anda
-              mengerti apa yang sedang Anda bangun.
+              mengerti apa yang sedang Anda bangun secara menyeluruh.
             </p>
           </div>
 
@@ -55,7 +44,7 @@ export function NonJokiManifesto() {
               </div>
               <h3 className="text-base font-bold text-white mb-2">100% Paham Mandiri</h3>
               <p className="text-xs text-[#94A3B8] leading-relaxed">
-                Paham logika kode dari awal hingga akhir, siap menjawab pertanyaan penguji secara percaya diri dan ilmiah.
+                Paham alur logika program dari awal hingga akhir, siap menjawab pertanyaan penguji secara percaya diri dan ilmiah.
               </p>
             </div>
 
@@ -65,7 +54,7 @@ export function NonJokiManifesto() {
               </div>
               <h3 className="text-base font-bold text-white mb-2">Bebas Risiko Sanksi</h3>
               <p className="text-xs text-[#94A3B8] leading-relaxed">
-                Tanpa kode bajakan atau skema curang. Portofolio tugas akhir Anda 100% etis, sah, dan membanggakan.
+                Tanpa kode bajakan atau skema curang. Portofolio tugas akhir Anda 100% etis, sah, dan dapat dipertanggungjawabkan.
               </p>
             </div>
 
@@ -75,7 +64,7 @@ export function NonJokiManifesto() {
               </div>
               <h3 className="text-base font-bold text-white mb-2">Bekal Karier Industri</h3>
               <p className="text-xs text-[#94A3B8] leading-relaxed">
-                Kemampuan membaca error stack trace dan arsitektur database yang langsung menjadi nilai jual di dunia kerja tech.
+                Kemampuan membaca error stack trace dan arsitektur database yang langsung menjadi nilai jual nyata di industri software.
               </p>
             </div>
           </div>
@@ -92,7 +81,7 @@ export function NonJokiManifesto() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-[#121316] font-bold text-sm transition-all shadow-[0_0_20px_rgba(249,182,55,0.3)] hover:scale-105 shrink-0"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-[#121316] font-bold text-sm transition-all shadow-sm active:translate-y-px shrink-0"
             >
               <span>Jadwalkan Mentoring Etis</span>
               <ArrowRight className="w-4 h-4" />

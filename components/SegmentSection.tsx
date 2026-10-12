@@ -17,7 +17,6 @@ import {
   Laptop,
   ArrowRight,
   Sparkles,
-  Layers,
 } from "lucide-react";
 
 export function SegmentSection() {
@@ -30,19 +29,9 @@ export function SegmentSection() {
 
   return (
     <section id="segment-overview" className="py-20 md:py-28 bg-[#17181C] relative">
-      {/* Decorative background glow */}
-      <div
-        className="absolute bottom-10 right-10 w-96 h-96 bg-[#FB6C00]/5 rounded-full blur-[120px] pointer-events-none"
-        aria-hidden="true"
-      />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Section Header (Restrained, no redundant eyebrow) */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C1E24] border border-[#2E323B] text-xs font-mono text-[#F9B637] mb-4">
-            <Layers className="w-3.5 h-3.5" />
-            <span>LAYANAN KAMI</span>
-          </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-4">
             Layanan Terarah untuk Pelaku Usaha{" "}
             <span className="text-sunset-gradient">
@@ -50,7 +39,7 @@ export function SegmentSection() {
             </span>
           </h2>
           <p className="text-[#94A3B8] text-base sm:text-lg">
-            Pilih kategori di bawah untuk melihat rincian masalah yang kami selesaikan dan estimasi biaya pengerjaannya.
+            Pilih kategori di bawah untuk meninjau kendala operasional yang kami tuntaskan dan rincian spesifikasi teknisnya.
           </p>
         </div>
 
@@ -59,7 +48,7 @@ export function SegmentSection() {
           <div
             role="tablist"
             aria-label="Pilihan Kategori Layanan"
-            className="inline-flex p-1.5 rounded-2xl bg-[#121316] border border-[#2E323B] shadow-lg max-w-xl w-full"
+            className="inline-flex p-1.5 rounded-2xl bg-[#121316] border border-[#2E323B] shadow-inner max-w-xl w-full"
           >
             <button
               role="tab"
@@ -69,7 +58,7 @@ export function SegmentSection() {
               onClick={() => setActiveSegment("biz")}
               className={`flex-1 flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl text-sm sm:text-base font-bold transition-all duration-200 ${
                 activeSegment === "biz"
-                  ? "bg-cta-gradient text-white shadow-glow-warm scale-[1.01]"
+                  ? "bg-cta-gradient text-white shadow-sm"
                   : "text-[#94A3B8] hover:text-white hover:bg-[#1C1E24]/60"
               }`}
             >
@@ -85,7 +74,7 @@ export function SegmentSection() {
               onClick={() => setActiveSegment("edu")}
               className={`flex-1 flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl text-sm sm:text-base font-bold transition-all duration-200 ${
                 activeSegment === "edu"
-                  ? "bg-cta-gradient text-white shadow-glow-warm scale-[1.01]"
+                  ? "bg-cta-gradient text-white shadow-sm"
                   : "text-[#94A3B8] hover:text-white hover:bg-[#1C1E24]/60"
               }`}
             >
@@ -95,13 +84,13 @@ export function SegmentSection() {
           </div>
         </div>
 
-        {/* SECTION: PROBLEM VS SOLUTION (Before vs After) */}
+        {/* SECTION: PROBLEM VS SOLUTION (Diagnostic Comparison) */}
         <div id="problem-solution" className="mb-24 scroll-mt-28">
           <div className="text-center mb-8">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#94A3B8]">
+            <span className="text-xs font-mono uppercase tracking-widest text-[#FB6C00]">
               {activeSegment === "biz"
-                ? "TRANSFORMASI OPERASIONAL BISNIS"
-                : "TRANSFORMASI AKADEMIS & SKILL CODING"}
+                ? "DIAGNOSTIK OPERASIONAL BISNIS"
+                : "DIAGNOSTIK AKADEMIS & SKILL CODING"}
             </span>
             <h3 className="text-2xl sm:text-3xl font-bold text-white mt-1">
               Komparasi Sebelum & Sesudah Nakami Studio
@@ -109,10 +98,10 @@ export function SegmentSection() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
-            {/* BEFORE Card (Red Dashed Border) */}
-            <div className="rounded-2xl bg-[#1C1E24]/70 border-2 border-dashed border-[#C33736]/60 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
+            {/* BEFORE Card (Diagnostic Card) */}
+            <div className="rounded-2xl bg-[#141518] border border-[#EF4444]/25 p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#C33736]/15 border border-[#C33736]/30 text-xs font-bold font-mono text-[#EF4444] mb-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#EF4444]/10 border border-[#EF4444]/25 text-xs font-bold font-mono text-[#EF4444] mb-4">
                   <XCircle className="w-4 h-4" />
                   <span>{currentProblemSolution.problemTag}</span>
                 </div>
@@ -133,14 +122,8 @@ export function SegmentSection() {
               </div>
             </div>
 
-            {/* AFTER Card (Warm Tech Glow + 6px Orange Accent Strip) */}
-            <div className="rounded-2xl bg-[#1C1E24] border border-[#FB6C00]/40 p-6 sm:p-8 flex flex-col justify-between shadow-glow-card relative overflow-hidden pl-8 sm:pl-10">
-              {/* 6px Orange Gradient Accent Strip on the left edge */}
-              <div
-                className="absolute left-0 top-0 bottom-0 w-2 sm:w-2.5 bg-strip-gradient"
-                aria-hidden="true"
-              />
-
+            {/* AFTER Card (Refined Solution Card) */}
+            <div className="rounded-2xl bg-[#1C1E24] border border-[#FB6C00]/30 p-6 sm:p-8 flex flex-col justify-between shadow-card-subtle relative overflow-hidden">
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-emerald-500/15 border border-emerald-500/30 text-xs font-bold font-mono text-emerald-400 mb-4">
                   <CheckCircle2 className="w-4 h-4" />
@@ -159,7 +142,7 @@ export function SegmentSection() {
                 </ul>
               </div>
               <div className="pt-4 border-t border-[#2E323B] text-xs text-[#F9B637] font-mono font-medium flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" />
+                <Sparkles className="w-3.5 h-3.5 text-[#FB6C00]" />
                 <span>Hasil: Alur kerja rapi dan data tercatat otomatis.</span>
               </div>
             </div>
@@ -170,7 +153,7 @@ export function SegmentSection() {
         <div
           id={activeSegment === "biz" ? "services-biz" : "services-edu"}
           role="tabpanel"
-          id-panel={activeSegment === "biz" ? "panel-biz-content" : "panel-edu-content"}
+          aria-labelledby={activeSegment === "biz" ? "tab-biz" : "tab-edu"}
           className="scroll-mt-28"
         >
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-[#2E323B]">
@@ -197,7 +180,7 @@ export function SegmentSection() {
             {currentServices.map((service: ServicePackage) => (
               <div
                 key={service.id}
-                className="rounded-2xl bg-[#1C1E24] border border-[#2E323B] hover:border-[#FB6C00]/60 p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:shadow-glow-card group"
+                className="rounded-2xl bg-[#1C1E24] border border-[#2E323B] hover:border-[#FB6C00]/50 p-6 sm:p-7 flex flex-col justify-between transition-colors group"
               >
                 <div>
                   {/* Top Bar: Code & Badge */}
@@ -272,7 +255,7 @@ export function SegmentSection() {
                       href={createWhatsAppUrl(service.waTemplate)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#242730] hover:bg-cta-gradient text-white border border-[#3F4450] hover:border-transparent text-xs sm:text-sm font-semibold transition-all duration-200 group-hover:scale-105"
+                      className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#242730] hover:bg-cta-gradient text-white border border-[#3F4450] hover:border-transparent text-xs sm:text-sm font-semibold transition-all active:translate-y-px"
                     >
                       <span>{service.ctaText}</span>
                       <ArrowRight className="w-3.5 h-3.5" />

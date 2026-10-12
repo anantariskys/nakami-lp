@@ -43,7 +43,7 @@ export const BIZ_SERVICES: ServicePackage[] = [
       "Setup SEO teknis, Google Analytics & integrasi tombol pesan WhatsApp langsung",
       "Garansi bug gratis 30 hari pascapeluncuran",
     ],
-    timeline: "Est. 7 – 14 Hari Kerja",
+    timeline: "Est. 7-14 Hari Kerja",
     startingPrice: "Mulai Rp 2.500.000",
     ctaText: "Konsultasi Website Bisnis",
     waTemplate:
@@ -66,7 +66,7 @@ export const BIZ_SERVICES: ServicePackage[] = [
       "Role-based access: kasir tidak bisa ubah harga atau hapus transaksi tanpa PIN manajer",
       "Akses dari tablet, laptop, atau smartphone",
     ],
-    timeline: "Est. 14 – 25 Hari Kerja",
+    timeline: "Est. 14-25 Hari Kerja",
     startingPrice: "Mulai Rp 4.500.000",
     ctaText: "Konsultasi Sistem Kasir",
     waTemplate:
@@ -89,7 +89,7 @@ export const BIZ_SERVICES: ServicePackage[] = [
       "Opsi integrasi uang muka / payment gateway",
       "Mencegah double-booking 100%",
     ],
-    timeline: "Est. 10 – 18 Hari Kerja",
+    timeline: "Est. 10-18 Hari Kerja",
     startingPrice: "Mulai Rp 3.500.000",
     ctaText: "Konsultasi Sistem Booking",
     waTemplate:
@@ -138,7 +138,7 @@ export const EDU_SERVICES: ServicePackage[] = [
       "Rekaman video sesi mentoring dikirimkan setelah sesi selesai",
       "Garansi follow-up chat 3 hari untuk error yang sama",
     ],
-    timeline: "Sesi Fleksibel (1 – 2 Jam via Google Meet)",
+    timeline: "Sesi Fleksibel (1-2 Jam via Google Meet)",
     format: "1-on-1 Screen-Share Interaktif",
     startingPrice: "Mulai Rp 150.000 / Jam",
     ctaText: "Jadwalkan Live Debugging",
@@ -209,7 +209,7 @@ export const FAQS: FaqItem[] = [
   {
     question: "Berapa lama estimasi waktu pengerjaan proyek website atau software kasir untuk UMKM?",
     answer:
-      "Estimasi waktu bergantung pada kompleksitas modul yang disepakati. Landing page konversi tinggi umumnya selesai dalam 7–14 hari kerja. Aplikasi kasir (POS) dan manajemen inventaris membutuhkan 14–25 hari kerja. Software kustom alur kerja internal diperkirakan mulai 3 minggu setelah tahap requirement gathering selesai. Timeline fixed akan tertuang jelas di kontrak sebelum pengerjaan dimulai.",
+      "Estimasi waktu bergantung pada kompleksitas modul yang disepakati. Landing page konversi tinggi umumnya selesai dalam 7-14 hari kerja. Aplikasi kasir (POS) dan manajemen inventaris membutuhkan 14-25 hari kerja. Software kustom alur kerja internal diperkirakan mulai 3 minggu setelah tahap requirement gathering selesai. Timeline fixed akan tertuang jelas di kontrak sebelum pengerjaan dimulai.",
   },
   {
     question: "Bagaimana skema pembayaran di Nakami Studio?",
