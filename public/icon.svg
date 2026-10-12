@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Sunset Linear Gradients -->
+    <linearGradient id="nakami-left-pill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E73F1E" />
+      <stop offset="100%" stop-color="#FB6C00" />
+    </linearGradient>
+    <linearGradient id="nakami-diagonal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FB6C00" />
+      <stop offset="100%" stop-color="#E73F1E" />
+    </linearGradient>
+    <linearGradient id="nakami-right-pill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFDD9C" />
+      <stop offset="100%" stop-color="#F9B637" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <!-- Background subtle badge -->
+  <rect width="100" height="100" rx="22" fill="#17181C" />
+  <rect width="98" height="98" x="1" y="1" rx="21" stroke="#2E323B" stroke-width="1.5" />
+  
+  <g filter="url(#glow)">
+    <!-- Left Pillar Capsule -->
+    <rect x="22" y="24" width="14" height="52" rx="7" fill="url(#nakami-left-pill)" />
+    <!-- Diagonal Connecting Blade -->
+    <path d="M 23 27 C 23 27, 47 48, 77 73 C 77 73, 77 64, 77 62 C 77 62, 53 41, 23 16 Z" fill="url(#nakami-diagonal)" opacity="0.9" />
+    <polygon points="26,27 34,22 75,69 67,74" fill="url(#nakami-diagonal)" />
+    <!-- Right Pillar Capsule (Taller, Golden-Peach) -->
+    <rect x="64" y="18" width="14" height="64" rx="7" fill="url(#nakami-right-pill)" />
+  </g>
+</svg>
