@@ -4,12 +4,14 @@ interface MonogramLogoProps {
   size?: number;
   className?: string;
   showText?: boolean;
+  variant?: "light" | "dark";
 }
 
 export function MonogramLogo({
   size = 36,
   className = "",
   showText = true,
+  variant = "light",
 }: MonogramLogoProps) {
   return (
     <div className={`inline-flex items-center gap-3 select-none ${className}`}>
@@ -54,10 +56,18 @@ export function MonogramLogo({
 
       {showText && (
         <div className="flex flex-col text-left">
-          <span className="font-extrabold tracking-tight text-white text-lg leading-tight uppercase font-[var(--font-display)]">
+          <span
+            className={`font-extrabold tracking-tight text-lg leading-tight uppercase font-[var(--font-display)] ${
+              variant === "dark" ? "text-white" : "text-[#0F172A]"
+            }`}
+          >
             NAKAMI<span className="text-[#FB6C00] ml-1">STUDIO</span>
           </span>
-          <span className="text-[10px] tracking-widest text-[#94A3B8] font-mono uppercase">
+          <span
+            className={`text-[10px] tracking-widest font-mono uppercase ${
+              variant === "dark" ? "text-[#94A3B8]" : "text-[#64748B]"
+            }`}
+          >
             SOFTWARE & MENTORING
           </span>
         </div>
