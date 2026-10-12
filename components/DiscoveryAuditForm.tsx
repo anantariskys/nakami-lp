@@ -3,319 +3,301 @@
 import React, { useState } from "react";
 import { createWhatsAppUrl } from "@/lib/constants";
 import {
-  Sparkles,
-  MessageCircle,
-  Building2,
+  Store,
   GraduationCap,
-  RotateCcw,
-  AlertCircle,
-  ArrowRight,
+  Calculator,
+  MessageCircle,
 } from "lucide-react";
 
-interface ProblemOption {
+interface ServiceOption {
   id: string;
-  label: string;
-  recommendedCode: string;
-  recommendedTitle: string;
-  recommendationNote: string;
+  name: string;
+  category: "biz" | "edu";
+  code: string;
+  baseTimeline: string;
+  basePrice: string;
 }
 
-const BIZ_OPTIONS: ProblemOption[] = [
+const SERVICE_OPTIONS: ServiceOption[] = [
   {
-    id: "biz_cashier",
-    label: "Rekap Kasir & Stok Manual Sering Selisih",
-    recommendedCode: "BIZ-02",
-    recommendedTitle: "Aplikasi Kasir (POS) & Manajemen Stok Multi-Outlet",
-    recommendationNote:
-      "Sistem kasir cloud terintegrasi barcode scan dan kalkulasi otomatis tanpa langganan bulanan.",
+    id: "web-biz",
+    name: "Website Profil Bisnis & Landing Page",
+    category: "biz",
+    code: "BIZ-01",
+    baseTimeline: "7-14 hari kerja",
+    basePrice: "Mulai Rp 2.500.000",
   },
   {
-    id: "biz_web",
-    label: "Belum Punya Web Profil Kredibel di Google",
-    recommendedCode: "BIZ-01",
-    recommendedTitle: "Web Profil Bisnis & Landing Page Konversi Tinggi",
-    recommendationNote:
-      "Website kustom berkecepatan tinggi dengan skor Lighthouse 95+, SEO lokal, dan tombol kontak langsung.",
+    id: "pos-biz",
+    name: "Aplikasi Kasir (POS) & Manajemen Stok",
+    category: "biz",
+    code: "BIZ-02",
+    baseTimeline: "14-25 hari kerja",
+    basePrice: "Mulai Rp 4.500.000",
   },
   {
-    id: "biz_booking",
-    label: "Chat Booking & Jadwal Bertumpuk / Sering Bentrok",
-    recommendedCode: "BIZ-03",
-    recommendedTitle: "Sistem Reservasi & Booking Jadwal Otomatis",
-    recommendationNote:
-      "Portal reservasi mandiri 24/7 dengan kalender slot kosong dan konfirmasi WhatsApp otomatis.",
+    id: "booking-biz",
+    name: "Sistem Booking Jadwal & Reservasi",
+    category: "biz",
+    code: "BIZ-03",
+    baseTimeline: "10-18 hari kerja",
+    basePrice: "Mulai Rp 3.500.000",
   },
   {
-    id: "biz_custom",
-    label: "Alur Kerja Internal Kaku & Butuh Software Kustom",
-    recommendedCode: "BIZ-04",
-    recommendedTitle: "Otomasi Alur Kerja & Software Kustom Perusahaan",
-    recommendationNote:
-      "Perancangan sistem internal tailor-made yang disesuaikan persis dengan alur SOP divisi Anda.",
+    id: "custom-biz",
+    name: "Software Internal Kustom / ERP Mini",
+    category: "biz",
+    code: "BIZ-04",
+    baseTimeline: "Mulai 3 minggu",
+    basePrice: "Sesuai lingkup kerja",
   },
   {
-    id: "biz_other",
-    label: "Konsultasi Kebutuhan Sistem Bisnis Lainnya",
-    recommendedCode: "BIZ-AUDIT",
-    recommendedTitle: "Sesi Audit & Discovery Arsitektur Bisnis",
-    recommendationNote:
-      "Diskusi 1-on-1 bersama engineer untuk membedah problem operasional dan opsi teknologi terbaik.",
-  },
-];
-
-const EDU_OPTIONS: ProblemOption[] = [
-  {
-    id: "edu_debug",
-    label: "Stuck Error Debugging Berhari-hari",
-    recommendedCode: "EDU-01",
-    recommendedTitle: "Live 1-on-1 Code Debugging & Problem Solving",
-    recommendationNote:
-      "Screen-share intensif untuk membedah bug, stack trace error, dan pemahaman logika perbaikan.",
+    id: "debug-edu",
+    name: "Live Debugging 1-on-1 & Code Review",
+    category: "edu",
+    code: "EDU-01",
+    baseTimeline: "1-2 jam per sesi",
+    basePrice: "Mulai Rp 150.000 / jam",
   },
   {
-    id: "edu_arch",
-    label: "Bingung Desain Database & Alur API Skripsi",
-    recommendedCode: "EDU-02",
-    recommendedTitle: "Bimbingan Arsitektur Software & Skema Database",
-    recommendationNote:
-      "Pendampingan perancangan ERD normalisasi, clean architecture API, dan flow diagram sistem.",
+    id: "db-edu",
+    name: "Mentoring Arsitektur Database & API",
+    category: "edu",
+    code: "EDU-02",
+    baseTimeline: "3 sesi terarah",
+    basePrice: "Mulai Rp 400.000 / paket",
   },
   {
-    id: "edu_defense",
-    label: "Takut Tidak Bisa Jawab Pertanyaan Dosen Penguji",
-    recommendedCode: "EDU-03",
-    recommendedTitle: "Simulasi Ujian Sidang & Bedah Logika Source Code",
-    recommendationNote:
-      "Bedah baris per baris kode sumber aplikasi agar Anda menguasai jawaban pertanyaan teknis penguji.",
-  },
-  {
-    id: "edu_other",
-    label: "Konsultasi Masalah Teknis Coding Lainnya",
-    recommendedCode: "EDU-AUDIT",
-    recommendedTitle: "Sesi Konsultasi & Roadmap Belajar Mandiri",
-    recommendationNote:
-      "Pemetaan problem teknis coding Anda dan saran metodologi yang paling relevan untuk dipelajari.",
+    id: "defense-edu",
+    name: "Simulasi Sidang Skripsi IT & Bedah Kode",
+    category: "edu",
+    code: "EDU-03",
+    baseTimeline: "Paket intensif 2 sesi",
+    basePrice: "Mulai Rp 550.000 / paket",
   },
 ];
 
 export function DiscoveryAuditForm() {
-  const [segment, setSegment] = useState<"biz" | "edu">("biz");
-  const [selectedProblemId, setSelectedProblemId] = useState<string>("biz_cashier");
-  const [clientName, setClientName] = useState<string>("");
-  const [notes, setNotes] = useState<string>("");
-  const [errorMsg, setErrorMsg] = useState<string>("");
+  const [targetCategory, setTargetCategory] = useState<"biz" | "edu">("biz");
+  const [selectedServiceId, setSelectedServiceId] = useState<string>("web-biz");
+  const [name, setName] = useState<string>("");
+  const [projectNote, setProjectNote] = useState<string>("");
 
-  const currentOptions = segment === "biz" ? BIZ_OPTIONS : EDU_OPTIONS;
-  const currentSelectedOption =
-    currentOptions.find((opt) => opt.id === selectedProblemId) || currentOptions[0];
+  const filteredServices = SERVICE_OPTIONS.filter(
+    (item) => item.category === targetCategory
+  );
 
-  const handleSegmentChange = (newSegment: "biz" | "edu") => {
-    setSegment(newSegment);
-    setSelectedProblemId(newSegment === "biz" ? "biz_cashier" : "edu_debug");
-    setErrorMsg("");
-  };
+  const activeService =
+    SERVICE_OPTIONS.find((s) => s.id === selectedServiceId) ||
+    filteredServices[0];
 
-  const handleReset = () => {
-    setClientName("");
-    setNotes("");
-    setSelectedProblemId(segment === "biz" ? "biz_cashier" : "edu_debug");
-    setErrorMsg("");
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!clientName.trim()) {
-      setErrorMsg("Mohon isi Nama Lengkap atau Nama Usaha Anda terlebih dahulu.");
-      return;
+  const handleCategorySwitch = (cat: "biz" | "edu") => {
+    setTargetCategory(cat);
+    const firstMatch = SERVICE_OPTIONS.find((s) => s.category === cat);
+    if (firstMatch) {
+      setSelectedServiceId(firstMatch.id);
     }
-    setErrorMsg("");
+  };
 
-    const segmentLabel = segment === "biz" ? "Bisnis/UMKM" : "Mahasiswa/Riset IT";
-    const waText = `Halo Nakami Studio!
+  const generateWhatsAppMessage = () => {
+    const greeting = "Halo Nakami Studio,";
+    const senderName = name.trim() ? `Saya ${name.trim()},` : "Saya";
+    const categoryLabel =
+      targetCategory === "biz" ? "Kebutuhan Bisnis / UMKM" : "Kebutuhan Mentoring IT / Skripsi";
+    const noteText = projectNote.trim()
+      ? `\nCatatan tambahan: "${projectNote.trim()}"`
+      : "";
 
-Saya ingin konsultasi kebutuhan sistem/mentoring:
-• Kategori: ${segmentLabel}
-• Nama / Usaha: ${clientName.trim()}
-• Kendala Utama: ${currentSelectedOption.label}
-• Rekomendasi Awal: [${currentSelectedOption.recommendedCode}] ${currentSelectedOption.recommendedTitle}
-${notes.trim() ? `• Catatan Tambahan: ${notes.trim()}\n` : ""}
-Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
-
-    const url = createWhatsAppUrl(waText);
-    window.open(url, "_blank", "noopener,noreferrer");
+    return `${greeting} ${senderName} ingin mendiskusikan ${categoryLabel}.
+Paket yang dipilih: [${activeService.code}] ${activeService.name}.
+Estimasi timeline: ${activeService.baseTimeline}.${noteText}
+Mohon info jadwal diskusi 15 menit awal. Terima kasih!`;
   };
 
   return (
-    <section id="audit-intake" className="py-20 md:py-28 bg-white relative scroll-mt-24 border-b border-slate-200/80">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight font-[var(--font-display)] mb-4">
-            Cek Solusi yang Sesuai{" "}
-            <span className="text-sunset-gradient">
-              dengan Kebutuhan Anda
-            </span>
+    <section id="kalkulator-estimasi" className="py-20 sm:py-24 bg-white border-b border-slate-200">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-200 text-xs font-mono font-medium text-slate-700 mb-4">
+            <Calculator className="w-3.5 h-3.5 text-[#FB6C00]" />
+            <span>INTERACTIVE ESTIMATOR</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight font-[var(--font-display)] mb-4">
+            Hitung perkiraan kebutuhan proyek Anda.
           </h2>
           <p className="text-slate-600 text-base leading-relaxed">
-            Pilih kendala yang sedang Anda hadapi untuk melihat estimasi modul dan rekomendasi solusi sebelum berdiskusi di WhatsApp.
+            Dapatkan rekomendasi paket, estimasi durasi pengerjaan, dan format pesan ringkasan yang siap dikonsultasikan via WhatsApp.
           </p>
         </div>
 
-        {/* Card Form */}
-        <div className="rounded-3xl bg-gradient-to-b from-[#FFFDFB] via-[#FFFBF6] to-[#FFF7EE] border border-[#FED7AA]/80 p-6 sm:p-10 shadow-[0_20px_50px_-16px_rgba(251,108,0,0.08)] relative">
-          <form onSubmit={handleSubmit} noValidate>
-            {/* Step 1: Segment Toggle */}
-            <div className="mb-8">
-              <label className="block text-xs font-mono uppercase tracking-wider text-slate-700 font-semibold mb-3">
-                1. Pilih Kategori Kebutuhan Anda:
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => handleSegmentChange("biz")}
-                  className={`flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl border text-sm font-bold transition-all ${
-                    segment === "biz"
-                      ? "bg-cta-gradient text-white border-transparent shadow-sm"
-                      : "bg-white text-slate-700 border-slate-200 hover:text-slate-900 hover:border-slate-300 hover:bg-slate-50"
-                  }`}
-                >
-                  <Building2 className="w-4 h-4 shrink-0" />
-                  <span>Bisnis / UMKM</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSegmentChange("edu")}
-                  className={`flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl border text-sm font-bold transition-all ${
-                    segment === "edu"
-                      ? "bg-cta-gradient text-white border-transparent shadow-sm"
-                      : "bg-white text-slate-700 border-slate-200 hover:text-slate-900 hover:border-slate-300 hover:bg-slate-50"
-                  }`}
-                >
-                  <GraduationCap className="w-4 h-4 shrink-0" />
-                  <span>Mahasiswa IT / Riset</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Step 2: Problem Chips */}
-            <div className="mb-8">
-              <label className="block text-xs font-mono uppercase tracking-wider text-slate-700 font-semibold mb-3">
-                2. Kendala yang Paling Sering Menghambat Anda Saat Ini:
-              </label>
-              <div className="flex flex-wrap gap-2.5">
-                {currentOptions.map((opt) => {
-                  const isSelected = selectedProblemId === opt.id;
-                  return (
-                    <button
-                      key={opt.id}
-                      type="button"
-                      onClick={() => setSelectedProblemId(opt.id)}
-                      className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border text-left transition-all ${
-                        isSelected
-                          ? "bg-[#FFF7ED] text-[#C2410C] border-[#FB6C00] font-bold shadow-sm ring-1 ring-[#FB6C00]/30"
-                          : "bg-white text-slate-700 border-slate-200 hover:text-slate-900 hover:border-slate-300 hover:bg-slate-50"
-                      }`}
-                    >
-                      {opt.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Step 3: Text Inputs */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        {/* Estimator Container */}
+        <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-6 sm:p-10 shadow-sm">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            
+            {/* Left Column: Form Controls */}
+            <div className="lg:col-span-7 space-y-6">
+              
+              {/* Step 1: Category Picker */}
               <div>
-                <label
-                  htmlFor="clientName"
-                  className="block text-xs font-mono uppercase tracking-wider text-slate-700 font-semibold mb-2"
-                >
-                  3. Nama Lengkap / Nama Bisnis <span className="text-[#EF4444]">*</span>
+                <label className="block text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-2">
+                  Langkah 1: Siapa Anda?
                 </label>
-                <input
-                  id="clientName"
-                  type="text"
-                  required
-                  value={clientName}
-                  onChange={(e) => {
-                    setClientName(e.target.value);
-                    if (errorMsg) setErrorMsg("");
-                  }}
-                  placeholder={
-                    segment === "biz"
-                      ? "Contoh: Budi Santoso (Kopi Seduh Nusantara)"
-                      : "Contoh: Dimas Aditya (Teknik Informatika)"
-                  }
-                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 font-medium text-sm focus:outline-none focus:border-[#FB6C00] focus:ring-2 focus:ring-[#FB6C00]/20 shadow-sm transition-colors"
-                />
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => handleCategorySwitch("biz")}
+                    className={`flex items-center justify-center gap-2 p-3.5 rounded-xl border text-sm font-bold transition-all ${
+                      targetCategory === "biz"
+                        ? "bg-white border-[#FB6C00] text-slate-900 shadow-2xs ring-1 ring-[#FB6C00]"
+                        : "bg-white/80 border-slate-200 text-slate-600 hover:bg-white"
+                    }`}
+                  >
+                    <Store className="w-4 h-4 text-[#FB6C00]" />
+                    <span>Pelaku Usaha / Bisnis</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handleCategorySwitch("edu")}
+                    className={`flex items-center justify-center gap-2 p-3.5 rounded-xl border text-sm font-bold transition-all ${
+                      targetCategory === "edu"
+                        ? "bg-white border-slate-900 text-slate-900 shadow-2xs ring-1 ring-slate-900"
+                        : "bg-white/80 border-slate-200 text-slate-600 hover:bg-white"
+                    }`}
+                  >
+                    <GraduationCap className="w-4 h-4 text-slate-800" />
+                    <span>Mahasiswa IT / Skripsi</span>
+                  </button>
+                </div>
               </div>
 
+              {/* Step 2: Specific Service Picker */}
               <div>
-                <label
-                  htmlFor="notes"
-                  className="block text-xs font-mono uppercase tracking-wider text-slate-700 font-semibold mb-2"
-                >
-                  4. Catatan Tambahan (Opsional)
+                <label className="block text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-2">
+                  Langkah 2: Pilih Kebutuhan Utama
                 </label>
-                <input
-                  id="notes"
-                  type="text"
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Contoh: Deadline 2 minggu, error di backend Node.js, dll."
-                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 font-medium text-sm focus:outline-none focus:border-[#FB6C00] focus:ring-2 focus:ring-[#FB6C00]/20 shadow-sm transition-colors"
-                />
+                <div className="space-y-2">
+                  {filteredServices.map((service) => {
+                    const isSelected = selectedServiceId === service.id;
+                    return (
+                      <button
+                        key={service.id}
+                        type="button"
+                        onClick={() => setSelectedServiceId(service.id)}
+                        className={`w-full text-left p-3.5 rounded-xl border text-xs sm:text-sm font-medium transition-all flex items-center justify-between ${
+                          isSelected
+                            ? "bg-white border-[#FB6C00] text-slate-900 shadow-2xs ring-1 ring-[#FB6C00]"
+                            : "bg-white/80 border-slate-200 text-slate-600 hover:bg-white"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
+                            {service.code}
+                          </span>
+                          <span>{service.name}</span>
+                        </div>
+                        <span className="text-xs text-slate-400 font-mono hidden sm:inline">
+                          {service.baseTimeline}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
+
+              {/* Step 3: Optional Name & Note */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div>
+                  <label htmlFor="user-name" className="block text-xs font-medium text-slate-700 mb-1">
+                    Nama atau Nama Bisnis (Opsional)
+                  </label>
+                  <input
+                    id="user-name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Contoh: Budi (Kopi Senja)"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-[#FB6C00]"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="project-note" className="block text-xs font-medium text-slate-700 mb-1">
+                    Catatan Khusus (Opsional)
+                  </label>
+                  <input
+                    id="project-note"
+                    type="text"
+                    value={projectNote}
+                    onChange={(e) => setProjectNote(e.target.value)}
+                    placeholder="Contoh: Butuh integrasi scan barcode"
+                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-[#FB6C00]"
+                  />
+                </div>
+              </div>
+
             </div>
 
-            {errorMsg && (
-              <div className="mb-6 p-3 rounded-xl bg-rose-50 border border-rose-200 flex items-center gap-2 text-xs text-rose-700 font-medium">
-                <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
-                <span>{errorMsg}</span>
-              </div>
-            )}
-
-            {/* Live Recommendation Preview Box */}
-            <div className="mb-8 p-5 rounded-2xl bg-white border-2 border-[#FED7AA] relative overflow-hidden shadow-sm">
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="text-xs font-mono text-[#C2410C] font-semibold flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#FB6C00]" />
-                  <span>Rekomendasi Paket Solusi:</span>
-                </span>
-                <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-[#FFF7ED] text-[#C2410C] border border-[#FED7AA]">
-                  {currentSelectedOption.recommendedCode}
+            {/* Right Column: Live Scope & WhatsApp Action Card */}
+            <div className="lg:col-span-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-6">
+              <div>
+                <div className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">
+                  RINGKASAN ESTIMASI
+                </div>
+                <h3 className="text-lg font-bold text-slate-900">
+                  {activeService.name}
+                </h3>
+                <span className="inline-block mt-1 font-mono text-xs font-bold text-[#FB6C00]">
+                  Kode Paket: {activeService.code}
                 </span>
               </div>
-              <h4 className="text-lg font-bold text-[#0F172A] mb-1">
-                {currentSelectedOption.recommendedTitle}
-              </h4>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                {currentSelectedOption.recommendationNote}
+
+              <div className="space-y-3 py-4 border-y border-slate-100 text-xs text-slate-600">
+                <div className="flex justify-between">
+                  <span className="text-slate-500">Estimasi Durasi:</span>
+                  <span className="font-semibold text-slate-900">{activeService.baseTimeline}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-500">Kisaran Biaya:</span>
+                  <span className="font-semibold text-slate-900">{activeService.basePrice}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-500">Format Kerja:</span>
+                  <span className="font-semibold text-slate-900">
+                    {targetCategory === "biz" ? "Fixed-Scope + Garansi 30 Hari" : "1-on-1 Live Mentoring"}
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <div className="text-xs font-mono text-slate-400 mb-2">
+                  Preview Pesan WhatsApp:
+                </div>
+                <div className="p-3 rounded-lg bg-slate-50 border border-slate-100 text-[11px] text-slate-700 font-mono whitespace-pre-wrap leading-relaxed">
+                  {generateWhatsAppMessage()}
+                </div>
+              </div>
+
+              <a
+                href={createWhatsAppUrl(generateWhatsAppMessage())}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2.5 py-3.5 px-4 rounded-xl bg-[#FB6C00] hover:bg-[#E73F1E] text-white text-sm font-bold shadow-xs transition-colors"
+              >
+                <MessageCircle className="w-4 h-4 shrink-0" />
+                <span>Kirim Ringkasan via WhatsApp</span>
+              </a>
+
+              <p className="text-[11px] text-slate-400 text-center leading-normal">
+                Diskusi 15 menit awal tidak dikenakan biaya apa pun.
               </p>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200">
-              <button
-                type="button"
-                onClick={handleReset}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>Reset Pilihan</span>
-              </button>
-
-              <button
-                type="submit"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-cta-gradient text-white font-bold text-sm sm:text-base hover:opacity-95 shadow-sm transition-all active:translate-y-px"
-              >
-                <MessageCircle className="w-5 h-5" />
-                <span>Kirim & Mulai Konsultasi WhatsApp</span>
-                <ArrowRight className="w-4 h-4 opacity-80" />
-              </button>
-            </div>
-          </form>
+          </div>
         </div>
+
       </div>
     </section>
   );
