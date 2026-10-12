@@ -35,8 +35,8 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#121316]/90 backdrop-blur-md border-b border-[#2E323B] shadow-lg shadow-black/30 py-3"
-          : "bg-[#121316]/70 backdrop-blur-sm border-b border-[#2E323B]/60 py-4"
+          ? "bg-white/95 backdrop-blur-md border-b border-[#E2E8F0] shadow-sm py-3"
+          : "bg-white/85 backdrop-blur-sm border-b border-[#F1F5F9] py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,41 +51,41 @@ export function Navbar() {
           </Link>
 
           {/* System Availability Status Pill (Desktop & Tablet) */}
-          <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-[#17181C] border border-[#2E323B] text-xs font-mono text-[#94A3B8]">
-            <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]"></span>
-            <span className="text-white font-medium">Slot Proyek Q4:</span>
-            <span className="text-emerald-400">Siap Mulai</span>
+          <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] text-xs font-mono text-[#64748B]">
+            <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.4)]"></span>
+            <span className="text-[#0F172A] font-semibold">Slot Proyek Q4:</span>
+            <span className="text-emerald-600 font-medium">Siap Mulai</span>
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-[#94A3B8]">
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-[#475569]">
             <a
               href="#segment-overview"
-              className="hover:text-white transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#FB6C00] rounded px-1"
+              className="hover:text-[#0F172A] transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#FB6C00] rounded px-1"
             >
               Solusi
             </a>
             <a
               href="#problem-solution"
-              className="hover:text-white transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#FB6C00] rounded px-1"
+              className="hover:text-[#0F172A] transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#FB6C00] rounded px-1"
             >
               Komparasi
             </a>
             <a
               href="#pricing"
-              className="hover:text-white transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#FB6C00] rounded px-1"
+              className="hover:text-[#0F172A] transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#FB6C00] rounded px-1"
             >
               Skema Harga
             </a>
             <a
               href="#non-joki"
-              className="hover:text-amber-400 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#FB6C00] rounded px-1 text-xs uppercase tracking-wider font-semibold border border-amber-500/30 px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300"
+              className="hover:text-[#FB6C00] transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#FB6C00] rounded text-xs uppercase tracking-wider font-semibold border border-amber-500/30 px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-700"
             >
               Manifesto Etis
             </a>
             <a
               href="#faq"
-              className="hover:text-white transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#FB6C00] rounded px-1"
+              className="hover:text-[#0F172A] transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[#FB6C00] rounded px-1"
             >
               FAQ
             </a>
@@ -123,7 +123,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg bg-[#1C1E24] border border-[#2E323B] text-white hover:bg-[#242730] transition-colors focus:outline-none focus:ring-2 focus:ring-[#FB6C00]"
+              className="p-2 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-[#0F172A] hover:bg-[#F1F5F9] transition-colors focus:outline-none focus:ring-2 focus:ring-[#FB6C00]"
               aria-label={mobileMenuOpen ? "Tutup Menu" : "Buka Menu"}
               aria-expanded={mobileMenuOpen}
             >
@@ -139,55 +139,55 @@ export function Navbar() {
           role="dialog"
           aria-modal="true"
           aria-label="Menu Navigasi Mobile"
-          className="fixed inset-x-0 top-[65px] bottom-0 bg-[#121316]/98 backdrop-blur-xl z-40 p-6 flex flex-col justify-between border-t border-[#2E323B] md:hidden animate-in fade-in duration-200"
+          className="fixed inset-x-0 top-[65px] bottom-0 bg-white/98 backdrop-blur-xl z-40 p-6 flex flex-col justify-between border-t border-[#E2E8F0] md:hidden animate-in fade-in duration-200"
         >
           <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-[#1C1E24] border border-[#2E323B] text-xs font-mono text-[#94A3B8]">
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] text-xs font-mono text-[#64748B]">
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="text-white font-medium">Slot Proyek Q4:</span>
-              <span className="text-emerald-400">Aktif & Siap Diskusi</span>
+              <span className="text-[#0F172A] font-semibold">Slot Proyek Q4:</span>
+              <span className="text-emerald-600 font-medium">Aktif & Siap Diskusi</span>
             </div>
 
             <nav className="flex flex-col gap-2 text-base font-semibold">
               <a
                 href="#segment-overview"
                 onClick={closeMenu}
-                className="px-4 py-3 rounded-lg hover:bg-[#1C1E24] text-white border border-transparent hover:border-[#2E323B] transition-all"
+                className="px-4 py-3 rounded-lg hover:bg-[#F8FAFC] text-[#0F172A] border border-transparent hover:border-[#E2E8F0] transition-all"
               >
                 Solusi Bisnis & Mahasiswa
               </a>
               <a
                 href="#problem-solution"
                 onClick={closeMenu}
-                className="px-4 py-3 rounded-lg hover:bg-[#1C1E24] text-white border border-transparent hover:border-[#2E323B] transition-all"
+                className="px-4 py-3 rounded-lg hover:bg-[#F8FAFC] text-[#0F172A] border border-transparent hover:border-[#E2E8F0] transition-all"
               >
                 Sebelum vs Sesudah
               </a>
               <a
                 href="#pricing"
                 onClick={closeMenu}
-                className="px-4 py-3 rounded-lg hover:bg-[#1C1E24] text-white border border-transparent hover:border-[#2E323B] transition-all"
+                className="px-4 py-3 rounded-lg hover:bg-[#F8FAFC] text-[#0F172A] border border-transparent hover:border-[#E2E8F0] transition-all"
               >
                 Skema Biaya & Termin
               </a>
               <a
                 href="#non-joki"
                 onClick={closeMenu}
-                className="px-4 py-3 rounded-lg bg-amber-500/10 text-amber-300 border border-amber-500/30 font-medium"
+                className="px-4 py-3 rounded-lg bg-amber-50 text-amber-800 border border-amber-200 font-medium"
               >
                 🛡️ Kebijakan Anti-Joki (Etika Riset)
               </a>
               <a
                 href="#faq"
                 onClick={closeMenu}
-                className="px-4 py-3 rounded-lg hover:bg-[#1C1E24] text-white border border-transparent hover:border-[#2E323B] transition-all"
+                className="px-4 py-3 rounded-lg hover:bg-[#F8FAFC] text-[#0F172A] border border-transparent hover:border-[#E2E8F0] transition-all"
               >
                 Pertanyaan Umum (FAQ)
               </a>
             </nav>
           </div>
 
-          <div className="pt-6 border-t border-[#2E323B] flex flex-col gap-3">
+          <div className="pt-6 border-t border-[#E2E8F0] flex flex-col gap-3">
             <a
               href={createWhatsAppUrl(
                 "Halo Nakami Studio, saya ingin konsultasi via WhatsApp..."
@@ -195,13 +195,14 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={closeMenu}
-              className="w-full py-3.5 px-4 rounded-xl bg-cta-gradient text-white font-bold text-center flex items-center justify-center gap-2 shadow-glow-warm text-sm"
+              className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-white font-bold text-center flex items-center justify-center gap-2 shadow-sm text-sm"
             >
               <MessageCircle className="w-5 h-5" />
-              <span>Mulai Konsultasi WhatsApp (Gratis)</span>
+              <span>Mulai Konsultasi WhatsApp</span>
+              <ArrowUpRight className="w-4 h-4" />
             </a>
             <p className="text-center text-xs text-[#64748B]">
-              Respon cepat setiap Senin - Sabtu | 09:00 - 21:00 WIB
+              Respon cepat: &lt; 15 menit pada jam operasional
             </p>
           </div>
         </div>
