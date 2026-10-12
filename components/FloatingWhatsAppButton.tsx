@@ -37,7 +37,7 @@ export function FloatingWhatsAppButton() {
 
         {/* Desktop Hover Tooltip */}
         <span
-          className="absolute right-16 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-[#1C1E24] border border-[#2E323B] text-white text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg shadow-black/50"
+          className="absolute right-16 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-slate-800 text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md"
           aria-hidden="true"
         >
           Chat WhatsApp Langsung →

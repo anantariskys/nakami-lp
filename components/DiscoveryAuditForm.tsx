@@ -146,27 +146,27 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
   };
 
   return (
-    <section id="audit-intake" className="py-20 md:py-28 bg-[#121316] relative scroll-mt-24">
+    <section id="audit-intake" className="py-20 md:py-28 bg-white relative scroll-mt-24 border-b border-slate-200/80">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight font-[var(--font-display)] mb-4">
             Cek Solusi yang Sesuai{" "}
             <span className="text-sunset-gradient">
               dengan Kebutuhan Anda
             </span>
           </h2>
-          <p className="text-[#94A3B8] text-base leading-relaxed">
+          <p className="text-slate-600 text-base leading-relaxed">
             Pilih kendala yang sedang Anda hadapi untuk melihat estimasi modul dan rekomendasi solusi sebelum berdiskusi di WhatsApp.
           </p>
         </div>
 
         {/* Card Form */}
-        <div className="rounded-3xl bg-[#1C1E24] border border-[#2E323B] p-6 sm:p-10 shadow-card-subtle relative">
+        <div className="rounded-3xl bg-gradient-to-b from-[#FFFDFB] via-[#FFFBF6] to-[#FFF7EE] border border-[#FED7AA]/80 p-6 sm:p-10 shadow-[0_20px_50px_-16px_rgba(251,108,0,0.08)] relative">
           <form onSubmit={handleSubmit} noValidate>
             {/* Step 1: Segment Toggle */}
             <div className="mb-8">
-              <label className="block text-xs font-mono uppercase tracking-wider text-[#94A3B8] mb-3">
+              <label className="block text-xs font-mono uppercase tracking-wider text-slate-700 font-semibold mb-3">
                 1. Pilih Kategori Kebutuhan Anda:
               </label>
               <div className="grid grid-cols-2 gap-3">
@@ -176,7 +176,7 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
                   className={`flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl border text-sm font-bold transition-all ${
                     segment === "biz"
                       ? "bg-cta-gradient text-white border-transparent shadow-sm"
-                      : "bg-[#121316] text-[#94A3B8] border-[#2E323B] hover:text-white hover:border-[#3F4450]"
+                      : "bg-white text-slate-700 border-slate-200 hover:text-slate-900 hover:border-slate-300 hover:bg-slate-50"
                   }`}
                 >
                   <Building2 className="w-4 h-4 shrink-0" />
@@ -188,7 +188,7 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
                   className={`flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl border text-sm font-bold transition-all ${
                     segment === "edu"
                       ? "bg-cta-gradient text-white border-transparent shadow-sm"
-                      : "bg-[#121316] text-[#94A3B8] border-[#2E323B] hover:text-white hover:border-[#3F4450]"
+                      : "bg-white text-slate-700 border-slate-200 hover:text-slate-900 hover:border-slate-300 hover:bg-slate-50"
                   }`}
                 >
                   <GraduationCap className="w-4 h-4 shrink-0" />
@@ -199,7 +199,7 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
 
             {/* Step 2: Problem Chips */}
             <div className="mb-8">
-              <label className="block text-xs font-mono uppercase tracking-wider text-[#94A3B8] mb-3">
+              <label className="block text-xs font-mono uppercase tracking-wider text-slate-700 font-semibold mb-3">
                 2. Kendala yang Paling Sering Menghambat Anda Saat Ini:
               </label>
               <div className="flex flex-wrap gap-2.5">
@@ -212,8 +212,8 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
                       onClick={() => setSelectedProblemId(opt.id)}
                       className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium border text-left transition-all ${
                         isSelected
-                          ? "bg-[#FB6C00]/15 text-white border-[#FB6C00] font-semibold shadow-sm"
-                          : "bg-[#121316] text-[#94A3B8] border-[#2E323B] hover:text-white hover:border-[#3F4450]"
+                          ? "bg-[#FFF7ED] text-[#C2410C] border-[#FB6C00] font-bold shadow-sm ring-1 ring-[#FB6C00]/30"
+                          : "bg-white text-slate-700 border-slate-200 hover:text-slate-900 hover:border-slate-300 hover:bg-slate-50"
                       }`}
                     >
                       {opt.label}
@@ -228,7 +228,7 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
               <div>
                 <label
                   htmlFor="clientName"
-                  className="block text-xs font-mono uppercase tracking-wider text-[#94A3B8] mb-2"
+                  className="block text-xs font-mono uppercase tracking-wider text-slate-700 font-semibold mb-2"
                 >
                   3. Nama Lengkap / Nama Bisnis <span className="text-[#EF4444]">*</span>
                 </label>
@@ -246,14 +246,14 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
                       ? "Contoh: Budi Santoso (Kopi Seduh Nusantara)"
                       : "Contoh: Dimas Aditya (Teknik Informatika)"
                   }
-                  className="w-full px-4 py-3 rounded-xl bg-[#121316] border border-[#2E323B] text-white placeholder-[#64748B] text-sm focus:outline-none focus:border-[#FB6C00] focus:ring-1 focus:ring-[#FB6C00] transition-colors"
+                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 font-medium text-sm focus:outline-none focus:border-[#FB6C00] focus:ring-2 focus:ring-[#FB6C00]/20 shadow-sm transition-colors"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="notes"
-                  className="block text-xs font-mono uppercase tracking-wider text-[#94A3B8] mb-2"
+                  className="block text-xs font-mono uppercase tracking-wider text-slate-700 font-semibold mb-2"
                 >
                   4. Catatan Tambahan (Opsional)
                 </label>
@@ -263,43 +263,43 @@ Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="Contoh: Deadline 2 minggu, error di backend Node.js, dll."
-                  className="w-full px-4 py-3 rounded-xl bg-[#121316] border border-[#2E323B] text-white placeholder-[#64748B] text-sm focus:outline-none focus:border-[#FB6C00] focus:ring-1 focus:ring-[#FB6C00] transition-colors"
+                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder-slate-400 font-medium text-sm focus:outline-none focus:border-[#FB6C00] focus:ring-2 focus:ring-[#FB6C00]/20 shadow-sm transition-colors"
                 />
               </div>
             </div>
 
             {errorMsg && (
-              <div className="mb-6 p-3 rounded-xl bg-[#EF4444]/10 border border-[#EF4444]/30 flex items-center gap-2 text-xs text-[#EF4444]">
-                <AlertCircle className="w-4 h-4 shrink-0" />
+              <div className="mb-6 p-3 rounded-xl bg-rose-50 border border-rose-200 flex items-center gap-2 text-xs text-rose-700 font-medium">
+                <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
                 <span>{errorMsg}</span>
               </div>
             )}
 
             {/* Live Recommendation Preview Box */}
-            <div className="mb-8 p-5 rounded-2xl bg-[#121316] border border-[#FB6C00]/30 relative overflow-hidden">
+            <div className="mb-8 p-5 rounded-2xl bg-white border-2 border-[#FED7AA] relative overflow-hidden shadow-sm">
               <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="text-xs font-mono text-[#F9B637] font-semibold flex items-center gap-1.5">
+                <span className="text-xs font-mono text-[#C2410C] font-semibold flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#FB6C00]" />
                   <span>Rekomendasi Paket Solusi:</span>
                 </span>
-                <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-[#1C1E24] text-[#FB6C00] border border-[#FB6C00]/30">
+                <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-[#FFF7ED] text-[#C2410C] border border-[#FED7AA]">
                   {currentSelectedOption.recommendedCode}
                 </span>
               </div>
-              <h4 className="text-lg font-bold text-white mb-1">
+              <h4 className="text-lg font-bold text-[#0F172A] mb-1">
                 {currentSelectedOption.recommendedTitle}
               </h4>
-              <p className="text-xs sm:text-sm text-[#94A3B8]">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 {currentSelectedOption.recommendationNote}
               </p>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#2E323B]">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200">
               <button
                 type="button"
                 onClick={handleReset}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono text-[#94A3B8] hover:text-white hover:bg-[#121316] transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Reset Pilihan</span>

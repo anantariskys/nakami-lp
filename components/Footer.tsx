@@ -6,27 +6,27 @@ import { Mail, Clock, ShieldAlert } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-[#121316] border-t border-[#2E323B] text-[#94A3B8] text-sm pt-16 pb-12">
+    <footer className="bg-[#F8FAFC] border-t border-slate-200 text-slate-600 text-sm pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
           {/* Brand Info (Span 2) */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="inline-block" aria-label="Nakami Studio Homepage">
-              <MonogramLogo size={36} variant="dark" />
+              <MonogramLogo size={36} variant="light" />
             </Link>
-            <p className="text-gray-400 text-sm max-w-sm leading-relaxed">
+            <p className="text-slate-600 text-sm max-w-sm leading-relaxed">
               Solusi web dan software kasir untuk efisiensi bisnis, serta mentoring coding 1-on-1 etis untuk mahasiswa IT.
             </p>
 
-            <div className="space-y-2 text-xs font-mono text-[#94A3B8] pt-2">
+            <div className="space-y-2 text-xs font-mono text-slate-600 pt-2">
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#FB6C00]" />
-                <a href={`mailto:${OFFICIAL_EMAIL}`} className="hover:text-white transition-colors">
+                <a href={`mailto:${OFFICIAL_EMAIL}`} className="hover:text-[#C2410C] transition-colors font-medium">
                   {OFFICIAL_EMAIL}
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-emerald-400" />
+                <Clock className="w-4 h-4 text-emerald-600" />
                 <span>Senin - Sabtu | 09:00 - 21:00 WIB</span>
               </div>
             </div>
@@ -36,7 +36,7 @@ export function Footer() {
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-[#1C1E24] border border-[#2E323B] hover:text-white hover:border-[#FB6C00] transition-colors"
+                className="p-2 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-[#FB6C00] hover:border-[#FB6C00] shadow-sm transition-colors"
                 aria-label={`Kunjungi Instagram ${INSTAGRAM_HANDLE}`}
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -47,7 +47,7 @@ export function Footer() {
                 href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-[#1C1E24] border border-[#2E323B] hover:text-white hover:border-[#FB6C00] transition-colors"
+                className="p-2 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-[#FB6C00] hover:border-[#FB6C00] shadow-sm transition-colors"
                 aria-label="Kunjungi Profil GitHub Nakami Studio"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -59,32 +59,32 @@ export function Footer() {
 
           {/* Nav: Solusi Bisnis */}
           <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-wider font-mono mb-4">
+            <h4 className="text-[#0F172A] font-bold text-sm uppercase tracking-wider font-mono mb-4">
               Solusi UMKM
             </h4>
             <ul className="space-y-2.5 text-xs">
               <li>
-                <a href="#services-biz" className="hover:text-white transition-colors">
+                <a href="#services-biz" className="hover:text-[#C2410C] transition-colors">
                   BIZ-01 Web Profil & Landing Page
                 </a>
               </li>
               <li>
-                <a href="#services-biz" className="hover:text-white transition-colors">
+                <a href="#services-biz" className="hover:text-[#C2410C] transition-colors">
                   BIZ-02 Aplikasi Kasir & Stok Multi-Outlet
                 </a>
               </li>
               <li>
-                <a href="#services-biz" className="hover:text-white transition-colors">
+                <a href="#services-biz" className="hover:text-[#C2410C] transition-colors">
                   BIZ-03 Sistem Booking & Reservasi
                 </a>
               </li>
               <li>
-                <a href="#services-biz" className="hover:text-white transition-colors">
+                <a href="#services-biz" className="hover:text-[#C2410C] transition-colors">
                   BIZ-04 Otomasi SOP & Sistem Kustom
                 </a>
               </li>
               <li>
-                <a href="#pricing" className="hover:text-white transition-colors">
+                <a href="#pricing" className="hover:text-[#C2410C] transition-colors">
                   Skema 3 Termin (DP 50-30-20)
                 </a>
               </li>
@@ -93,61 +93,69 @@ export function Footer() {
 
           {/* Nav: Mentoring Mahasiswa */}
           <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-wider font-mono mb-4">
+            <h4 className="text-[#0F172A] font-bold text-sm uppercase tracking-wider font-mono mb-4">
               Mentoring IT
             </h4>
             <ul className="space-y-2.5 text-xs">
               <li>
-                <a href="#services-edu" className="hover:text-white transition-colors">
+                <a href="#services-edu" className="hover:text-[#C2410C] transition-colors">
                   EDU-01 Live Debugging 1-on-1
                 </a>
               </li>
               <li>
-                <a href="#services-edu" className="hover:text-white transition-colors">
+                <a href="#services-edu" className="hover:text-[#C2410C] transition-colors">
                   EDU-02 Mentoring Database & API
                 </a>
               </li>
               <li>
-                <a href="#services-edu" className="hover:text-white transition-colors">
+                <a href="#services-edu" className="hover:text-[#C2410C] transition-colors">
                   EDU-03 Simulasi Sidang Skripsi
                 </a>
               </li>
               <li>
-                <a href="#non-joki" className="text-amber-400 hover:text-amber-300 font-semibold transition-colors flex items-center gap-1">
-                  <ShieldAlert className="w-3.5 h-3.5" />
+                <a href="#non-joki" className="text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 hover:bg-amber-100 font-semibold transition-colors flex items-center gap-1 w-fit">
+                  <ShieldAlert className="w-3.5 h-3.5 text-amber-700" />
                   <span>Kebijakan Anti-Joki</span>
-                </a>
-              </li>
-              <li>
-                <a href="#audit-intake" className="hover:text-white transition-colors">
-                  Rekomendasi Paket Otomatis
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Nav: Kebijakan & Integritas */}
+          {/* Nav: Transparansi & Prinsip */}
           <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-wider font-mono mb-4">
-              Etika & Transparansi
+            <h4 className="text-[#0F172A] font-bold text-sm uppercase tracking-wider font-mono mb-4">
+              Transparansi
             </h4>
-            <ul className="space-y-2.5 text-xs text-[#94A3B8]">
-              <li>✓ 100% Hak Milik Source Code</li>
-              <li>✓ Tanpa Vendor Lock-in</li>
-              <li>✓ Garansi Bug 30 Hari Pascarilis</li>
-              <li>✓ Kepatuhan Integritas Akademik</li>
-              <li>✓ Kerahasiaan Data & Non-Disclosure</li>
+            <ul className="space-y-2.5 text-xs">
+              <li>
+                <a href="#pricing" className="hover:text-[#C2410C] transition-colors">
+                  Fixed-Scope Agreement
+                </a>
+              </li>
+              <li>
+                <a href="#problem-solution" className="hover:text-[#C2410C] transition-colors">
+                  Diagnostik Operasional
+                </a>
+              </li>
+              <li>
+                <a href="#faq" className="hover:text-[#C2410C] transition-colors">
+                  Garansi Perbaikan Bug 30 Hari
+                </a>
+              </li>
+              <li>
+                <a href="#audit-intake" className="hover:text-[#C2410C] transition-colors">
+                  Cek Estimasi Kebutuhan
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-[#2E323B] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#64748B]">
-          <p>
-            © 2026 Nakami Studio. Hak cipta dilindungi.
-          </p>
-          <p className="font-mono">
-            Rancangan Asli Kustom • Warm Tech Sunset Design System
+        {/* Bottom Bar: Copyright & Ethics Disclaimer */}
+        <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+          <p>© 2026 Nakami Studio. Hak Cipta Dilindungi.</p>
+          <p className="text-center md:text-right">
+            Menjunjung etika rekayasa perangkat lunak dan integritas akademis mahasiswa.
           </p>
         </div>
       </div>
