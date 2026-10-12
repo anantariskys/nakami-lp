@@ -15,7 +15,7 @@ export function Footer() {
               <MonogramLogo size={36} />
             </Link>
             <p className="text-gray-400 text-sm max-w-sm leading-relaxed">
-              Bukan sekadar baris kode. Kami meracik sistem yang benar-benar bekerja untuk efisiensi bisnis Anda dan pemahaman coding mendalam tanpa jalan pintas joki.
+              Solusi web dan software kasir untuk efisiensi bisnis, serta mentoring coding 1-on-1 etis untuk mahasiswa IT.
             </p>
 
             <div className="space-y-2 text-xs font-mono text-[#94A3B8] pt-2">

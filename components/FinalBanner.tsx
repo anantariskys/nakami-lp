@@ -16,34 +16,34 @@ export function FinalBanner() {
           {/* Eyebrow */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#121316] border border-[#2E323B] text-xs font-mono text-[#F9B637] mb-6">
             <Sparkles className="w-3.5 h-3.5 text-[#FB6C00]" />
-            <span>DISCOVERY CALL 15 MENIT BEBAS RISIKO</span>
+            <span>DISKUSI AWAL 15 MENIT</span>
           </div>
 
           {/* Heading */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-6 max-w-3xl mx-auto leading-tight">
-            Siap Merapikan Sistem Bisnismu atau{" "}
+            Ceritakan Kendala Sistem Bisnis atau{" "}
             <span className="text-sunset-gradient">
-              Menuntaskan Skripsimu Sekarang?
+              Hambatan Skripsi Anda.
             </span>
           </h2>
 
           {/* Subtitle */}
           <p className="text-[#94A3B8] text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-            Sesi 15 menit discovery call pertama bebas risiko. Ceritakan kendala operasional atau error yang Anda hadapi, dan kami tunjukkan peta jalan solusinya tanpa paksaan komitmen apa pun.
+            Gunakan sesi diskusi 15 menit untuk memetakan kendala sistem atau error teknis yang sedang Anda hadapi. Kami bantu berikan gambaran solusinya tanpa kewajiban memesan paket apa pun.
           </p>
 
           {/* WhatsApp CTA Button */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
             <a
               href={createWhatsAppUrl(
-                "Halo Nakami Studio, saya ingin klaim sesi discovery call 15 menit bebas risiko..."
+                "Halo Nakami Studio, saya ingin konsultasi 15 menit untuk membahas kendala sistem/skripsi saya..."
               )}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-cta-gradient text-white font-extrabold text-base hover:opacity-95 shadow-glow-warm hover:scale-105 active:scale-95 transition-all focus-visible:ring-2 focus-visible:ring-amber-300"
             >
               <MessageCircle className="w-5 h-5" />
-              <span>Mulai Konsultasi Bebas Risiko</span>
+              <span>Jadwalkan Diskusi via WhatsApp</span>
             </a>
           </div>
 
@@ -51,15 +51,15 @@ export function FinalBanner() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 border-t border-[#2E323B] text-xs font-mono text-[#94A3B8]">
             <div className="flex items-center justify-center gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>15 Menit Bebas Risiko</span>
+              <span>Diskusi Awal Tanpa Biaya</span>
             </div>
             <div className="flex items-center justify-center gap-2">
               <Clock className="w-4 h-4 text-[#FB6C00] shrink-0" />
-              <span>Respons Cepat &lt; 2 Jam</span>
+              <span>Respons Terarah & Cepat</span>
             </div>
             <div className="flex items-center justify-center gap-2">
               <Lock className="w-4 h-4 text-amber-400 shrink-0" />
-              <span>100% Kerahasiaan Data & Kode</span>
+              <span>Kerahasiaan Data & Kode Terjamin</span>
             </div>
           </div>
         </div>

@@ -22,28 +22,28 @@ export function NonJokiManifesto() {
           {/* Eyebrow */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-xs font-mono font-bold text-amber-400 mb-6">
             <ShieldCheck className="w-4 h-4" />
-            <span>KOMITMEN INTEGRITAS AKADEMIK // ZERO-TOLERANCE JOKI</span>
+            <span>INTEGRITAS AKADEMIK // MENTORING ETIS</span>
           </div>
 
           {/* Headline */}
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-6 leading-tight">
-            Kenapa Kami Menolak Jadi Joki Tugas?{" "}
+            Lulus Sidang dengan Paham Setiap Baris Kode,{" "}
             <span className="block text-sunset-gradient mt-1">
-              Karena Kami Mau Kamu Lulus Sidang dengan Kepala Tegak.
+              Bukan Bergantung pada Hasil Joki.
             </span>
           </h2>
 
           {/* Manifesto Storytelling */}
           <div className="space-y-4 text-sm sm:text-base text-gray-300 leading-relaxed mb-10 max-w-3xl">
             <p>
-              Di luar sana, banyak jasa yang menawarkan klaim manis &quot;terima beres&quot; dengan kode hasil copy-paste yang rapuh.
-              Akibatnya fatal: mahasiswa gemetar saat dosen penguji mematikan proyektor dan meminta menjelaskan logika di baris 140,
-              atau terancam sanksi akademik karena terindikasi plagiarisme.
+              Banyak jasa joki menawarkan klaim &quot;terima beres&quot; dengan kode tempelan.
+              Saat dosen penguji meminta menjelaskan logika di baris tertentu, mahasiswa tidak bisa menjawab
+              atau bahkan tersangkut masalah plagiarisme.
             </p>
             <p>
-              Di Nakami Studio, kami memilih jalan yang berprinsip: <strong className="text-white font-semibold">Live Mentoring & Code Review 1-on-1</strong>.
-              Kami mendampingi Anda membedah arsitektur, menemukan akar bug error, dan melatih simulasi sidang agar Anda menguasai
-              setiap jengkal baris kodemu sendiri.
+              Kami mendampingi lewat <strong className="text-white font-semibold">Live Mentoring & Code Review 1-on-1</strong>.
+              Kami bantu membedah struktur database, menelusuri sumber error, dan latihan simulasi tanya-jawab agar Anda
+              mengerti apa yang sedang Anda bangun.
             </p>
           </div>
 

@@ -22,31 +22,31 @@ export function HeroSection() {
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1C1E24] border border-[#2E323B] shadow-sm mb-6 hover:border-[#FB6C00]/50 transition-colors">
           <Sparkles className="w-3.5 h-3.5 text-[#F9B637] animate-pulse" />
           <span className="text-xs font-mono font-medium tracking-wider text-[#94A3B8] uppercase">
-            NAKAMI STUDIO // PRODUCTION LAUNCH
+            REKAYASA SISTEM & MENTORING IT
           </span>
         </div>
 
         {/* Semantic H1 Headline */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.12] mb-6 font-[var(--font-display)]">
-          Bukan Sekadar Baris Kode.{" "}
+          Bangun Sistem Bisnis yang Teruji,{" "}
           <span className="block mt-2 text-sunset-gradient">
-            Kami Meracik Sistem yang Benar-Benar Bekerja.
+            Kuasai Logika Kodemu Sendiri.
           </span>
         </h1>
 
         {/* Subheadline */}
         <p className="text-lg sm:text-xl text-[#94A3B8] max-w-3xl mx-auto mb-8 font-normal leading-relaxed">
-          Otomasi operasional praktis untuk bisnis Anda dan live mentoring coding
-          1-on-1 etis untuk mahasiswa IT tanpa jalan pintas joki. Dibangun
-          presisi oleh praktisi rekayasa perangkat lunak.
+          Website dan software kasir untuk merapikan alur kerja UMKM, serta
+          live mentoring coding 1-on-1 etis agar mahasiswa IT siap menghadapi
+          sidang tugas akhir tanpa joki.
         </p>
 
         {/* Live System Status Pill */}
         <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#17181C] border border-[#2E323B] text-xs font-mono mb-10 shadow-inner">
           <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10B981]"></span>
-          <span className="text-[#94A3B8]">STATUS SISTEM:</span>
+          <span className="text-[#94A3B8]">KONSULTASI AWAL:</span>
           <span className="text-emerald-400 font-semibold tracking-wide">
-            SEMUA SISTEM NOMINAL // 0 ERROR KRITIS
+            SLOT DISKUSI TERSEDIA MINGGU INI
           </span>
         </div>
 
@@ -81,7 +81,7 @@ export function HeroSection() {
             </div>
             <div>
               <p className="text-xs font-bold text-white leading-tight">100% Kustom</p>
-              <p className="text-[11px] text-[#94A3B8]">Anti template pasaran</p>
+              <p className="text-[11px] text-[#94A3B8]">Bukan template pasaran</p>
             </div>
           </div>
 
@@ -91,7 +91,7 @@ export function HeroSection() {
             </div>
             <div>
               <p className="text-xs font-bold text-white leading-tight">Lighthouse 95+</p>
-              <p className="text-[11px] text-[#94A3B8]">Ultra cepat & SEO</p>
+              <p className="text-[11px] text-[#94A3B8]">Akses cepat & SEO lokal</p>
             </div>
           </div>
 
@@ -100,8 +100,8 @@ export function HeroSection() {
               <ShieldCheck className="w-4 h-4" />
             </div>
             <div>
-              <p className="text-xs font-bold text-white leading-tight">0% Joki Ilegal</p>
-              <p className="text-[11px] text-[#94A3B8]">100% paham mandiri</p>
+              <p className="text-xs font-bold text-white leading-tight">Mentoring Etis</p>
+              <p className="text-[11px] text-[#94A3B8]">Paham kode mandiri</p>
             </div>
           </div>
 
@@ -111,7 +111,7 @@ export function HeroSection() {
             </div>
             <div>
               <p className="text-xs font-bold text-white leading-tight">Full Source Code</p>
-              <p className="text-[11px] text-[#94A3B8]">Milik Anda + Garansi 30H</p>
+              <p className="text-[11px] text-[#94A3B8]">Hak milik & garansi 30 hari</p>
             </div>
           </div>
         </div>

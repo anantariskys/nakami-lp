@@ -23,13 +23,13 @@ export function FAQAccordion() {
             <span>PERTANYAAN UMUM</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-4">
-            Semua yang Perlu Anda Ketahui{" "}
+            Hal Penting Seputar{" "}
             <span className="text-sunset-gradient">
-              Sebelum Memulai
+              Layanan & Mentoring Kami
             </span>
           </h2>
           <p className="text-[#94A3B8] text-base leading-relaxed">
-            Jawaban transparan untuk pertanyaan yang paling sering diajukan seputar layanan pengembangan sistem dan bimbingan coding di Nakami Studio.
+            Jawaban seputar proses kerja, garansi, skema pembayaran, dan etika mentoring di Nakami Studio.
           </p>
         </div>
 

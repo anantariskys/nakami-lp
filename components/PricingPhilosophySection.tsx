@@ -10,17 +10,17 @@ export function PricingPhilosophySection() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C1E24] border border-[#2E323B] text-xs font-mono text-[#F9B637] mb-4">
             <Coins className="w-3.5 h-3.5" />
-            <span>TRANSPARANSI INVESTASI & ALUR KERJA</span>
+            <span>SKEMA BIAYA & ALUR KERJA</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-4">
-            Investasi Terukur Berdasarkan Nilai Nyata,{" "}
+            Biaya Pasti Berdasarkan Lingkup Kerja,{" "}
             <span className="text-sunset-gradient">
-              Bukan Tebak-Tebakan Jam Kerja.
+              Disepakati Tertulis Sejak Awal.
             </span>
           </h2>
           <p className="text-[#94A3B8] text-base sm:text-lg">
-            Kami menerapkan prinsip <strong className="text-white font-medium">fixed-scope agreement</strong>: Anda tahu persis apa
-            yang didapatkan, kapan selesai, dan berapa biayanya sejak hari pertama tanpa tagihan tersembunyi.
+            Kami menerapkan sistem <strong className="text-white font-medium">fixed-scope agreement</strong>: modul, jadwal
+            pengerjaan, dan biaya disepakati sebelum proyek dimulai. Tanpa biaya siluman di tengah jalan.
           </p>
         </div>
 

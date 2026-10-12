@@ -35,7 +35,7 @@ const BIZ_OPTIONS: ProblemOption[] = [
     recommendedCode: "BIZ-01",
     recommendedTitle: "Web Profil Bisnis & Landing Page Konversi Tinggi",
     recommendationNote:
-      "Website modern super cepat skor 95+ dengan optimasi SEO lokal dan tombol kontak langsung.",
+      "Website kustom berkecepatan tinggi dengan skor Lighthouse 95+, SEO lokal, dan tombol kontak langsung.",
   },
   {
     id: "biz_booking",
@@ -86,7 +86,7 @@ const EDU_OPTIONS: ProblemOption[] = [
     recommendedCode: "EDU-03",
     recommendedTitle: "Simulasi Sidang Skripsi IT & Bedah Kode Menyeluruh",
     recommendationNote:
-      "Simulasi latihan tanya-jawab teknis dosen penguji dan bedah alur kode menyeluruh.",
+      "Latihan tanya-jawab teknis khas penguji skripsi dan bedah alur kode baris demi baris.",
   },
   {
     id: "edu_logic",
@@ -147,7 +147,7 @@ Saya ingin konsultasi kebutuhan sistem/mentoring:
 • Kendala Utama: ${currentSelectedOption.label}
 • Rekomendasi Awal: [${currentSelectedOption.recommendedCode}] ${currentSelectedOption.recommendedTitle}
 ${notes.trim() ? `• Catatan Tambahan: ${notes.trim()}\n` : ""}
-Mohon info jadwal discovery call 15 menit bebas risiko. Terima kasih!`;
+Mohon info jadwal sesi diskusi 15 menit. Terima kasih!`;
 
     const url = createWhatsAppUrl(waText);
     window.open(url, "_blank", "noopener,noreferrer");
@@ -160,18 +160,16 @@ Mohon info jadwal discovery call 15 menit bebas risiko. Terima kasih!`;
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C1E24] border border-[#2E323B] text-xs font-mono text-[#FB6C00] mb-4">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>INTERACTIVE DISCOVERY INTAKE</span>
+            <span>SIMULASI KEBUTUHAN</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-4">
-            Bingung Memilih Paket?{" "}
+            Cek Solusi yang Sesuai{" "}
             <span className="text-sunset-gradient">
-              Dapatkan Rekomendasi Presisi
+              dengan Kebutuhan Anda
             </span>
           </h2>
           <p className="text-[#94A3B8] text-base leading-relaxed">
-            Pilih kendala yang sedang Anda hadapi. Sistem kami akan
-            menyesuaikan paket yang paling relevan sebelum Anda ngobrol di
-            WhatsApp.
+            Pilih kendala yang sedang Anda hadapi untuk melihat estimasi modul dan rekomendasi solusi sebelum berdiskusi di WhatsApp.
           </p>
         </div>
 

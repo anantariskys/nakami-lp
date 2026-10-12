@@ -34,11 +34,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://nakamistudio.com"),
   title: {
-    default: "Nakami Studio — Solusi Web Bisnis & Mentoring Coding 1-on-1",
+    default: "Nakami Studio | Solusi Web Bisnis & Mentoring Coding 1-on-1",
     template: "%s | Nakami Studio",
   },
   description:
-    "Bukan sekadar kode, kami meracik sistem yang bekerja. Layanan web & kasir kustom UMKM serta live mentoring coding 1-on-1 etis tanpa jalan pintas joki.",
+    "Solusi website dan aplikasi kasir untuk UMKM, serta live mentoring coding 1-on-1 etis untuk mahasiswa IT.",
   applicationName: "Nakami Studio",
   authors: [{ name: "Nanta & Kamilia", url: "https://nakamistudio.com" }],
   generator: "Next.js 16",
@@ -66,9 +66,9 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Nakami Studio — Solusi Web Bisnis & Mentoring Coding 1-on-1",
+    title: "Nakami Studio | Solusi Web Bisnis & Mentoring Coding 1-on-1",
     description:
-      "Otomasi operasional praktis untuk bisnis Anda dan live mentoring coding 1-on-1 etis untuk mahasiswa IT tanpa jalan pintas joki.",
+      "Layanan web kustom dan software kasir untuk bisnis, serta mentoring coding 1-on-1 etis tanpa joki.",
     url: "https://nakamistudio.com",
     siteName: "Nakami Studio",
     locale: "id_ID",
@@ -78,16 +78,16 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Nakami Studio — Bukan Sekadar Baris Kode. Kami Meracik Sistem yang Benar-Benar Bekerja.",
+        alt: "Nakami Studio | Solusi Web Bisnis & Mentoring Coding 1-on-1",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nakami Studio — Solusi Web Bisnis & Mentoring Coding 1-on-1",
+    title: "Nakami Studio | Solusi Web Bisnis & Mentoring Coding 1-on-1",
     description:
-      "Otomasi operasional praktis untuk bisnis Anda dan mentoring coding 1-on-1 etis tanpa jalan pintas joki.",
+      "Layanan web kustom dan software kasir untuk bisnis, serta mentoring coding 1-on-1 etis tanpa joki.",
     creator: "@nakamistudio",
     site: "@nakamistudio",
     images: ["/og-image.png"],

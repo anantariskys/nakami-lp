@@ -38,7 +38,7 @@ export const BIZ_SERVICES: ServicePackage[] = [
       "Website kustom cepat, responsif, dan teroptimasi SEO lokal agar bisnis Anda mudah ditemukan di Google.",
     benefits: [
       "100% Kode Kustom Modern (Next.js / Tailwind CSS, bukan template pasaran)",
-      "Skor Google Lighthouse 95+ (Anti lemot di jaringan mobile)",
+      "Skor Google Lighthouse 95+ (Cepat diakses di jaringan mobile)",
       "Desain responsif mobile-first disesuaikan dengan identitas brand",
       "Setup SEO teknis, Google Analytics & integrasi tombol pesan WhatsApp langsung",
       "Garansi bug gratis 30 hari pascapeluncuran",
@@ -78,7 +78,7 @@ export const BIZ_SERVICES: ServicePackage[] = [
     segment: "biz",
     title: "Sistem Reservasi & Booking Jadwal Otomatis",
     badge: "Otomasi Reservasi",
-    subtitle: "Ucapkan Selamat Tinggal pada Chat Booking yang Bertumpuk dan Tabrakan",
+    subtitle: "Jadwal Reservasi Masuk Otomatis Tanpa Perlu Balas Chat Berulang",
     painPointCallout: "Admin lelah membalas chat jadwal berulang-ulang dan sering terjadi jadwal bentrok.",
     solutionSummary:
       "Portal booking mandiri untuk klinik, salon, studio foto, atau rental dengan kalender otomatis.",
@@ -100,8 +100,8 @@ export const BIZ_SERVICES: ServicePackage[] = [
     code: "BIZ-04",
     segment: "biz",
     title: "Otomasi Alur Kerja & Software Kustom Perusahaan",
-    badge: "Solusi Terintegrasi",
-    subtitle: "Digitalkan Alur Kerja Unik Bisnis Anda Tanpa Terjebak SaaS Generik",
+    badge: "Sistem Kustom",
+    subtitle: "Aplikasi Internal yang Dirancang Pas Mengikuti SOP Tim Anda",
     painPointCallout: "Software generik di pasaran terlalu kaku, tidak cocok dengan SOP unik internal Anda.",
     solutionSummary:
       "Software internal kustom (ERP mini, portal klien, manajemen SPK/invoice) yang dirancang pas dengan SOP Anda.",
@@ -175,7 +175,7 @@ export const EDU_SERVICES: ServicePackage[] = [
     segment: "edu",
     title: "Simulasi Sidang Skripsi IT & Bedah Kode Menyeluruh",
     badge: "Siap Hadapi Penguji",
-    subtitle: "Kuasai Setiap Baris Kodemu dan Jawab Pertanyaan Dosen Penguji Tanpa Gugup",
+    subtitle: "Pahami Logika Kodemu dan Jawab Pertanyaan Dosen Penguji dengan Jelas",
     painPointCallout: "Takut blank saat dosen penguji bertanya: 'Kenapa pakai algoritma ini?' atau 'Jelaskan fungsi baris 142!'.",
     solutionSummary:
       "Simulasi sidang realistis bersama mentor: kami mengajukan pertanyaan kritis khas dosen penguji dan melatih cara menjawab Anda secara ilmiah dan percaya diri.",
@@ -224,7 +224,7 @@ export const FAQS: FaqItem[] = [
   {
     question: "Bagaimana cara memulai konsultasi pertama saya?",
     answer:
-      "Sangat mudah! Anda cukup klik tombol 'Konsultasi via WhatsApp' di website ini atau isi formulir Quick Intake Audit. Sesi discovery call 15 menit pertama bersifat GRATIS dan BEBAS RISIKO untuk mendiskusikan kendala sistem Anda sebelum Anda memutuskan melangkah lebih jauh.",
+      "Klik tombol WhatsApp di website ini atau isi formulir Quick Intake Audit di bawah. Kita jadwalkan sesi diskusi 15 menit untuk memetakan kendala sistem Anda, tanpa biaya dan tanpa kewajiban memesan paket apa pun.",
   },
 ];
 
@@ -261,7 +261,7 @@ export const PROBLEM_SOLUTION_DATA = {
     solutionPoints: [
       "Paham teknik debugging sistematis bersama senior engineer: error selesai, ilmunya melekat",
       "Struktur database normal, rapi, dan siap dipertanggungjawabkan secara akademis",
-      "Kebanggaan atas karya sendiri — 100% etis, orisinal, dan membanggakan orang tua",
+      "Hasil murni pemahaman sendiri, etis, dan siap dipertanggungjawabkan di ruang sidang",
       "Lancar menjawab setiap pertanyaan penguji karena telah melalui simulasi bedah kode intensif",
     ],
   },

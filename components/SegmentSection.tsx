@@ -41,17 +41,16 @@ export function SegmentSection() {
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1C1E24] border border-[#2E323B] text-xs font-mono text-[#F9B637] mb-4">
             <Layers className="w-3.5 h-3.5" />
-            <span>SEGMENTASI LAYANAN SPESIFIK</span>
+            <span>LAYANAN KAMI</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-4">
-            Dua Kebutuhan Berbeda.{" "}
+            Layanan Terarah untuk Pelaku Usaha{" "}
             <span className="text-sunset-gradient">
-              Satu Standar Rekayasa yang Sama.
+              dan Mahasiswa IT.
             </span>
           </h2>
           <p className="text-[#94A3B8] text-base sm:text-lg">
-            Pilih jalur kebutuhan Anda untuk melihat pemecahan masalah dan paket
-            rekayasa perangkat lunak yang dirancang khusus.
+            Pilih kategori di bawah untuk melihat rincian masalah yang kami selesaikan dan estimasi biaya pengerjaannya.
           </p>
         </div>
 
@@ -161,7 +160,7 @@ export function SegmentSection() {
               </div>
               <div className="pt-4 border-t border-[#2E323B] text-xs text-[#F9B637] font-mono font-medium flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>Hasil: Sistem stabil, terukur, dan terkendali penuh.</span>
+                <span>Hasil: Alur kerja rapi dan data tercatat otomatis.</span>
               </div>
             </div>
           </div>
