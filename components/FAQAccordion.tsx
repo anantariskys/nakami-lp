@@ -14,12 +14,12 @@ export function FAQAccordion() {
   };
 
   return (
-    <section id="faq" className="py-20 sm:py-24 bg-slate-50 border-b border-slate-200">
+    <section id="faq" className="py-20 sm:py-24 bg-slate-50/50 border-b border-slate-200/80">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white border border-slate-200 text-xs font-mono font-medium text-slate-700 mb-4 shadow-2xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-slate-200 text-xs font-mono font-medium text-slate-700 mb-4 shadow-2xs">
             <HelpCircle className="w-3.5 h-3.5 text-[#FB6C00]" />
             <span>TANYA JAWAB UMUM</span>
           </div>
@@ -32,7 +32,7 @@ export function FAQAccordion() {
         </div>
 
         {/* Accordion Container */}
-        <div className="space-y-3">
+        <div className="space-y-3.5">
           {FAQS.map((faq, index) => {
             const isOpen = openIndexes.includes(index);
             const headerId = `faq-header-${index}`;
@@ -41,10 +41,10 @@ export function FAQAccordion() {
             return (
               <div
                 key={index}
-                className={`rounded-xl border transition-all duration-200 bg-white ${
+                className={`rounded-2xl border transition-all duration-200 bg-white ${
                   isOpen
-                    ? "border-slate-400 shadow-2xs"
-                    : "border-slate-200 hover:border-slate-300"
+                    ? "border-orange-300 shadow-xs"
+                    : "border-slate-200/90 hover:border-slate-300"
                 }`}
               >
                 <h3>
@@ -60,10 +60,10 @@ export function FAQAccordion() {
                       {faq.question}
                     </span>
                     <span
-                      className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border transition-transform duration-200 ${
+                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 border transition-transform duration-200 ${
                         isOpen
-                          ? "bg-slate-100 text-slate-900 border-slate-300 rotate-180"
-                          : "bg-slate-50 text-slate-500 border-slate-200"
+                          ? "bg-orange-50 text-[#FB6C00] border-orange-200 rotate-180"
+                          : "bg-slate-50 text-slate-400 border-slate-200"
                       }`}
                     >
                       <ChevronDown className="w-4 h-4" />

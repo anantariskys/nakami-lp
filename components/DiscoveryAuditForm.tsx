@@ -7,6 +7,10 @@ import {
   GraduationCap,
   Calculator,
   MessageCircle,
+  Clock,
+  Coins,
+  ShieldCheck,
+  ArrowRight,
 } from "lucide-react";
 
 interface ServiceOption {
@@ -16,6 +20,7 @@ interface ServiceOption {
   code: string;
   baseTimeline: string;
   basePrice: string;
+  summary: string;
 }
 
 const SERVICE_OPTIONS: ServiceOption[] = [
@@ -26,14 +31,16 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     code: "BIZ-01",
     baseTimeline: "7-14 hari kerja",
     basePrice: "Mulai Rp 2.500.000",
+    summary: "Website kustom Next.js/Tailwind responsif, SEO siap saing, domain & integrasi WhatsApp.",
   },
   {
     id: "pos-biz",
-    name: "Aplikasi Kasir (POS) & Manajemen Stok",
+    name: "Aplikasi Kasir (POS) & Stok Multi-Outlet",
     category: "biz",
     code: "BIZ-02",
     baseTimeline: "14-25 hari kerja",
     basePrice: "Mulai Rp 4.500.000",
+    summary: "Sistem kasir web/cloud tanpa biaya langganan bulanan per device, print struk & scan barcode.",
   },
   {
     id: "booking-biz",
@@ -42,6 +49,7 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     code: "BIZ-03",
     baseTimeline: "10-18 hari kerja",
     basePrice: "Mulai Rp 3.500.000",
+    summary: "Portal booking mandiri cegah jadwal bentrok, kalender interaktif & notifikasi otomatis.",
   },
   {
     id: "custom-biz",
@@ -50,6 +58,7 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     code: "BIZ-04",
     baseTimeline: "Mulai 3 minggu",
     basePrice: "Sesuai lingkup kerja",
+    summary: "Software operasional tim disesuaikan persis dengan SOP unik bisnis Anda tanpa kompromi.",
   },
   {
     id: "debug-edu",
@@ -58,6 +67,7 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     code: "EDU-01",
     baseTimeline: "1-2 jam per sesi",
     basePrice: "Mulai Rp 150.000 / jam",
+    summary: "Sesi investigasi error sistematis via Google Meet + rekaman video sesi untuk dipelajari lagi.",
   },
   {
     id: "db-edu",
@@ -66,6 +76,7 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     code: "EDU-02",
     baseTimeline: "3 sesi terarah",
     basePrice: "Mulai Rp 400.000 / paket",
+    summary: "Bimbingan perancangan ERD, normalisasi, dan REST API terstandar industri untuk fondasi skripsi.",
   },
   {
     id: "defense-edu",
@@ -74,6 +85,7 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     code: "EDU-03",
     baseTimeline: "Paket intensif 2 sesi",
     basePrice: "Mulai Rp 550.000 / paket",
+    summary: "Simulasi pertanyaan dosen penguji, bedah alur algoritma, dan persiapan mental hingga siap 100%.",
   },
 ];
 
@@ -99,199 +111,213 @@ export function DiscoveryAuditForm() {
     }
   };
 
-  const generateWhatsAppMessage = () => {
-    const greeting = "Halo Nakami Studio,";
-    const senderName = name.trim() ? `Saya ${name.trim()},` : "Saya";
-    const categoryLabel =
-      targetCategory === "biz" ? "Kebutuhan Bisnis / UMKM" : "Kebutuhan Mentoring IT / Skripsi";
+  const generateWhatsAppMessage = (): string => {
+    const sender = name.trim() ? name.trim() : "Calon Klien";
     const noteText = projectNote.trim()
-      ? `\nCatatan tambahan: "${projectNote.trim()}"`
+      ? `\nCatatan kebutuhan: ${projectNote.trim()}`
       : "";
 
-    return `${greeting} ${senderName} ingin mendiskusikan ${categoryLabel}.
-Paket yang dipilih: [${activeService.code}] ${activeService.name}.
-Estimasi timeline: ${activeService.baseTimeline}.${noteText}
-Mohon info jadwal diskusi 15 menit awal. Terima kasih!`;
+    return `Halo Nakami Studio, saya ${sender}. Saya ingin konsultasi paket ${activeService.code} (${activeService.name}).${noteText}\nMohon info jadwal diskusi awal 15 menit.`;
   };
 
   return (
-    <section id="kalkulator-estimasi" className="py-20 sm:py-24 bg-white border-b border-slate-200">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="kalkulator-estimasi" className="py-20 sm:py-24 bg-white border-b border-slate-200/80">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-slate-100 border border-slate-200 text-xs font-mono font-medium text-slate-700 mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-orange-50 border border-orange-200 text-xs font-mono font-medium text-orange-950 mb-4 shadow-2xs">
             <Calculator className="w-3.5 h-3.5 text-[#FB6C00]" />
-            <span>INTERACTIVE ESTIMATOR</span>
+            <span>KALKULATOR ESTIMASI LINGKUP & BIAYA</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight font-[var(--font-display)] mb-4">
-            Hitung perkiraan kebutuhan proyek Anda.
+            Hitung estimasi proyek dalam hitungan detik.
           </h2>
-          <p className="text-slate-600 text-base leading-relaxed">
-            Dapatkan rekomendasi paket, estimasi durasi pengerjaan, dan format pesan ringkasan yang siap dikonsultasikan via WhatsApp.
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+            Dapatkan gambaran durasi pengerjaan, kisaran biaya, dan format kolaborasi sebelum memulai sesi diskusi awal.
           </p>
         </div>
 
         {/* Estimator Container */}
-        <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-6 sm:p-10 shadow-sm">
+        <div className="rounded-[32px] sm:rounded-[40px] bg-gradient-to-b from-[#FFFDFB] via-[#FFFBF6] to-white border border-orange-100 p-6 sm:p-10 lg:p-12 shadow-xs">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             
-            {/* Left Column: Form Controls */}
-            <div className="lg:col-span-7 space-y-6">
+            {/* Left Column: Interactive Inputs */}
+            <div className="lg:col-span-7 space-y-7">
               
-              {/* Step 1: Category Picker */}
+              {/* Category Segment Selector */}
               <div>
-                <label className="block text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-2">
-                  Langkah 1: Siapa Anda?
+                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-600 mb-3">
+                  1. Pilih Kategori Kebutuhan
                 </label>
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     type="button"
                     onClick={() => handleCategorySwitch("biz")}
-                    className={`flex items-center justify-center gap-2 p-3.5 rounded-xl border text-sm font-bold transition-all ${
+                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border text-sm font-bold transition-all ${
                       targetCategory === "biz"
-                        ? "bg-white border-[#FB6C00] text-slate-900 shadow-2xs ring-1 ring-[#FB6C00]"
-                        : "bg-white/80 border-slate-200 text-slate-600 hover:bg-white"
+                        ? "bg-[#FB6C00] text-white border-[#FB6C00] shadow-2xs"
+                        : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
                     }`}
                   >
-                    <Store className="w-4 h-4 text-[#FB6C00]" />
-                    <span>Pelaku Usaha / Bisnis</span>
+                    <Store className="w-4 h-4 shrink-0" />
+                    <span>Sistem Bisnis UMKM</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => handleCategorySwitch("edu")}
-                    className={`flex items-center justify-center gap-2 p-3.5 rounded-xl border text-sm font-bold transition-all ${
+                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border text-sm font-bold transition-all ${
                       targetCategory === "edu"
-                        ? "bg-white border-slate-900 text-slate-900 shadow-2xs ring-1 ring-slate-900"
-                        : "bg-white/80 border-slate-200 text-slate-600 hover:bg-white"
+                        ? "bg-slate-900 text-white border-slate-900 shadow-2xs"
+                        : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
                     }`}
                   >
-                    <GraduationCap className="w-4 h-4 text-slate-800" />
-                    <span>Mahasiswa IT / Skripsi</span>
+                    <GraduationCap className="w-4 h-4 shrink-0" />
+                    <span>Mentoring Coding IT</span>
                   </button>
                 </div>
               </div>
 
-              {/* Step 2: Specific Service Picker */}
+              {/* Specific Service Package Radio Group */}
               <div>
-                <label className="block text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-2">
-                  Langkah 2: Pilih Kebutuhan Utama
+                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-600 mb-3">
+                  2. Pilih Modul Layanan
                 </label>
-                <div className="space-y-2">
-                  {filteredServices.map((service) => {
-                    const isSelected = selectedServiceId === service.id;
-                    return (
-                      <button
-                        key={service.id}
-                        type="button"
-                        onClick={() => setSelectedServiceId(service.id)}
-                        className={`w-full text-left p-3.5 rounded-xl border text-xs sm:text-sm font-medium transition-all flex items-center justify-between ${
-                          isSelected
-                            ? "bg-white border-[#FB6C00] text-slate-900 shadow-2xs ring-1 ring-[#FB6C00]"
-                            : "bg-white/80 border-slate-200 text-slate-600 hover:bg-white"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="font-mono text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
-                            {service.code}
-                          </span>
-                          <span>{service.name}</span>
-                        </div>
-                        <span className="text-xs text-slate-400 font-mono hidden sm:inline">
-                          {service.baseTimeline}
+                <div className="space-y-2.5">
+                  {filteredServices.map((srv) => (
+                    <button
+                      key={srv.id}
+                      type="button"
+                      onClick={() => setSelectedServiceId(srv.id)}
+                      className={`w-full text-left p-3.5 sm:p-4 rounded-2xl border transition-all flex items-center justify-between gap-4 ${
+                        selectedServiceId === srv.id
+                          ? "bg-white border-[#FB6C00] shadow-xs ring-1 ring-[#FB6C00]"
+                          : "bg-white/80 border-slate-200/90 hover:bg-white hover:border-slate-300"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span
+                          className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${
+                            selectedServiceId === srv.id
+                              ? "bg-orange-100 text-[#C2410C]"
+                              : "bg-slate-100 text-slate-700"
+                          }`}
+                        >
+                          {srv.code}
                         </span>
-                      </button>
-                    );
-                  })}
+                        <span className="text-sm font-bold text-slate-900">
+                          {srv.name}
+                        </span>
+                      </div>
+                      <span className="font-mono text-xs font-semibold text-slate-600 shrink-0">
+                        {srv.basePrice}
+                      </span>
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              {/* Step 3: Optional Name & Note */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              {/* Optional Name & Context Note */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="user-name" className="block text-xs font-medium text-slate-700 mb-1">
-                    Nama atau Nama Bisnis (Opsional)
+                  <label
+                    htmlFor="client-name"
+                    className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-600 mb-2"
+                  >
+                    Nama Anda / Usaha (Opsional)
                   </label>
                   <input
-                    id="user-name"
+                    id="client-name"
                     type="text"
+                    placeholder="Contoh: Budi / Toko Maju"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Contoh: Budi (Kopi Senja)"
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-[#FB6C00]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-[#FB6C00]"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="project-note" className="block text-xs font-medium text-slate-700 mb-1">
+                  <label
+                    htmlFor="project-note"
+                    className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-600 mb-2"
+                  >
                     Catatan Khusus (Opsional)
                   </label>
                   <input
                     id="project-note"
                     type="text"
+                    placeholder="Contoh: Butuh integrasi barcode"
                     value={projectNote}
                     onChange={(e) => setProjectNote(e.target.value)}
-                    placeholder="Contoh: Butuh integrasi scan barcode"
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-[#FB6C00]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-[#FB6C00]"
                   />
                 </div>
               </div>
 
             </div>
 
-            {/* Right Column: Live Scope & WhatsApp Action Card */}
-            <div className="lg:col-span-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-6">
-              <div>
-                <div className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">
-                  RINGKASAN ESTIMASI
-                </div>
-                <h3 className="text-lg font-bold text-slate-900">
-                  {activeService.name}
-                </h3>
-                <span className="inline-block mt-1 font-mono text-xs font-bold text-[#FB6C00]">
-                  Kode Paket: {activeService.code}
-                </span>
+            {/* Right Column: Live Summary & Direct WhatsApp Action */}
+            <div className="lg:col-span-5 rounded-3xl bg-white border border-slate-200 p-6 sm:p-7 shadow-2xs">
+              <div className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 mb-4 pb-3 border-b border-slate-100 flex items-center justify-between">
+                <span>RINGKASAN ESTIMASI</span>
+                <span className="text-[#FB6C00]">{activeService.code}</span>
               </div>
 
-              <div className="space-y-3 py-4 border-y border-slate-100 text-xs text-slate-600">
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Estimasi Durasi:</span>
-                  <span className="font-semibold text-slate-900">{activeService.baseTimeline}</span>
+              <h3 className="text-xl font-bold text-slate-950 mb-2 font-[var(--font-display)]">
+                {activeService.name}
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">
+                {activeService.summary}
+              </p>
+
+              {/* Metrics Box */}
+              <div className="space-y-3.5 mb-7 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div className="flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-2 text-slate-600">
+                    <Clock className="w-4 h-4 text-slate-400" />
+                    <span>Estimasi Durasi</span>
+                  </div>
+                  <span className="font-bold text-slate-900 font-mono">
+                    {activeService.baseTimeline}
+                  </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Kisaran Biaya:</span>
-                  <span className="font-semibold text-slate-900">{activeService.basePrice}</span>
+
+                <div className="flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-2 text-slate-600">
+                    <Coins className="w-4 h-4 text-slate-400" />
+                    <span>Kisaran Investasi</span>
+                  </div>
+                  <span className="font-bold text-[#C2410C] font-mono text-sm">
+                    {activeService.basePrice}
+                  </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Format Kerja:</span>
-                  <span className="font-semibold text-slate-900">
-                    {targetCategory === "biz" ? "Fixed-Scope + Garansi 30 Hari" : "1-on-1 Live Mentoring"}
+
+                <div className="flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-2 text-slate-600">
+                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                    <span>Jaminan Garansi</span>
+                  </div>
+                  <span className="font-semibold text-emerald-700">
+                    30 Hari Bebas Bug &amp; Source Code
                   </span>
                 </div>
               </div>
 
-              <div>
-                <div className="text-xs font-mono text-slate-400 mb-2">
-                  Preview Pesan WhatsApp:
-                </div>
-                <div className="p-3 rounded-lg bg-slate-50 border border-slate-100 text-[11px] text-slate-700 font-mono whitespace-pre-wrap leading-relaxed">
-                  {generateWhatsAppMessage()}
-                </div>
-              </div>
-
+              {/* Action Button */}
               <a
                 href={createWhatsAppUrl(generateWhatsAppMessage())}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2.5 py-3.5 px-4 rounded-xl bg-[#FB6C00] hover:bg-[#E73F1E] text-white text-sm font-bold shadow-xs transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-full bg-[#FB6C00] hover:bg-[#E73F1E] text-white font-bold text-sm shadow-xs transition-colors"
               >
                 <MessageCircle className="w-4 h-4 shrink-0" />
-                <span>Kirim Ringkasan via WhatsApp</span>
+                <span>Konsultasikan Rincian via WA</span>
+                <ArrowRight className="w-4 h-4 shrink-0" />
               </a>
 
-              <p className="text-[11px] text-slate-400 text-center leading-normal">
-                Diskusi 15 menit awal tidak dikenakan biaya apa pun.
+              <p className="text-center text-[11px] text-slate-500 mt-3">
+                Diskusi 15 menit awal bebas biaya dan tanpa kewajiban apa pun.
               </p>
             </div>
 

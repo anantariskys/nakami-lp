@@ -124,7 +124,7 @@ export default function RootLayout({
       lang="id"
       className={`${montserrat.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth antialiased`}
     >
-      <body className="min-h-screen bg-[#121316] text-[#FFFFFF] font-sans selection:bg-[#FB6C00] selection:text-[#121316]">
+      <body className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#FB6C00] selection:text-white">
         {children}
       </body>
     </html>
