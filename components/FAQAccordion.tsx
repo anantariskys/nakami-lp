@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { FAQS } from "@/lib/constants";
-import { ChevronDown, HelpCircle } from "lucide-react";
+import { FAQS, createWhatsAppUrl } from "@/lib/constants";
+import { ChevronDown, HelpCircle, MessageCircle, ArrowDown } from "lucide-react";
 
 export function FAQAccordion() {
   const [openIndexes, setOpenIndexes] = useState<number[]>([0]);
@@ -14,7 +14,7 @@ export function FAQAccordion() {
   };
 
   return (
-    <section id="faq" className="py-20 sm:py-24 bg-slate-50/50 border-b border-slate-200/80">
+    <section id="faq" className="scroll-mt-28 py-20 sm:py-24 bg-slate-50/50 border-b border-slate-200/80">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -84,6 +84,33 @@ export function FAQAccordion() {
               </div>
             );
           })}
+        </div>
+
+        {/* Forward Bridge to Direct Consultation & Final Banner */}
+        <div className="mt-14 text-center">
+          <p className="text-sm text-slate-600 mb-4">
+            Punya skenario teknis spesifik yang belum terjawab di atas?
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href={createWhatsAppUrl(
+                "Halo Nakami Studio, saya membaca FAQ dan ingin bertanya lebih lanjut seputar kebutuhan proyek saya..."
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#FB6C00] hover:bg-[#E73F1E] text-white font-bold text-xs sm:text-sm shadow-2xs hover:shadow-xs transition-colors"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>Tanyakan Langsung via WhatsApp</span>
+            </a>
+            <a
+              href="#konsultasi-akhir"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-800 font-semibold text-xs sm:text-sm shadow-2xs transition-colors"
+            >
+              <span>Lanjut ke Konsultasi Bebas Biaya</span>
+              <ArrowDown className="w-4 h-4 text-slate-400" />
+            </a>
+          </div>
         </div>
 
       </div>

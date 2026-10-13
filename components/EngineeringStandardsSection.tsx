@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   CheckCircle2,
   Compass,
+  ArrowRight,
 } from "lucide-react";
 
 export function EngineeringStandardsSection() {
@@ -67,7 +68,8 @@ export function EngineeringStandardsSection() {
   ];
 
   return (
-    <section id="standar-rekayasa" className="py-20 sm:py-24 bg-slate-50/50 border-b border-slate-200/80">
+    <section id="standar-kualitas" className="scroll-mt-28 py-20 sm:py-24 bg-slate-50/50 border-b border-slate-200/80">
+      <div id="standar-rekayasa" className="scroll-mt-28 sr-only" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -127,6 +129,48 @@ export function EngineeringStandardsSection() {
               </div>
             );
           })}
+        </div>
+
+        {/* Forward Transition Banner to Service Catalog */}
+        <div className="mt-14 pt-8 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <div>
+            <div className="text-sm font-bold text-slate-900">
+              Siap melihat modul spesifik untuk bisnis Anda atau paket bimbingan IT?
+            </div>
+            <div className="text-xs text-slate-600">
+              Pilih modul aplikasi siap rilis atau jadwalkan sesi live code review bersama engineer.
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3">
+            <a
+              href="#layanan-bisnis"
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(
+                    new CustomEvent("nakami:switch-track", { detail: { track: "biz" } })
+                  );
+                }
+              }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FB6C00] hover:bg-[#E73F1E] text-white font-bold text-xs sm:text-sm shadow-2xs hover:shadow-xs transition-colors"
+            >
+              <span>Katalog Modul Bisnis</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <a
+              href="#mentoring-it"
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  window.dispatchEvent(
+                    new CustomEvent("nakami:switch-track", { detail: { track: "edu" } })
+                  );
+                }
+              }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-semibold text-xs sm:text-sm shadow-2xs transition-colors"
+            >
+              <span>Paket Mentoring IT</span>
+              <ArrowRight className="w-4 h-4 text-slate-400" />
+            </a>
+          </div>
         </div>
 
       </div>

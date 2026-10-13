@@ -24,19 +24,36 @@ export function SegmentSection() {
   const [activeTab, setActiveTab] = useState<"biz" | "edu">("biz");
 
   useEffect(() => {
+    const scrollToTarget = (id: string) => {
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 60);
+    };
+
     const handleHashChange = () => {
       const currentHash = window.location.hash;
-      if (currentHash === "#mentoring-it" || currentHash === "#manifesto-etis") {
+      if (currentHash === "#mentoring-it") {
         setActiveTab("edu");
+        scrollToTarget("mentoring-it");
+      } else if (currentHash === "#manifesto-etis") {
+        setActiveTab("edu");
+        scrollToTarget("manifesto-etis");
       } else if (currentHash === "#layanan-bisnis") {
         setActiveTab("biz");
+        scrollToTarget("layanan-bisnis");
       }
     };
 
     const handleCustomTrackSwitch = (e: Event) => {
-      const customEvent = e as CustomEvent<{ track: "biz" | "edu" }>;
+      const customEvent = e as CustomEvent<{ track: "biz" | "edu"; targetId?: string }>;
       if (customEvent.detail?.track) {
         setActiveTab(customEvent.detail.track);
+        if (customEvent.detail.targetId) {
+          scrollToTarget(customEvent.detail.targetId);
+        }
       }
     };
 
@@ -46,7 +63,7 @@ export function SegmentSection() {
     // Initial check from window hash if navigated directly
     const timer = setTimeout(() => {
       handleHashChange();
-    }, 0);
+    }, 50);
 
     return () => {
       clearTimeout(timer);
@@ -55,15 +72,24 @@ export function SegmentSection() {
     };
   }, []);
 
+  useEffect(() => {
+    if (activeTab === "edu" && typeof window !== "undefined" && window.location.hash === "#manifesto-etis") {
+      const timer = setTimeout(() => {
+        document.getElementById("manifesto-etis")?.scrollIntoView({ behavior: "smooth" });
+      }, 80);
+      return () => clearTimeout(timer);
+    }
+  }, [activeTab]);
+
   const currentServices = activeTab === "biz" ? BIZ_SERVICES : EDU_SERVICES;
 
   return (
-    <section id="katalog-layanan" className="py-20 sm:py-24 bg-white border-b border-slate-200/80">
+    <section id="katalog-layanan" className="scroll-mt-28 py-20 sm:py-24 bg-white border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Anchor targets for direct navbar and gateway links */}
-        <div id="layanan-bisnis" className="relative -top-28" />
-        <div id="mentoring-it" className="relative -top-28" />
+        <div id="layanan-bisnis" className="scroll-mt-28 relative -top-28" />
+        <div id="mentoring-it" className="scroll-mt-28 relative -top-28" />
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">

@@ -11,6 +11,7 @@ import {
   Coins,
   ShieldCheck,
   ArrowRight,
+  ArrowDown,
 } from "lucide-react";
 
 interface ServiceOption {
@@ -153,7 +154,7 @@ export function DiscoveryAuditForm() {
   };
 
   return (
-    <section id="kalkulator-estimasi" className="py-20 sm:py-24 bg-white border-b border-slate-200/80">
+    <section id="kalkulator-estimasi" className="scroll-mt-28 py-20 sm:py-24 bg-white border-b border-slate-200/80">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -353,6 +354,22 @@ export function DiscoveryAuditForm() {
               </p>
             </div>
 
+          </div>
+        </div>
+
+        {/* Forward Bridge to FAQ */}
+        <div className="mt-12 text-center">
+          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 px-5 py-3 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs text-slate-600 shadow-2xs">
+            <span className="font-medium">
+              Masih memiliki pertanyaan seputar garansi 30 hari, hak milik kode, atau alur kerja?
+            </span>
+            <a
+              href="#faq"
+              className="inline-flex items-center gap-1 font-bold text-[#FB6C00] hover:text-[#E73F1E] transition-colors underline-offset-4 hover:underline"
+            >
+              <span>Pelajari Tanya Jawab (FAQ)</span>
+              <ArrowDown className="w-3.5 h-3.5" />
+            </a>
           </div>
         </div>
 

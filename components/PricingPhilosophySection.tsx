@@ -13,7 +13,7 @@ import {
 
 export function PricingPhilosophySection() {
   return (
-    <section id="transparansi-biaya" className="py-20 sm:py-24 bg-white border-b border-slate-200/80">
+    <section id="transparansi-biaya" className="scroll-mt-28 py-20 sm:py-24 bg-white border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

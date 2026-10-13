@@ -99,8 +99,8 @@ export function NonJokiManifesto({ embedded = false }: NonJokiManifestoProps) {
           </div>
         </div>
 
-        {/* Action CTA */}
-        <div className="flex flex-wrap items-center justify-between gap-6 pt-8 border-t border-amber-200/70">
+        {/* Action CTA & Forward Links */}
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pt-8 border-t border-amber-200/70">
           <div>
             <div className="text-sm font-bold text-slate-900">
               Stuck pada error atau bingung alur arsitektur tugas akhir?
@@ -110,18 +110,36 @@ export function NonJokiManifesto({ embedded = false }: NonJokiManifestoProps) {
             </div>
           </div>
 
-          <a
-            href={createWhatsAppUrl(
-              "Halo Nakami Studio, saya mahasiswa IT dan butuh mentoring etis untuk tugas akhir/error koding..."
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm shadow-xs transition-colors"
-          >
-            <MessageCircle className="w-4 h-4" />
-            <span>Jadwalkan Mentoring Etis</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
+          <div className="flex flex-wrap items-center gap-3">
+            <a
+              href={createWhatsAppUrl(
+                "Halo Nakami Studio, saya mahasiswa IT dan butuh mentoring etis untuk tugas akhir/error koding..."
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm shadow-xs transition-colors"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>Jadwalkan Mentoring Etis</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+
+            <a
+              href="#transparansi-biaya"
+              className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-semibold text-xs sm:text-sm shadow-2xs transition-colors"
+            >
+              <span>Biaya Mentoring</span>
+              <ArrowRight className="w-4 h-4 text-slate-400" />
+            </a>
+
+            <a
+              href="#kalkulator-estimasi"
+              className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-semibold text-xs sm:text-sm shadow-2xs transition-colors"
+            >
+              <span>Simulasi di Kalkulator</span>
+              <ArrowRight className="w-4 h-4 text-slate-400" />
+            </a>
+          </div>
         </div>
 
       </div>
@@ -130,14 +148,14 @@ export function NonJokiManifesto({ embedded = false }: NonJokiManifestoProps) {
 
   if (embedded) {
     return (
-      <div id="manifesto-etis" className="mt-14 sm:mt-16 pt-10 border-t border-slate-200/80">
+      <div id="manifesto-etis" className="scroll-mt-28 mt-14 sm:mt-16 pt-10 border-t border-slate-200/80">
         {content}
       </div>
     );
   }
 
   return (
-    <section id="manifesto-etis" className="py-20 sm:py-24 bg-white border-b border-slate-200/80">
+    <section id="manifesto-etis" className="scroll-mt-28 py-20 sm:py-24 bg-white border-b border-slate-200/80">
       {content}
     </section>
   );

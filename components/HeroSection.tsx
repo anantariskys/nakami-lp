@@ -6,6 +6,7 @@ import { createWhatsAppUrl } from "@/lib/constants";
 import {
   MessageCircle,
   ArrowUpRight,
+  ArrowDown,
   CheckCircle2,
   ShieldCheck,
   Code2,
@@ -16,7 +17,7 @@ import {
 
 export function HeroSection() {
   return (
-    <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20 bg-white text-slate-900">
+    <section id="hero" className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20 bg-white text-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Framed Hero Showcase Container */}
@@ -107,6 +108,15 @@ export function HeroSection() {
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-semibold text-sm sm:text-base transition-colors shadow-2xs"
                 >
                   <span>Hitung Estimasi Proyek</span>
+                </a>
+
+                {/* Direct Forward to Section 2 (Dual Gateway) */}
+                <a
+                  href="#pilih-jalur"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-slate-50 hover:bg-orange-50/70 text-slate-700 hover:text-[#FB6C00] border border-slate-200/80 font-semibold text-sm sm:text-base transition-colors shadow-2xs"
+                >
+                  <span>Pilih Jalur Layanan</span>
+                  <ArrowDown className="w-4 h-4 text-[#FB6C00]" />
                 </a>
               </div>
 

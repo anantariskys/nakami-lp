@@ -6,7 +6,7 @@ import { MessageCircle, ShieldCheck, Clock, Lock, ArrowUpRight } from "lucide-re
 
 export function FinalBanner() {
   return (
-    <section className="py-20 sm:py-24 bg-white border-b border-slate-200/80">
+    <section id="konsultasi-akhir" className="scroll-mt-28 py-20 sm:py-24 bg-white border-b border-slate-200/80">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Warm Showcase Closing Card */}

@@ -31,6 +31,15 @@ export function Navbar() {
 
   const closeMenu = () => setMobileMenuOpen(false);
 
+  const handleNavClick = (track?: "biz" | "edu", targetId?: string) => {
+    if (track && typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("nakami:switch-track", { detail: { track, targetId } })
+      );
+    }
+    closeMenu();
+  };
+
   return (
     <header className="fixed top-3 sm:top-5 left-0 right-0 z-50 flex justify-center px-3 sm:px-6 pointer-events-none transition-all duration-300">
       <div
@@ -53,12 +62,14 @@ export function Navbar() {
         <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-medium text-slate-600">
           <a
             href="#layanan-bisnis"
+            onClick={() => handleNavClick("biz", "layanan-bisnis")}
             className="hover:text-slate-900 transition-colors"
           >
             Solusi Bisnis
           </a>
           <a
             href="#mentoring-it"
+            onClick={() => handleNavClick("edu", "mentoring-it")}
             className="hover:text-slate-900 transition-colors"
           >
             Mentoring IT
@@ -83,6 +94,7 @@ export function Navbar() {
           </a>
           <a
             href="#manifesto-etis"
+            onClick={() => handleNavClick("edu", "manifesto-etis")}
             className="hover:text-[#FB6C00] transition-colors font-semibold"
           >
             Anti-Joki
@@ -129,10 +141,10 @@ export function Navbar() {
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 top-[72px] z-40 bg-white/98 backdrop-blur-md px-6 py-8 flex flex-col justify-between pointer-events-auto lg:hidden overflow-y-auto">
-          <nav className="flex flex-col space-y-4 text-base font-semibold text-slate-800">
+          <nav className="flex flex-col text-sm font-semibold text-slate-800">
             <a
               href="#layanan-bisnis"
-              onClick={closeMenu}
+              onClick={() => handleNavClick("biz", "layanan-bisnis")}
               className="py-3 border-b border-slate-100 flex items-center justify-between"
             >
               <span>Solusi Bisnis & UMKM</span>
@@ -140,7 +152,7 @@ export function Navbar() {
             </a>
             <a
               href="#mentoring-it"
-              onClick={closeMenu}
+              onClick={() => handleNavClick("edu", "mentoring-it")}
               className="py-3 border-b border-slate-100 flex items-center justify-between"
             >
               <span>Mentoring IT & Skripsi</span>
@@ -172,7 +184,7 @@ export function Navbar() {
             </a>
             <a
               href="#manifesto-etis"
-              onClick={closeMenu}
+              onClick={() => handleNavClick("edu", "manifesto-etis")}
               className="py-3 border-b border-slate-100 flex items-center justify-between text-[#FB6C00]"
             >
               <span>Manifesto Anti-Joki (Etis)</span>
