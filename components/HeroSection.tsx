@@ -1,302 +1,240 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
+import React, { useMemo } from "react";
 import { createWhatsAppUrl } from "@/lib/constants";
-import {
-  MessageCircle,
-  ArrowUpRight,
-  ArrowDown,
-  CheckCircle2,
-  ShieldCheck,
-  Code2,
-  Zap,
-  Sparkles,
-  Lock,
-} from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 export function HeroSection() {
+  // 1. Precompute halftone dome dots for the 3D globe arch
+  const domeDots = useMemo(() => {
+    const cx = 600;
+    const cy = 460;
+    const rx = 520;
+    const ry = 300;
+    const spacingX = 18;
+    const spacingY = 15;
+
+    const dots: Array<{ x: number; y: number; r: number; op: number }> = [];
+    for (let y = cy - ry; y <= cy; y += spacingY) {
+      const normY = (cy - y) / ry;
+      const wAtY = rx * Math.sqrt(Math.max(0, 1 - normY * normY));
+      const startX = cx - Math.floor(wAtY / spacingX) * spacingX;
+      const endX = cx + Math.floor(wAtY / spacingX) * spacingX;
+
+      for (let x = startX; x <= endX; x += spacingX) {
+        const normX = (x - cx) / rx;
+        const distSq = normX * normX + normY * normY;
+        if (distSq > 0.98) continue;
+        const z = Math.sqrt(Math.max(0, 1 - distSq));
+        // Dots are larger and denser near the top apex of the curve
+        const r = +(1.2 + 2.8 * z * (0.25 + 0.75 * normY)).toFixed(2);
+        const op = +(0.15 + 0.65 * z * (0.3 + 0.7 * normY)).toFixed(2);
+        dots.push({ x, y, r, op });
+      }
+    }
+    return dots;
+  }, []);
+
+  // 2. Precompute upper-right dot matrix
+  const matrixDots = useMemo(() => {
+    const dots: Array<{ x: number; y: number; op: number }> = [];
+    for (let row = 0; row < 9; row++) {
+      for (let col = 0; col < 14; col++) {
+        const x = col * 16;
+        const y = row * 16;
+        const op = +((col / 13) * (1 - row / 11) * 0.45).toFixed(2);
+        if (op > 0.05) dots.push({ x, y, op });
+      }
+    }
+    return dots;
+  }, []);
+
   return (
-    <section id="hero" className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20 bg-white text-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="hero"
+      className="relative pt-32 pb-14 sm:pt-40 sm:pb-20 lg:pt-48 lg:pb-24 overflow-hidden text-white"
+      style={{
+        background:
+          "linear-gradient(180deg, #070628 0%, #0C093A 6%, #100D42 12%, #1B186B 22%, #2F2BB2 36%, #5B5CFB 52%, #9698FD 68%, #CCCDFF 82%, #E9E9FF 92%, #FFFFFF 100%)",
+      }}
+    >
+      {/* 1. Subtle Thin-Line Technical Grid Overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-40"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(255, 255, 255, 0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 1px, transparent 1px)",
+          backgroundSize: "112px 112px",
+          maskImage:
+            "radial-gradient(ellipse 80% 65% at 50% 35%, black 40%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 80% 65% at 50% 35%, black 40%, transparent 100%)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* 2. Top-Right Dot Matrix Texture */}
+      <div
+        className="absolute top-20 right-6 sm:right-16 lg:right-28 pointer-events-none hidden sm:block"
+        aria-hidden="true"
+      >
+        <svg width="224" height="144" viewBox="0 0 224 144" fill="none">
+          {matrixDots.map((d, i) => (
+            <circle
+              key={i}
+              cx={d.x + 8}
+              cy={d.y + 8}
+              r="1.8"
+              fill="white"
+              fillOpacity={d.op}
+            />
+          ))}
+        </svg>
+      </div>
+
+      {/* 3. Ambient Center Radial Glow */}
+      <div
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[720px] sm:w-[920px] h-[480px] bg-[radial-gradient(ellipse_at_center,rgba(91,92,251,0.28),transparent_70%)] pointer-events-none blur-3xl"
+        aria-hidden="true"
+      />
+
+      {/* Hero Content Area */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 flex flex-col items-center">
         
-        {/* Framed Hero Showcase Container */}
-        <div className="relative rounded-[32px] sm:rounded-[44px] bg-gradient-to-b from-[#FFFDFB] via-[#FFFBF6] to-white border border-orange-100 p-6 sm:p-10 lg:p-14 shadow-xs overflow-hidden">
-          
-          {/* Subtle Technical Grid / Ambient Glow */}
-          <div
-            className="absolute inset-0 pointer-events-none opacity-40 bg-[radial-gradient(#FB6C00_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,black_70%,transparent_100%)]"
+        {/* Main Headline */}
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[64px] font-bold tracking-tight text-white leading-[1.14] mb-6 sm:mb-8 font-[var(--font-display)] max-w-5xl mx-auto">
+          Platform rekayasa sistem bisnis teruji, aplikasi kustom dan mentoring IT mandiri.
+        </h1>
+
+        {/* Subheadline */}
+        <p className="text-base sm:text-lg lg:text-xl text-white/80 font-normal leading-relaxed max-w-3xl mx-auto mb-10 sm:mb-12">
+          Solusi website profil dan aplikasi kasir operasional tanpa biaya langganan bulanan untuk UMKM, serta bimbingan 1-on-1 bagi mahasiswa IT untuk menuntaskan logika kode tanpa jalan pintas joki.
+        </p>
+
+        {/* Action Buttons (Centered Pill Pair) */}
+        <div className="flex flex-wrap items-center justify-center gap-4 mb-10 sm:mb-14 z-20 relative">
+          <a
+            href={createWhatsAppUrl(
+              "Halo Nakami Studio, saya ingin konsultasi kebutuhan sistem bisnis / mentoring IT..."
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-white text-[#100D42] hover:bg-slate-50 font-bold text-sm sm:text-base shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+          >
+            Mulai Konsultasi WhatsApp
+          </a>
+
+          <a
+            href="#pilih-jalur"
+            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/25 text-white font-medium text-sm sm:text-base backdrop-blur-sm transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+          >
+            <span>Lihat Jalur Layanan</span>
+            <ChevronRight className="w-4 h-4 text-white/80" />
+          </a>
+        </div>
+
+        {/* Halftone Dome / Globe Anchor Graphic */}
+        <div className="relative w-full max-w-5xl mx-auto -mt-4 sm:-mt-8 mb-6 sm:mb-10 pointer-events-none select-none">
+          <svg
+            viewBox="0 0 1200 460"
+            className="w-full h-auto max-h-[340px] overflow-visible"
+            fill="none"
             aria-hidden="true"
-          />
+          >
+            {domeDots.map((dot, idx) => (
+              <circle
+                key={idx}
+                cx={dot.x}
+                cy={dot.y}
+                r={dot.r}
+                fill="white"
+                fillOpacity={dot.op}
+              />
+            ))}
+          </svg>
+        </div>
 
-          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            
-            {/* Left Column: Value Proposition & Action Button Group */}
-            <div className="lg:col-span-7 flex flex-col items-start text-left z-10">
-              
-              {/* Studio Eyebrow Tag with Live Pulse Dot */}
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-orange-50 border border-orange-200/70 text-xs font-mono font-medium text-orange-950 mb-6 shadow-2xs">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FB6C00] opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FB6C00]" />
-                </span>
-                <span>NAKAMI STUDIO · REKAYASA WEB BISNIS & MENTORING IT ETIS</span>
-              </div>
+        {/* Trust Bar & Client / Technology Logos (Bottom Section on Pure White Transition) */}
+        <div className="w-full pt-8 sm:pt-12 mt-2 sm:mt-4">
+          <p className="text-xs sm:text-sm font-semibold tracking-wider text-slate-700 uppercase mb-8 sm:mb-10 text-center">
+            Dipercaya oleh pemilik bisnis, UMKM modern, dan ratusan talenta IT di seluruh Indonesia
+          </p>
 
-              {/* Main Headline with Organic Hand-Drawn Highlight */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-950 leading-[1.12] mb-6 font-[var(--font-display)]">
-                Bangun Sistem Bisnis{" "}
-                <span className="relative inline-block whitespace-nowrap text-[#FB6C00]">
-                  Teruji
-                  {/* Organic hand-drawn SVG loop */}
-                  <svg
-                    className="absolute -inset-x-3 -inset-y-2 w-[calc(100%+1.5rem)] h-[calc(100%+1rem)] pointer-events-none text-[#FB6C00]"
-                    viewBox="0 0 160 60"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M 12 32 C 18 12, 142 10, 148 28 C 152 44, 22 54, 16 36 C 14 26, 45 18, 85 18"
-                      stroke="currentColor"
-                      strokeWidth="3.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-                , Kuasai Logika Kodemu Sendiri.
-              </h1>
-
-              {/* Subheadline */}
-              <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed mb-8 max-w-2xl">
-                Solusi rekayasa website profil dan aplikasi kasir operasional kustom untuk UMKM tanpa biaya langganan bulanan, serta bimbingan 1-on-1 bagi mahasiswa IT untuk memahami arsitektur dan menuntaskan kode tanpa jalan pintas joki.
-              </p>
-
-              {/* Action Button Group */}
-              <div className="flex flex-wrap items-center gap-3.5 mb-8 w-full sm:w-auto">
-                {/* Primary Button Group: WhatsApp Pill + Separate Circular Arrow Button */}
-                <div className="inline-flex items-center gap-2">
-                  <a
-                    href={createWhatsAppUrl(
-                      "Halo Nakami Studio, saya ingin konsultasi kebutuhan sistem bisnis / mentoring IT..."
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-full bg-[#FB6C00] hover:bg-[#E73F1E] text-white font-bold text-sm sm:text-base shadow-xs hover:shadow-sm transition-all active:translate-y-px"
-                  >
-                    <MessageCircle className="w-5 h-5 shrink-0" />
-                    <span>Mulai Konsultasi WhatsApp</span>
-                  </a>
-
-                  <a
-                    href={createWhatsAppUrl(
-                      "Halo Nakami Studio, saya ingin konsultasi langsung dengan engineer..."
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full bg-slate-900 text-white flex items-center justify-center hover:bg-slate-800 transition-colors shadow-2xs hover:shadow-xs shrink-0"
-                    aria-label="Konsultasi langsung via tautan WhatsApp"
-                  >
-                    <ArrowUpRight className="w-5 h-5" />
-                  </a>
-                </div>
-
-                {/* Secondary Pill Button */}
-                <a
-                  href="#kalkulator-estimasi"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-semibold text-sm sm:text-base transition-colors shadow-2xs"
-                >
-                  <span>Hitung Estimasi Proyek</span>
-                </a>
-
-                {/* Direct Forward to Section 2 (Dual Gateway) */}
-                <a
-                  href="#pilih-jalur"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-slate-50 hover:bg-orange-50/70 text-slate-700 hover:text-[#FB6C00] border border-slate-200/80 font-semibold text-sm sm:text-base transition-colors shadow-2xs"
-                >
-                  <span>Pilih Jalur Layanan</span>
-                  <ArrowDown className="w-4 h-4 text-[#FB6C00]" />
-                </a>
-              </div>
-
-              {/* Trust Points Strip with Green Checkmarks */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-6 border-t border-orange-100/80 w-full text-xs text-slate-600">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span className="font-medium">100% Hak Milik Source Code</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span className="font-medium">Garansi 30 Hari Bebas Bug</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span className="font-medium">Mentoring Etis Bebas Joki</span>
-                </div>
-              </div>
+          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 lg:gap-16 text-slate-900 opacity-90">
+            {/* 1. SCANIA style: KASIR KILAT */}
+            <div className="flex items-center gap-2 hover:opacity-100 transition-opacity">
+              <svg className="w-5 h-5 text-slate-900" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M4 4h3l2.5 11h9.5l2-8H7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                <circle cx="10" cy="19" r="2" />
+                <circle cx="17" cy="19" r="2" />
+              </svg>
+              <span className="font-extrabold tracking-widest text-slate-950 text-base sm:text-lg">
+                KASIR KILAT
+              </span>
             </div>
 
-            {/* Right Column: Art-Directed Talent Showcase & Proof Cards */}
-            <div className="lg:col-span-5 relative flex items-center justify-center w-full">
-              
-              {/* Organic Shape Backplate */}
-              <div className="relative w-full max-w-[420px] aspect-4/5 sm:aspect-square flex items-center justify-center">
-                
-                {/* Radiant Halo Backplate with Subtle Blueprint Ring */}
-                <div
-                  className="absolute inset-4 rounded-[40px] sm:rounded-[52px] bg-gradient-to-tr from-amber-400/25 via-orange-500/20 to-rose-400/20 transform rotate-1 scale-105"
-                  aria-hidden="true"
-                />
-                
-                {/* Concentric Technical Dashed Blueprint Ring */}
-                <div
-                  className="absolute inset-2 rounded-full border border-dashed border-orange-300/60 pointer-events-none"
-                  aria-hidden="true"
-                />
-
-                {/* Main Subject Cutout Photo with Smooth Bottom Mask */}
-                <div className="relative z-10 w-full h-full flex items-end justify-center overflow-hidden">
-                  <Image
-                    src="/images/female-coder-cutout.png"
-                    alt="Talenta rekayasa software dan mentoring coding Nakami Studio"
-                    width={460}
-                    height={520}
-                    priority
-                    className="object-contain max-h-[92%] drop-shadow-md select-none"
-                    style={{
-                      maskImage:
-                        "linear-gradient(to bottom, black 82%, transparent 100%)",
-                      WebkitMaskImage:
-                        "linear-gradient(to bottom, black 82%, transparent 100%)",
-                    }}
-                  />
-                </div>
-
-                {/* Floating Stat Card: 489+ Clients & Students */}
-                <div className="absolute -top-3 sm:top-2 -right-2 sm:-right-4 z-20 rounded-2xl bg-white/95 backdrop-blur-md p-4 shadow-lg border border-orange-100 flex flex-col gap-2.5 max-w-[210px] transition-transform hover:-translate-y-1">
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="text-3xl font-extrabold text-slate-950 font-[var(--font-display)] leading-none">
-                      489+
-                    </span>
-                    <span className="w-7 h-7 rounded-full bg-orange-50 text-[#FB6C00] flex items-center justify-center">
-                      <ArrowUpRight className="w-4 h-4" />
-                    </span>
-                  </div>
-                  <div className="text-[11px] font-semibold text-slate-600 leading-snug">
-                    Pelaku Usaha &amp; Mahasiswa IT Terbantu
-                  </div>
-
-                  {/* Avatar Stack + Verified Indicator */}
-                  <div className="flex items-center gap-2 pt-1 border-t border-slate-100">
-                    <div className="flex -space-x-2 overflow-hidden">
-                      <Image
-                        src="/images/avatar-1.jpg"
-                        alt="Klien Nakami"
-                        width={24}
-                        height={24}
-                        className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
-                      />
-                      <Image
-                        src="/images/avatar-2.jpg"
-                        alt="Mahasiswa bimbingan Nakami"
-                        width={24}
-                        height={24}
-                        className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
-                      />
-                      <Image
-                        src="/images/avatar-3.jpg"
-                        alt="Alumni mentoring Nakami"
-                        width={24}
-                        height={24}
-                        className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
-                      />
-                    </div>
-                    <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
-                      ✓ Teruji
-                    </span>
-                  </div>
-                </div>
-
-                {/* Floating Assurance Badge (Bottom Left) */}
-                <div className="absolute -bottom-3 sm:bottom-3 -left-2 sm:-left-4 z-20 rounded-xl bg-white/95 backdrop-blur-md px-3.5 py-2.5 shadow-md border border-slate-200/80 flex items-center gap-2.5 max-w-[240px]">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                    <ShieldCheck className="w-5 h-5" />
-                  </div>
-                  <div className="flex flex-col text-left">
-                    <span className="text-xs font-bold text-slate-900 leading-tight">
-                      Garansi 30 Hari Bebas Bug
-                    </span>
-                    <span className="text-[10px] text-slate-500 font-mono">
-                      Full Source Code Terjamin
-                    </span>
-                  </div>
-                </div>
-
-              </div>
+            {/* 2. HubSpot style: NEXT.JS */}
+            <div className="flex items-center gap-2 hover:opacity-100 transition-opacity">
+              <svg className="w-5 h-5 text-slate-900" viewBox="0 0 180 180" fill="none">
+                <circle cx="90" cy="90" r="88" stroke="currentColor" strokeWidth="12" />
+                <path d="M149.5 157.4L69.1 54H54V126H66.1V69.4L140 164.8C143.3 162.6 146.5 160.1 149.5 157.4Z" fill="currentColor" />
+                <rect x="115" y="54" width="12" height="72" fill="currentColor" />
+              </svg>
+              <span className="font-bold tracking-tight text-slate-900 text-base sm:text-lg">
+                Next.js
+              </span>
             </div>
 
-          </div>
-
-          {/* 4 Value Pillars Footer at the base of Hero */}
-          <div className="mt-12 pt-8 border-t border-orange-100/80 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-lg bg-orange-50 border border-orange-200 text-[#FB6C00] flex items-center justify-center shrink-0">
-                <Code2 className="w-4 h-4" />
+            {/* 3. Milliman style: POSTGRESQL */}
+            <div className="flex items-center gap-2 hover:opacity-100 transition-opacity">
+              <div className="w-6 h-6 rounded bg-slate-900 flex items-center justify-center text-white font-mono font-bold text-xs">
+                PG
               </div>
-              <div className="flex flex-col">
-                <span className="text-xs sm:text-sm font-bold text-slate-900">
-                  100% Kustom
-                </span>
-                <span className="text-[11px] sm:text-xs text-slate-500">
-                  Bukan template pasaran
-                </span>
-              </div>
+              <span className="font-semibold tracking-wide text-slate-900 text-base sm:text-lg">
+                PostgreSQL
+              </span>
             </div>
 
-            <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-lg bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center shrink-0">
-                <Zap className="w-4 h-4" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs sm:text-sm font-bold text-slate-900">
-                  Lighthouse 95+
-                </span>
-                <span className="text-[11px] sm:text-xs text-slate-500">
-                  Optimasi kecepatan &amp; SEO
-                </span>
-              </div>
+            {/* 4. WHITE & CASE style: DOCKER */}
+            <div className="flex items-center gap-2 hover:opacity-100 transition-opacity">
+              <svg className="w-6 h-5 text-slate-900" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13 8h2v2h-2V8zm-3 0h2v2h-2V8zm-3 0h2v2H7V8zm6-3h2v2h-2V5zm-3 0h2v2h-2V5zm-3 0h2v2H7V5zm14.5 7.5c-.4-.3-1.3-.4-2-.1-.2-.8-.7-1.4-1.5-1.9l-.6-.3-.3.6c-.4.8-.4 1.7-.1 2.5-.5.3-1.3.3-1.8.3H3c-.5 0-1 .4-1 .9 0 2.4 1.2 4.6 3.2 5.9 2 1.3 4.5 1.6 6.8 1.6 5.5 0 10-3.5 10.5-8.9.6-.2 1.3-.4 2-.6v-.9z" />
+              </svg>
+              <span className="font-bold tracking-widest text-slate-900 text-sm sm:text-base">
+                DOCKER
+              </span>
             </div>
 
-            <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-lg bg-rose-50 border border-rose-200 text-[#E73F1E] flex items-center justify-center shrink-0">
-                <Sparkles className="w-4 h-4" />
+            {/* 5. Debevoise & Plimpton style: TYPESCRIPT */}
+            <div className="flex items-center gap-2 hover:opacity-100 transition-opacity">
+              <div className="w-6 h-6 rounded bg-slate-900 text-white flex items-center justify-center font-bold text-xs font-mono">
+                TS
               </div>
-              <div className="flex flex-col">
-                <span className="text-xs sm:text-sm font-bold text-slate-900">
-                  Mentoring Etis 1-on-1
-                </span>
-                <span className="text-[11px] sm:text-xs text-slate-500">
-                  Bimbingan logika privat
-                </span>
-              </div>
+              <span className="font-bold tracking-tight text-slate-900 text-base sm:text-lg">
+                TypeScript
+              </span>
             </div>
 
-            <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center shrink-0">
-                <Lock className="w-4 h-4" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs sm:text-sm font-bold text-slate-900">
-                  Full Source Code
-                </span>
-                <span className="text-[11px] sm:text-xs text-slate-500">
-                  Tanpa biaya langganan kaku
-                </span>
-              </div>
+            {/* 6. CLYDE & CO style: TAILWIND */}
+            <div className="flex items-center gap-2 hover:opacity-100 transition-opacity">
+              <svg className="w-5 h-5 text-slate-900" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.33-1.83 4-1.5.95.19 1.63.88 2.38 1.65C14.61 11.38 16.19 13 20 13c2.67 0 4.33-1.33 5-4-1 1.33-2.33 1.83-4 1.5-.95-.19-1.63-.88-2.38-1.65C17.39 7.62 15.81 6 12 6zm-8 7c-2.67 0-4.33 1.33-5 4 1-1.33 2.33-1.83 4-1.5.95.19 1.63.88 2.38 1.65C6.61 18.38 8.19 20 12 20c2.67 0 4.33-1.33 5-4-1 1.33-2.33 1.83-4 1.5-.95-.19-1.63-.88-2.38-1.65C9.39 14.62 7.81 13 4 13z" />
+              </svg>
+              <span className="font-semibold tracking-wide text-slate-900 text-base sm:text-lg">
+                Tailwind CSS
+              </span>
+            </div>
+
+            {/* 7. AstraZeneca style: KAFE & CO */}
+            <div className="flex items-center gap-2 hover:opacity-100 transition-opacity">
+              <svg className="w-5 h-5 text-slate-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3" />
+              </svg>
+              <span className="font-bold tracking-wider text-slate-900 text-base sm:text-lg">
+                KAFE &amp; CO
+              </span>
             </div>
           </div>
-
         </div>
 
       </div>
