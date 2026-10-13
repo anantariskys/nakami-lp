@@ -154,25 +154,25 @@ export function DiscoveryAuditForm() {
   };
 
   return (
-    <section id="kalkulator-estimasi" className="scroll-mt-28 py-20 sm:py-24 bg-white border-b border-slate-200/80">
+    <section id="kalkulator-estimasi" className="scroll-mt-28 py-20 sm:py-24 bg-[#121316] border-b border-[#2E323B]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-orange-50 border border-orange-200 text-xs font-mono font-medium text-orange-950 mb-4 shadow-2xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1C1E24] border border-[#2E323B] text-xs font-mono font-medium text-[#F9B637] mb-4 shadow-sm">
             <Calculator className="w-3.5 h-3.5 text-[#FB6C00]" />
-            <span>KALKULATOR ESTIMASI LINGKUP & BIAYA</span>
+            <span>KALKULATOR ESTIMASI LINGKUP &amp; BIAYA</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight font-[var(--font-display)] mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-4">
             Hitung estimasi proyek dalam hitungan detik.
           </h2>
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+          <p className="text-[#94A3B8] text-base sm:text-lg leading-relaxed">
             Dapatkan gambaran durasi pengerjaan, kisaran biaya, dan format kolaborasi sebelum memulai sesi diskusi awal.
           </p>
         </div>
 
         {/* Estimator Container */}
-        <div className="rounded-[32px] sm:rounded-[40px] bg-gradient-to-b from-[#FFFDFB] via-[#FFFBF6] to-white border border-orange-100 p-6 sm:p-10 lg:p-12 shadow-xs">
+        <div className="rounded-[32px] sm:rounded-[40px] bg-[#1C1E24] border border-[#2E323B] p-6 sm:p-10 lg:p-12 shadow-lg">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             
             {/* Left Column: Interactive Inputs */}
@@ -180,17 +180,17 @@ export function DiscoveryAuditForm() {
               
               {/* Category Segment Selector */}
               <div>
-                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-600 mb-3">
+                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#94A3B8] mb-3">
                   1. Pilih Kategori Kebutuhan
                 </label>
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     type="button"
                     onClick={() => handleCategorySwitch("biz")}
-                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border text-sm font-bold transition-all ${
+                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border text-sm font-bold transition-all cursor-pointer ${
                       targetCategory === "biz"
-                        ? "bg-[#FB6C00] text-white border-[#FB6C00] shadow-2xs"
-                        : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
+                        ? "bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-[#121316] border-[#FB6C00] shadow-glow-warm"
+                        : "bg-[#17181C] text-[#94A3B8] border-[#2E323B] hover:text-white hover:border-[#3F4450]"
                     }`}
                   >
                     <Store className="w-4 h-4 shrink-0" />
@@ -200,10 +200,10 @@ export function DiscoveryAuditForm() {
                   <button
                     type="button"
                     onClick={() => handleCategorySwitch("edu")}
-                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border text-sm font-bold transition-all ${
+                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border text-sm font-bold transition-all cursor-pointer ${
                       targetCategory === "edu"
-                        ? "bg-slate-900 text-white border-slate-900 shadow-2xs"
-                        : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
+                        ? "bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-[#121316] border-[#FB6C00] shadow-glow-warm"
+                        : "bg-[#17181C] text-[#94A3B8] border-[#2E323B] hover:text-white hover:border-[#3F4450]"
                     }`}
                   >
                     <GraduationCap className="w-4 h-4 shrink-0" />
@@ -214,7 +214,7 @@ export function DiscoveryAuditForm() {
 
               {/* Specific Service Package Radio Group */}
               <div>
-                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-600 mb-3">
+                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#94A3B8] mb-3">
                   2. Pilih Modul Layanan
                 </label>
                 <div className="space-y-2.5">
@@ -223,27 +223,27 @@ export function DiscoveryAuditForm() {
                       key={srv.id}
                       type="button"
                       onClick={() => setSelectedServiceId(srv.id)}
-                      className={`w-full text-left p-3.5 sm:p-4 rounded-2xl border transition-all flex items-center justify-between gap-4 ${
+                      className={`w-full text-left p-3.5 sm:p-4 rounded-2xl border transition-all flex items-center justify-between gap-4 cursor-pointer ${
                         selectedServiceId === srv.id
-                          ? "bg-white border-[#FB6C00] shadow-xs ring-1 ring-[#FB6C00]"
-                          : "bg-white/80 border-slate-200/90 hover:bg-white hover:border-slate-300"
+                          ? "bg-[#242730] border-[#FB6C00] shadow-sm ring-1 ring-[#FB6C00]"
+                          : "bg-[#17181C] border-[#2E323B] hover:bg-[#202228] hover:border-[#3F4450]"
                       }`}
                     >
                       <div className="flex items-center gap-3">
                         <span
                           className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${
                             selectedServiceId === srv.id
-                              ? "bg-orange-100 text-[#C2410C]"
-                              : "bg-slate-100 text-slate-700"
+                              ? "bg-[#FB6C00]/20 text-[#F9B637]"
+                              : "bg-[#242730] text-[#94A3B8]"
                           }`}
                         >
                           {srv.code}
                         </span>
-                        <span className="text-sm font-bold text-slate-900">
+                        <span className="text-sm font-bold text-white">
                           {srv.name}
                         </span>
                       </div>
-                      <span className="font-mono text-xs font-semibold text-slate-600 shrink-0">
+                      <span className="font-mono text-xs font-semibold text-[#F9B637] shrink-0">
                         {srv.basePrice}
                       </span>
                     </button>
@@ -256,7 +256,7 @@ export function DiscoveryAuditForm() {
                 <div>
                   <label
                     htmlFor="client-name"
-                    className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-600 mb-2"
+                    className="block text-xs font-mono font-bold uppercase tracking-wider text-[#94A3B8] mb-2"
                   >
                     Nama Anda / Usaha (Opsional)
                   </label>
@@ -266,14 +266,14 @@ export function DiscoveryAuditForm() {
                     placeholder="Contoh: Budi / Toko Maju"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-[#FB6C00]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#17181C] border border-[#2E323B] text-white placeholder-[#6B7280] text-sm focus:outline-hidden focus:ring-2 focus:ring-[#FB6C00]"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="project-note"
-                    className="block text-xs font-mono font-bold uppercase tracking-wider text-slate-600 mb-2"
+                    className="block text-xs font-mono font-bold uppercase tracking-wider text-[#94A3B8] mb-2"
                   >
                     Catatan Khusus (Opsional)
                   </label>
@@ -283,7 +283,7 @@ export function DiscoveryAuditForm() {
                     placeholder="Contoh: Butuh integrasi barcode"
                     value={projectNote}
                     onChange={(e) => setProjectNote(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-[#FB6C00]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#17181C] border border-[#2E323B] text-white placeholder-[#6B7280] text-sm focus:outline-hidden focus:ring-2 focus:ring-[#FB6C00]"
                   />
                 </div>
               </div>
@@ -291,47 +291,47 @@ export function DiscoveryAuditForm() {
             </div>
 
             {/* Right Column: Live Summary & Direct WhatsApp Action */}
-            <div className="lg:col-span-5 rounded-3xl bg-white border border-slate-200 p-6 sm:p-7 shadow-2xs">
-              <div className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 mb-4 pb-3 border-b border-slate-100 flex items-center justify-between">
+            <div className="lg:col-span-5 rounded-3xl bg-[#17181C] border border-[#2E323B] p-6 sm:p-7 shadow-sm">
+              <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#94A3B8] mb-4 pb-3 border-t border-transparent border-b border-[#2E323B] flex items-center justify-between">
                 <span>RINGKASAN ESTIMASI</span>
                 <span className="text-[#FB6C00]">{activeService.code}</span>
               </div>
 
-              <h3 className="text-xl font-bold text-slate-950 mb-2 font-[var(--font-display)]">
+              <h3 className="text-xl font-bold text-white mb-2 font-[var(--font-display)]">
                 {activeService.name}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6">
+              <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed mb-6">
                 {activeService.summary}
               </p>
 
               {/* Metrics Box */}
-              <div className="space-y-3.5 mb-7 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+              <div className="space-y-3.5 mb-7 p-4 rounded-2xl bg-[#242730] border border-[#2E323B]">
                 <div className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2 text-slate-600">
-                    <Clock className="w-4 h-4 text-slate-400" />
+                  <div className="flex items-center gap-2 text-[#94A3B8]">
+                    <Clock className="w-4 h-4 text-[#94A3B8]" />
                     <span>Estimasi Durasi</span>
                   </div>
-                  <span className="font-bold text-slate-900 font-mono">
+                  <span className="font-bold text-white font-mono">
                     {activeService.baseTimeline}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2 text-slate-600">
-                    <Coins className="w-4 h-4 text-slate-400" />
+                  <div className="flex items-center gap-2 text-[#94A3B8]">
+                    <Coins className="w-4 h-4 text-[#94A3B8]" />
                     <span>Kisaran Investasi</span>
                   </div>
-                  <span className="font-bold text-[#C2410C] font-mono text-sm">
+                  <span className="font-bold text-[#F9B637] font-mono text-sm">
                     {activeService.basePrice}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2 text-slate-600">
-                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                  <div className="flex items-center gap-2 text-[#94A3B8]">
+                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
                     <span>Jaminan Garansi</span>
                   </div>
-                  <span className="font-semibold text-emerald-700">
+                  <span className="font-semibold text-emerald-400">
                     30 Hari Bebas Bug &amp; Source Code
                   </span>
                 </div>
@@ -342,14 +342,14 @@ export function DiscoveryAuditForm() {
                 href={createWhatsAppUrl(generateWhatsAppMessage())}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-full bg-[#FB6C00] hover:bg-[#E73F1E] text-white font-bold text-sm shadow-xs transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-full bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-[#121316] font-bold text-sm shadow-glow-warm hover:brightness-110 transition-all"
               >
-                <MessageCircle className="w-4 h-4 shrink-0" />
+                <MessageCircle className="w-4 h-4 shrink-0 text-[#121316]" />
                 <span>Konsultasikan Rincian via WA</span>
-                <ArrowRight className="w-4 h-4 shrink-0" />
+                <ArrowRight className="w-4 h-4 shrink-0 text-[#121316]" />
               </a>
 
-              <p className="text-center text-[11px] text-slate-500 mt-3">
+              <p className="text-center text-[11px] text-[#6B7280] mt-3">
                 Diskusi 15 menit awal bebas biaya dan tanpa kewajiban apa pun.
               </p>
             </div>
@@ -359,13 +359,13 @@ export function DiscoveryAuditForm() {
 
         {/* Forward Bridge to FAQ */}
         <div className="mt-12 text-center">
-          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 px-5 py-3 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs text-slate-600 shadow-2xs">
+          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 px-5 py-3 rounded-2xl bg-[#1C1E24] border border-[#2E323B] text-xs text-[#94A3B8] shadow-sm">
             <span className="font-medium">
               Masih memiliki pertanyaan seputar garansi 30 hari, hak milik kode, atau alur kerja?
             </span>
             <a
               href="#faq"
-              className="inline-flex items-center gap-1 font-bold text-[#FB6C00] hover:text-[#E73F1E] transition-colors underline-offset-4 hover:underline"
+              className="inline-flex items-center gap-1 font-bold text-[#FB6C00] hover:text-[#FFDD9C] transition-colors underline-offset-4 hover:underline"
             >
               <span>Pelajari Tanya Jawab (FAQ)</span>
               <ArrowDown className="w-3.5 h-3.5" />

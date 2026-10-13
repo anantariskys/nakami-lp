@@ -1,65 +1,75 @@
 @import "tailwindcss";
 
 @theme {
-  --color-canvas-base: #FFFFFF;
-  --color-canvas-subtle: #F8FAFC;
-  --color-canvas-overlay: rgba(255, 255, 255, 0.9);
+  /* === WARM TECH DESIGN SYSTEM — Dark Mode Base === */
+  /* Docs: 02-DESIGN-SYSTEM-AND-VISUAL-GUIDELINES.md + 06-UI-UX-LANDING-PAGE-SPEC.md */
 
-  --color-surface-card: #FFFFFF;
-  --color-surface-elevated: #F8FAFC;
-  --color-surface-interactive: #F1F5F9;
-  --color-surface-input: #FFFFFF;
+  /* Canvas (60% Dominant) */
+  --color-canvas-base: #121316;
+  --color-canvas-subtle: #17181C;
+  --color-canvas-overlay: rgba(18, 19, 22, 0.9);
 
-  --color-border-subtle: #E2E8F0;
-  --color-border-hover: #CBD5E1;
+  /* Surface (30% Structure) */
+  --color-surface-card: #1C1E24;
+  --color-surface-elevated: #242730;
+  --color-surface-interactive: #2A2E39;
+  --color-surface-input: #121316;
+
+  /* Border */
+  --color-border-subtle: #2E323B;
+  --color-border-hover: #3F4450;
   --color-border-active: #FB6C00;
   --color-border-dashed: #FED7AA;
 
+  /* Accent — Warm Tech Gradient (10%) */
   --color-accent-crimson: #E73F1E;
   --color-accent-orange: #FB6C00;
   --color-accent-amber: #F9B637;
   --color-accent-peach: #FFDD9C;
 
+  /* Status */
   --color-status-success: #10B981;
   --color-status-warning: #F59E0B;
   --color-status-error: #EF4444;
 
-  --color-text-primary: #0F172A;
-  --color-text-secondary: #475569;
+  /* Text */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #94A3B8;
   --color-text-muted: #64748B;
-  --color-text-inverse: #FFFFFF;
+  --color-text-inverse: #121316;
 
+  /* Typography */
   --font-display: var(--font-montserrat), "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-body: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
 :root {
-  --background: #FFFFFF;
-  --foreground: #0F172A;
+  --background: #121316;
+  --foreground: #FFFFFF;
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: #FFFFFF;
-  color: #0F172A;
+  background-color: #121316;
+  color: #FFFFFF;
 }
 
 body {
-  background-color: #FFFFFF;
-  color: #0F172A;
+  background-color: #121316;
+  color: #FFFFFF;
   font-family: var(--font-body);
   overflow-x: hidden;
   min-height: 100vh;
 }
 
-/* Custom Gradients & Utilities */
+/* Custom Gradients & Utilities — Warm Tech Palette */
 .bg-sunset-gradient {
   background: linear-gradient(135deg, #E73F1E 0%, #FB6C00 45%, #F9B637 80%, #FFDD9C 100%);
 }
 
 .text-sunset-gradient {
-  background: linear-gradient(135deg, #E73F1E 0%, #FB6C00 50%, #EA580C 100%);
+  background: linear-gradient(135deg, #FFDD9C 0%, #FB6C00 50%, #E73F1E 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -81,11 +91,11 @@ body {
 }
 
 .shadow-glow-card {
-  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(251, 108, 0, 0.18);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(251, 108, 0, 0.18);
 }
 
 .shadow-card-subtle {
-  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.3);
 }
 
 /* Reduced motion support */

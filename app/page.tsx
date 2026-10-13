@@ -20,14 +20,14 @@ export default function HomePage() {
       {/* Skip to Main Content Link for Keyboard Accessibility (WCAG 2.1) */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-[#FB6C00] text-white font-bold rounded-lg shadow-lg focus:outline-none"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-[#121316] font-bold rounded-lg shadow-lg focus:outline-none"
       >
         Lewati ke Konten Utama
       </a>
 
       <Navbar />
 
-      <main id="main-content" className="relative flex flex-col min-h-screen">
+      <main id="main-content" className="relative flex flex-col min-h-screen bg-[#121316] text-white">
         {/* Section 1: Hero & Realitas Masalah (Value Proposition & Terminal Demo) */}
         <HeroSection />
 

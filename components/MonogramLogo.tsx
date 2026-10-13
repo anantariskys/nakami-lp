@@ -11,7 +11,7 @@ export function MonogramLogo({
   size = 36,
   className = "",
   showText = true,
-  variant = "light",
+  variant = "dark",
 }: MonogramLogoProps) {
   return (
     <div className={`inline-flex items-center gap-3 select-none ${className}`}>
@@ -68,7 +68,7 @@ export function MonogramLogo({
               variant === "dark" ? "text-[#94A3B8]" : "text-[#64748B]"
             }`}
           >
-            SOFTWARE & MENTORING
+            SOFTWARE &amp; MENTORING
           </span>
         </div>
       )}

@@ -44,8 +44,8 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#070628]/95 backdrop-blur-md border-b border-white/10 shadow-lg py-3 sm:py-3.5"
-          : "bg-transparent border-b border-white/10 py-4 sm:py-5"
+          ? "bg-[#121316]/95 backdrop-blur-md border-b border-[#2E323B] shadow-lg py-3 sm:py-3.5"
+          : "bg-transparent border-b border-[#2E323B]/50 py-4 sm:py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -53,14 +53,14 @@ export function Navbar() {
         {/* Brand Logo */}
         <Link
           href="/"
-          className="group focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white rounded-full shrink-0"
+          className="group focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#FB6C00] rounded-full shrink-0"
           aria-label="Nakami Studio Homepage"
         >
           <MonogramLogo size={36} variant="dark" />
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium text-white/80">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium text-[#94A3B8]">
           <a
             href="#layanan-bisnis"
             onClick={() => handleNavClick("biz", "layanan-bisnis")}
@@ -93,7 +93,7 @@ export function Navbar() {
           <a
             href="#manifesto-etis"
             onClick={() => handleNavClick("edu", "manifesto-etis")}
-            className="hover:text-[#FB6C00] text-orange-300 font-semibold transition-colors"
+            className="hover:text-[#F9B637] text-[#F9B637] font-semibold transition-colors"
           >
             Anti-Joki
           </a>
@@ -106,7 +106,7 @@ export function Navbar() {
         <div className="hidden sm:flex items-center gap-5">
           <a
             href="#kalkulator-estimasi"
-            className="text-sm font-medium text-white/80 hover:text-white transition-colors"
+            className="text-sm font-medium text-[#94A3B8] hover:text-white transition-colors"
           >
             Hitung Estimasi
           </a>
@@ -117,7 +117,7 @@ export function Navbar() {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#5B5CFB] hover:bg-[#4F46E5] text-white text-xs sm:text-sm font-semibold transition-all shadow-md active:scale-95"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] hover:shadow-glow-warm text-[#121316] text-xs sm:text-sm font-bold transition-all shadow-md active:scale-95"
           >
             <MessageCircle className="w-4 h-4 shrink-0" />
             <span>Konsultasi WA</span>
@@ -129,7 +129,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg text-white/90 hover:text-white hover:bg-white/10 focus:outline-hidden focus:ring-2 focus:ring-white"
+            className="p-2 rounded-lg text-[#94A3B8] hover:text-white hover:bg-[#1C1E24] focus:outline-hidden focus:ring-2 focus:ring-[#FB6C00]"
             aria-label={mobileMenuOpen ? "Tutup menu" : "Buka menu navigasi"}
             aria-expanded={mobileMenuOpen}
           >
@@ -142,69 +142,69 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Menu Drawer - Docs Spec: bg-[#17181C]/95 */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 top-[60px] sm:top-[68px] z-40 bg-[#070628]/98 backdrop-blur-md px-6 py-8 flex flex-col justify-between pointer-events-auto lg:hidden overflow-y-auto border-t border-white/10">
-          <nav className="flex flex-col text-sm font-semibold text-white/90">
+        <div className="fixed inset-0 top-[60px] sm:top-[68px] z-40 bg-[#17181C]/95 backdrop-blur-xl px-6 py-8 flex flex-col justify-between pointer-events-auto lg:hidden overflow-y-auto border-t border-[#2E323B]">
+          <nav className="flex flex-col text-sm font-semibold text-[#94A3B8]">
             <a
               href="#layanan-bisnis"
               onClick={() => handleNavClick("biz", "layanan-bisnis")}
-              className="py-3.5 border-b border-white/10 flex items-center justify-between"
+              className="py-3.5 border-b border-[#2E323B] flex items-center justify-between hover:text-white transition-colors"
             >
-              <span>Solusi Bisnis &amp; UMKM</span>
-              <ArrowUpRight className="w-4 h-4 text-white/40" />
+              <span>Solusi Bisnis & UMKM</span>
+              <ArrowUpRight className="w-4 h-4 text-[#3F4450]" />
             </a>
             <a
               href="#mentoring-it"
               onClick={() => handleNavClick("edu", "mentoring-it")}
-              className="py-3.5 border-b border-white/10 flex items-center justify-between"
+              className="py-3.5 border-b border-[#2E323B] flex items-center justify-between hover:text-white transition-colors"
             >
-              <span>Mentoring IT &amp; Skripsi</span>
-              <ArrowUpRight className="w-4 h-4 text-white/40" />
+              <span>Mentoring IT & Skripsi</span>
+              <ArrowUpRight className="w-4 h-4 text-[#3F4450]" />
             </a>
             <a
               href="#standar-kualitas"
               onClick={closeMenu}
-              className="py-3.5 border-b border-white/10 flex items-center justify-between"
+              className="py-3.5 border-b border-[#2E323B] flex items-center justify-between hover:text-white transition-colors"
             >
               <span>Standar Kualitas Rekayasa</span>
-              <ArrowUpRight className="w-4 h-4 text-white/40" />
+              <ArrowUpRight className="w-4 h-4 text-[#3F4450]" />
             </a>
             <a
               href="#transparansi-biaya"
               onClick={closeMenu}
-              className="py-3.5 border-b border-white/10 flex items-center justify-between"
+              className="py-3.5 border-b border-[#2E323B] flex items-center justify-between hover:text-white transition-colors"
             >
-              <span>Skema Biaya &amp; 3 Termin</span>
-              <ArrowUpRight className="w-4 h-4 text-white/40" />
+              <span>Skema Biaya & 3 Termin</span>
+              <ArrowUpRight className="w-4 h-4 text-[#3F4450]" />
             </a>
             <a
               href="#kalkulator-estimasi"
               onClick={closeMenu}
-              className="py-3.5 border-b border-white/10 flex items-center justify-between"
+              className="py-3.5 border-b border-[#2E323B] flex items-center justify-between hover:text-white transition-colors"
             >
               <span>Kalkulator Estimasi Proyek</span>
-              <ArrowUpRight className="w-4 h-4 text-white/40" />
+              <ArrowUpRight className="w-4 h-4 text-[#3F4450]" />
             </a>
             <a
               href="#manifesto-etis"
               onClick={() => handleNavClick("edu", "manifesto-etis")}
-              className="py-3.5 border-b border-white/10 flex items-center justify-between text-orange-300"
+              className="py-3.5 border-b border-[#2E323B] flex items-center justify-between text-[#F9B637] hover:text-[#FFDD9C] transition-colors"
             >
               <span>Manifesto Anti-Joki (Etis)</span>
-              <ArrowUpRight className="w-4 h-4 text-orange-300" />
+              <ArrowUpRight className="w-4 h-4 text-[#F9B637]" />
             </a>
             <a
               href="#faq"
               onClick={closeMenu}
-              className="py-3.5 border-b border-white/10 flex items-center justify-between"
+              className="py-3.5 border-b border-[#2E323B] flex items-center justify-between hover:text-white transition-colors"
             >
               <span>Tanya Jawab (FAQ)</span>
-              <ArrowUpRight className="w-4 h-4 text-white/40" />
+              <ArrowUpRight className="w-4 h-4 text-[#3F4450]" />
             </a>
           </nav>
 
-          <div className="pt-6 border-t border-white/10">
+          <div className="pt-6 border-t border-[#2E323B]">
             <a
               href={createWhatsAppUrl(
                 "Halo Nakami Studio, saya ingin konsultasi kebutuhan sistem bisnis / mentoring IT..."
@@ -212,7 +212,7 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={closeMenu}
-              className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-[#5B5CFB] text-white font-bold text-sm shadow-md"
+              className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-[#121316] font-bold text-sm shadow-glow-warm"
             >
               <MessageCircle className="w-5 h-5" />
               <span>Hubungi via WhatsApp</span>

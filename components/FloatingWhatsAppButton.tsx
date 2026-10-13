@@ -29,14 +29,14 @@ export function FloatingWhatsAppButton() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Konsultasi Langsung via WhatsApp"
-        className="group relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#FB6C00] hover:bg-[#E73F1E] text-white shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-hidden focus:ring-4 focus:ring-[#FB6C00]/40"
+        className="group relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-[#121316] shadow-glow-warm hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-hidden focus:ring-4 focus:ring-[#FB6C00]/40"
       >
         <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7" />
         <span className="sr-only">Konsultasi WhatsApp</span>
 
         {/* Desktop Hover Tooltip */}
         <span
-          className="absolute right-16 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-white text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md font-mono"
+          className="absolute right-16 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-[#1C1E24] border border-[#2E323B] text-white text-xs font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md font-mono"
           aria-hidden="true"
         >
           Chat WhatsApp Langsung
