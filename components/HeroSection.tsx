@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useMemo } from "react";
+import Image from "next/image";
 import { createWhatsAppUrl } from "@/lib/constants";
 import {
   MessageCircle,
@@ -132,8 +133,16 @@ export function HeroSection() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 flex flex-col items-center">
         
         {/* Category Pill Badge (Top) - Docs Spec: 5.2 */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1C1E24] border border-[#F9B637]/40 text-[#F9B637] text-xs font-mono tracking-wider uppercase mb-6 shadow-sm">
-          <span className="w-2 h-2 rounded-full bg-[#FB6C00] animate-pulse" />
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#1C1E24] border border-[#F9B637]/40 text-[#F9B637] text-xs font-mono tracking-wider uppercase mb-6 shadow-sm">
+          <Image
+            src="/brand/nakami-app-icon-192.png"
+            alt="Nakami Studio Icon"
+            width={18}
+            height={18}
+            className="w-4.5 h-4.5 rounded-md object-cover shadow-xs"
+            priority
+          />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#FB6C00] animate-pulse" />
           <span>NAKAMI STUDIO // PRODUCTION LAUNCH</span>
         </div>
 

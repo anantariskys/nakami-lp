@@ -24,8 +24,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#FFFFFF",
-  colorScheme: "light",
+  themeColor: "#121316",
+  colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -108,10 +108,13 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/icon.svg", type: "image/svg+xml" },
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
@@ -124,7 +127,7 @@ export default function RootLayout({
       lang="id"
       className={`${montserrat.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth antialiased`}
     >
-      <body className="min-h-screen bg-white text-slate-900 font-sans selection:bg-[#FB6C00] selection:text-white">
+      <body className="min-h-screen bg-[#121316] text-[#F1F5F9] font-sans selection:bg-[#FB6C00] selection:text-white">
         {children}
       </body>
     </html>
