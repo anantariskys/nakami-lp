@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createWhatsAppUrl } from "@/lib/constants";
 import {
   Store,
@@ -95,14 +95,6 @@ export function DiscoveryAuditForm() {
   const [name, setName] = useState<string>("");
   const [projectNote, setProjectNote] = useState<string>("");
 
-  const filteredServices = SERVICE_OPTIONS.filter(
-    (item) => item.category === targetCategory
-  );
-
-  const activeService =
-    SERVICE_OPTIONS.find((s) => s.id === selectedServiceId) ||
-    filteredServices[0];
-
   const handleCategorySwitch = (cat: "biz" | "edu") => {
     setTargetCategory(cat);
     const firstMatch = SERVICE_OPTIONS.find((s) => s.category === cat);
@@ -110,6 +102,46 @@ export function DiscoveryAuditForm() {
       setSelectedServiceId(firstMatch.id);
     }
   };
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const currentHash = window.location.hash;
+      if (currentHash === "#mentoring-it" || currentHash === "#manifesto-etis") {
+        handleCategorySwitch("edu");
+      } else if (currentHash === "#layanan-bisnis") {
+        handleCategorySwitch("biz");
+      }
+    };
+
+    const handleCustomTrackSwitch = (e: Event) => {
+      const customEvent = e as CustomEvent<{ track: "biz" | "edu" }>;
+      if (customEvent.detail?.track) {
+        handleCategorySwitch(customEvent.detail.track);
+      }
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    window.addEventListener("nakami:switch-track", handleCustomTrackSwitch);
+
+    // Initial sync
+    const timer = setTimeout(() => {
+      handleHashChange();
+    }, 0);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("nakami:switch-track", handleCustomTrackSwitch);
+    };
+  }, []);
+
+  const filteredServices = SERVICE_OPTIONS.filter(
+    (item) => item.category === targetCategory
+  );
+
+  const activeService =
+    SERVICE_OPTIONS.find((s) => s.id === selectedServiceId) ||
+    filteredServices[0];
 
   const generateWhatsAppMessage = (): string => {
     const sender = name.trim() ? name.trim() : "Calon Klien";

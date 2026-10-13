@@ -1,10 +1,11 @@
 import React from "react";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
+import { DualGateway } from "@/components/DualGateway";
+import { EngineeringStandardsSection } from "@/components/EngineeringStandardsSection";
 import { SegmentSection } from "@/components/SegmentSection";
-import { DiscoveryAuditForm } from "@/components/DiscoveryAuditForm";
-import { NonJokiManifesto } from "@/components/NonJokiManifesto";
 import { PricingPhilosophySection } from "@/components/PricingPhilosophySection";
+import { DiscoveryAuditForm } from "@/components/DiscoveryAuditForm";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { FinalBanner } from "@/components/FinalBanner";
 import { Footer } from "@/components/Footer";
@@ -27,12 +28,28 @@ export default function HomePage() {
       <Navbar />
 
       <main id="main-content" className="relative flex flex-col min-h-screen">
+        {/* Section 1: Hero & Realitas Masalah (Value Proposition & Terminal Demo) */}
         <HeroSection />
+
+        {/* Section 2: Dual Gateway / Segmentasi Audiens (Bisnis & UMKM vs Mentoring Mahasiswa IT) */}
+        <DualGateway />
+
+        {/* Section 3: Standar Rekayasa & Keandalan Teknis (6 Pilar Software Studio) */}
+        <EngineeringStandardsSection />
+
+        {/* Section 4: Katalog Layanan & Spesifikasi Modul (Modul Bisnis & Mentoring Edukasi + Manifesto Etis) */}
         <SegmentSection />
-        <DiscoveryAuditForm />
-        <NonJokiManifesto />
+
+        {/* Section 5: Transparansi Kontrak & Tata Kelola Biaya (Fixed-Scope, 3 Termin, Transparansi Mentoring) */}
         <PricingPhilosophySection />
+
+        {/* Section 6: Estimator Kebutuhan Interaktif (Kalkulator Estimasi Cepat & Direct WhatsApp Dispatch) */}
+        <DiscoveryAuditForm />
+
+        {/* Section 7: Tanya Jawab Terstruktur (FAQ Kategori Bisnis, Mentoring, Teknis & Legalitas) */}
         <FAQAccordion />
+
+        {/* Section 8: Final Action Banner & WhatsApp Fast-Track */}
         <FinalBanner />
       </main>
 

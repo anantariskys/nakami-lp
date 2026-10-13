@@ -50,7 +50,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium text-slate-600">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-medium text-slate-600">
           <a
             href="#layanan-bisnis"
             className="hover:text-slate-900 transition-colors"
@@ -64,6 +64,18 @@ export function Navbar() {
             Mentoring IT
           </a>
           <a
+            href="#standar-kualitas"
+            className="hover:text-slate-900 transition-colors"
+          >
+            Standar Kualitas
+          </a>
+          <a
+            href="#transparansi-biaya"
+            className="hover:text-slate-900 transition-colors"
+          >
+            Alur Biaya
+          </a>
+          <a
             href="#kalkulator-estimasi"
             className="hover:text-slate-900 transition-colors"
           >
@@ -73,13 +85,7 @@ export function Navbar() {
             href="#manifesto-etis"
             className="hover:text-[#FB6C00] transition-colors font-semibold"
           >
-            Manifesto Anti-Joki
-          </a>
-          <a
-            href="#transparansi-biaya"
-            className="hover:text-slate-900 transition-colors"
-          >
-            Alur Biaya
+            Anti-Joki
           </a>
           <a href="#faq" className="hover:text-slate-900 transition-colors">
             FAQ
@@ -141,6 +147,22 @@ export function Navbar() {
               <ArrowUpRight className="w-4 h-4 text-slate-400" />
             </a>
             <a
+              href="#standar-kualitas"
+              onClick={closeMenu}
+              className="py-3 border-b border-slate-100 flex items-center justify-between"
+            >
+              <span>Standar Kualitas Rekayasa</span>
+              <ArrowUpRight className="w-4 h-4 text-slate-400" />
+            </a>
+            <a
+              href="#transparansi-biaya"
+              onClick={closeMenu}
+              className="py-3 border-b border-slate-100 flex items-center justify-between"
+            >
+              <span>Skema Biaya & 3 Termin</span>
+              <ArrowUpRight className="w-4 h-4 text-slate-400" />
+            </a>
+            <a
               href="#kalkulator-estimasi"
               onClick={closeMenu}
               className="py-3 border-b border-slate-100 flex items-center justify-between"
@@ -155,14 +177,6 @@ export function Navbar() {
             >
               <span>Manifesto Anti-Joki (Etis)</span>
               <ArrowUpRight className="w-4 h-4 text-[#FB6C00]" />
-            </a>
-            <a
-              href="#transparansi-biaya"
-              onClick={closeMenu}
-              className="py-3 border-b border-slate-100 flex items-center justify-between"
-            >
-              <span>Skema Biaya & 3 Termin</span>
-              <ArrowUpRight className="w-4 h-4 text-slate-400" />
             </a>
             <a
               href="#faq"
