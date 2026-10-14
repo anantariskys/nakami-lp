@@ -50,13 +50,18 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         
-        {/* Brand Logo */}
+        {/* Brand Logo — docs/06 §5.1: monogram 36px desktop / 32px mobile */}
         <Link
           href="/"
-          className="group focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#FB6C00] rounded-full shrink-0"
+          className="group focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#FB6C00] rounded-lg shrink-0"
           aria-label="Nakami Studio Homepage"
         >
-          <MonogramLogo size={36} variant="dark" />
+          <div className="sm:hidden">
+            <MonogramLogo size={32} useAppIcon={false} variant="dark" />
+          </div>
+          <div className="hidden sm:block">
+            <MonogramLogo size={36} useAppIcon={false} variant="dark" />
+          </div>
         </Link>
 
         {/* Desktop Navigation Links */}

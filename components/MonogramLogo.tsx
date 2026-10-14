@@ -33,15 +33,20 @@ export function MonogramLogo({
           />
         </div>
       ) : (
+        /* Pure warm-gradient monogram with ambient glow per docs/06 §5.1 */
         <div
           className="relative shrink-0 transition-transform duration-300 group-hover:scale-105"
-          style={{ width: size, height: Math.round(size * 1.13) }}
+          style={{
+            width: size,
+            height: Math.round(size * (850 / 750)),
+            filter: "drop-shadow(0 0 8px rgba(251,108,0,0.4))",
+          }}
         >
           <Image
-            src="/brand/nakami-monogram.png"
+            src="/brand/nakami-monogram-512.png"
             alt="Nakami Monogram"
-            width={size}
-            height={Math.round(size * 1.13)}
+            width={512}
+            height={Math.round(512 * (850 / 750))}
             className="w-full h-full object-contain"
             priority
           />
@@ -50,19 +55,17 @@ export function MonogramLogo({
 
       {showText && (
         <div className="flex flex-col text-left">
+          {/* docs/06 §5.1 line 165: "NAKAMI" ExtraBold #FFFFFF + "STUDIO" SemiBold #FB6C00
+             docs/02 §3: wide tracking for brand lockup */}
           <span
-            className={`font-extrabold tracking-tight text-lg leading-tight uppercase font-[var(--font-display)] ${
+            className={`tracking-wide text-lg leading-tight uppercase font-[var(--font-display)] ${
               variant === "dark" ? "text-white" : "text-[#0F172A]"
             }`}
           >
-            NAKAMI<span className="text-[#FB6C00] ml-1">STUDIO</span>
-          </span>
-          <span
-            className={`text-[10px] tracking-widest font-mono uppercase ${
-              variant === "dark" ? "text-[#94A3B8]" : "text-[#64748B]"
-            }`}
-          >
-            SOFTWARE &amp; MENTORING
+            <span className="font-extrabold">NAKAMI</span>
+            <span className="font-semibold text-[#FB6C00] ml-1.5">
+              STUDIO
+            </span>
           </span>
         </div>
       )}

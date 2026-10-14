@@ -15,7 +15,7 @@ export function Footer() {
           {/* Brand Info (Span 2) */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="inline-block" aria-label="Nakami Studio Homepage">
-              <MonogramLogo size={36} variant="dark" />
+              <MonogramLogo size={36} useAppIcon={false} variant="dark" />
             </Link>
             <p className="text-[#94A3B8] text-sm max-w-sm leading-relaxed">
               Studio rekayasa software kustom untuk efisiensi operasional bisnis UMKM, serta pendampingan teknis 1-on-1 bagi mahasiswa IT untuk memahami kode tanpa kompromi joki.
