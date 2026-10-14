@@ -1,83 +1,77 @@
 "use client";
 
 import React, { useState } from "react";
-import { FAQS, createWhatsAppUrl } from "@/lib/constants";
-import { ChevronDown, HelpCircle, MessageCircle, ArrowDown } from "lucide-react";
+import { FAQS } from "@/lib/constants";
+import { Plus, Minus, ArrowUpRight } from "lucide-react";
+import { createWhatsAppUrl } from "@/lib/constants";
 
 export function FAQAccordion() {
   const [openIndexes, setOpenIndexes] = useState<number[]>([0]);
 
-  const toggleItem = (index: number) => {
+  const toggleFaq = (index: number) => {
     setOpenIndexes((prev) =>
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
   };
 
   return (
-    <section id="faq" className="scroll-mt-28 py-20 sm:py-24 bg-[#17181C] border-b border-[#2E323B]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="faq"
+      className="scroll-mt-24 py-24 sm:py-32 bg-white border-b border-neutral-200 relative overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1C1E24] border border-[#2E323B] text-xs font-mono font-medium text-[#F9B637] mb-4 shadow-sm">
-            <HelpCircle className="w-3.5 h-3.5 text-[#FB6C00]" />
-            <span>TANYA JAWAB UMUM</span>
+        {/* Editorial Section Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14 sm:mb-20">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-[#FB6C00] font-bold mb-3">
+              <span>[ TRANSPARANSI INFORMASI // FAQ ]</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A0A0A] tracking-tight font-[var(--font-display)] leading-[1.12]">
+              Jawaban terbuka untuk pertanyaan kritis Anda.
+            </h2>
+            <p className="mt-4 text-neutral-600 text-base leading-relaxed">
+              Mulai dari kepemilikan kode, batasan garansi, komitmen etis non-joki, hingga rincian termin pembayaran.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-4">
-            Hal penting seputar layanan kami.
-          </h2>
-          <p className="text-[#94A3B8] text-base leading-relaxed">
-            Jawaban transparan seputar alur kerja, garansi perbaikan bug 30 hari, skema pembayaran, dan etika mentoring Nakami.
-          </p>
+
+          <div className="font-mono text-xs text-neutral-500 self-start lg:self-auto">
+            TOTAL {FAQS.length} PERTANYAAN TERDOKUMENTASI
+          </div>
         </div>
 
-        {/* Accordion Container */}
-        <div className="space-y-3.5">
-          {FAQS.map((faq, index) => {
-            const isOpen = openIndexes.includes(index);
-            const headerId = `faq-header-${index}`;
-            const panelId = `faq-panel-${index}`;
-
+        {/* Minimalist Hairline Accordion List (Awwwards Style) */}
+        <div className="max-w-4xl mx-auto divide-y divide-neutral-200 border-t border-b border-neutral-200">
+          {FAQS.map((faq, idx) => {
+            const isOpen = openIndexes.includes(idx);
             return (
-              <div
-                key={index}
-                className={`rounded-2xl border transition-all duration-200 bg-[#1C1E24] ${
-                  isOpen
-                    ? "border-[#FB6C00]/60 shadow-md"
-                    : "border-[#2E323B] hover:border-[#3F4450]"
-                }`}
-              >
-                <h3>
-                  <button
-                    type="button"
-                    id={headerId}
-                    aria-expanded={isOpen}
-                    aria-controls={panelId}
-                    onClick={() => toggleItem(index)}
-                    className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#FB6C00] cursor-pointer"
-                  >
-                    <span className="text-base font-bold text-white leading-snug">
+              <div key={idx} className="py-6 sm:py-8 transition-colors">
+                <button
+                  type="button"
+                  onClick={() => toggleFaq(idx)}
+                  className="w-full flex items-start justify-between gap-6 text-left group cursor-pointer focus:outline-hidden"
+                  aria-expanded={isOpen}
+                >
+                  <div className="flex items-start gap-4 sm:gap-6">
+                    <span className="font-mono text-xs font-bold text-neutral-400 mt-1">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-bold text-[#0A0A0A] group-hover:text-[#FB6C00] transition-colors leading-snug">
                       {faq.question}
-                    </span>
-                    <span
-                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 border transition-transform duration-200 ${
-                        isOpen
-                          ? "bg-[#2A1D18] text-[#FB6C00] border-[#FB6C00]/40 rotate-180"
-                          : "bg-[#242730] text-[#94A3B8] border-[#2E323B]"
-                      }`}
-                    >
-                      <ChevronDown className="w-4 h-4" />
-                    </span>
-                  </button>
-                </h3>
+                    </h3>
+                  </div>
+
+                  <div className="w-8 h-8 rounded-full border border-neutral-200 group-hover:border-neutral-400 flex items-center justify-center text-neutral-600 shrink-0 mt-0.5 transition-colors">
+                    {isOpen ? (
+                      <Minus className="w-4 h-4" />
+                    ) : (
+                      <Plus className="w-4 h-4" />
+                    )}
+                  </div>
+                </button>
 
                 {isOpen && (
-                  <div
-                    id={panelId}
-                    role="region"
-                    aria-labelledby={headerId}
-                    className="px-6 pb-6 pt-1 text-sm text-[#CBD5E1] leading-relaxed border-t border-[#2E323B]"
-                  >
+                  <div className="pt-4 sm:pt-6 pl-8 sm:pl-12 pr-4 sm:pr-12 text-sm sm:text-base text-neutral-600 leading-relaxed animate-fadeIn">
                     <p>{faq.answer}</p>
                   </div>
                 )}
@@ -86,31 +80,22 @@ export function FAQAccordion() {
           })}
         </div>
 
-        {/* Forward Bridge to Direct Consultation & Final Banner */}
-        <div className="mt-14 text-center">
-          <p className="text-sm text-[#94A3B8] mb-4">
-            Punya skenario teknis spesifik yang belum terjawab di atas?
+        {/* Direct Help Callout */}
+        <div className="mt-16 text-center">
+          <p className="text-sm text-neutral-600 mb-4">
+            Punya pertanyaan teknis spesifik yang belum terjawab di atas?
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <a
-              href={createWhatsAppUrl(
-                "Halo Nakami Studio, saya membaca FAQ dan ingin bertanya lebih lanjut seputar kebutuhan proyek saya..."
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-[#121316] font-bold text-xs sm:text-sm shadow-glow-warm hover:brightness-110 transition-all"
-            >
-              <MessageCircle className="w-4 h-4 text-[#121316]" />
-              <span>Tanyakan Langsung via WhatsApp</span>
-            </a>
-            <a
-              href="#konsultasi-akhir"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#242730] hover:bg-[#2C303B] border border-[#2E323B] text-white font-semibold text-xs sm:text-sm shadow-sm transition-colors"
-            >
-              <span>Lanjut ke Konsultasi Bebas Biaya</span>
-              <ArrowDown className="w-4 h-4 text-[#94A3B8]" />
-            </a>
-          </div>
+          <a
+            href={createWhatsAppUrl(
+              "Halo Nakami Studio, saya punya pertanyaan teknis yang ingin dikonsultasikan langsung..."
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-bold text-[#0A0A0A] hover:text-[#FB6C00] transition-colors font-mono"
+          >
+            <span>Tanyakan Langsung ke Tim Engineer di WhatsApp</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
         </div>
 
       </div>

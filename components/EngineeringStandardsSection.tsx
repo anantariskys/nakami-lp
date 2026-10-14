@@ -3,174 +3,210 @@
 import React from "react";
 import {
   Code2,
-  Lock,
-  BookOpen,
+  Database,
   ShieldCheck,
+  Zap,
   CheckCircle2,
-  Compass,
-  ArrowRight,
 } from "lucide-react";
 
 export function EngineeringStandardsSection() {
   const standards = [
     {
+      index: "01",
+      title: "Arsitektur Modular & Strict TypeScript",
       icon: Code2,
-      iconBg: "bg-[#2A1D18] text-[#FB6C00] border-[#FB6C00]/30",
-      tag: "KUALITAS KODE",
-      title: "100% Custom Code, Tanpa Template Pasaran",
-      description:
-        "Setiap baris kode ditulis khusus menggunakan Next.js, React, TypeScript, dan Tailwind CSS. Bersih dari plugin usang, bebas bloatware lambat, dan dibangun dengan struktur modular yang mudah dirawat.",
-      metrics: [
-        "Skor Google Lighthouse 95+ (Kecepatan & SEO)",
-        "Struktur semantik ramah aksesibilitas (WCAG 2.1 AA)",
-        "Arsitektur komponen modular dan scalable",
+      tag: "CODE INTEGRITY",
+      summary:
+        "Kode dirancang dengan Clean Architecture dan type-safe menyeluruh. Tidak ada spaghetti code, tidak ada variabel misterius.",
+      specs: [
+        "TypeScript Strict Mode aktif tanpa kompromi 'any' serampangan",
+        "Pemisahan tegas: Business Logic, Data Access, dan UI Components",
+        "Format kode standar industri (ESLint + Prettier configuration)",
       ],
+      impact:
+        "Developer mana pun di masa depan bisa langsung membaca, memelihara, dan mengembangkan sistem tanpa perlu menebak logika.",
     },
     {
-      icon: Lock,
-      iconBg: "bg-[#182820] text-emerald-400 border-emerald-500/30",
-      tag: "HAK KEPEMILIKAN",
-      title: "Full Source Code Ownership, Bebas Biaya Bulanan",
-      description:
-        "Anda memiliki 100% repositori kode sumber dan skema database secara penuh. Bebas memilih hosting sendiri, bebas menambah kasir atau outlet tanpa tagihan sewa lisensi per perangkat setiap bulan.",
-      metrics: [
-        "Handover repositori Git privat dan kredensial lengkap",
-        "0 biaya langganan bulanan wajib ke pihak studio",
-        "Bebas vendor lock-in: sistem milik bisnis Anda seutuhnya",
+      index: "02",
+      title: "Database Ternormalisasi & Zero Data Loss",
+      icon: Database,
+      tag: "PERSISTENCE & SECURITY",
+      summary:
+        "Skema database relasional (PostgreSQL / MySQL) dirancang dengan indexing optimal dan integritas data ACID.",
+      specs: [
+        "Normalisasi tabel (3NF) mencegah duplikasi data transaksi",
+        "Automated migration schema (Prisma / Drizzle) terdokumentasi",
+        "Proteksi terhadap SQL Injection dan sanitasi input mutlak",
       ],
+      impact:
+        "Data transaksi kasir, inventori stok, dan riwayat pesanan bisnis Anda terlindungi aman dan konsisten bahkan saat mati lampu mendadak.",
     },
     {
-      icon: BookOpen,
-      iconBg: "bg-[#282218] text-amber-400 border-amber-500/30",
-      tag: "INTEGRITAS EDUKASI",
-      title: "Transfer Logika Baris Demi Baris (Bukan Kode Gelap Joki)",
-      description:
-        "Untuk mahasiswa IT, kami membimbing cara membaca error trace, mendesain normalisasi tabel, dan memahami fungsi setiap baris kode. Kami mendidik Anda menjadi engineer yang siap diuji di ruang sidang.",
-      metrics: [
-        "Sesi 1-on-1 screen-share privat via Google Meet",
-        "Rekaman video sesi dikirimkan untuk dipelajari kembali",
-        "100% bebas risiko sanksi plagiarisme atau drop out akademik",
+      index: "03",
+      title: "Performa Tinggi & Lighthouse Score 95+",
+      icon: Zap,
+      tag: "PERFORMANCE BENCHMARK",
+      summary:
+        "Optimasi asset, server-side caching, dan bundle splitting untuk waktu muat halaman di bawah 1.5 detik.",
+      specs: [
+        "Next.js App Router dengan Server Components berdaya komputasi tinggi",
+        "Image optimization otomatis WebP/AVIF berbobot minimal",
+        "Core Web Vitals optimal: LCP < 1.8s, CLS < 0.05, FID < 80ms",
       ],
+      impact:
+        "Pelanggan tidak kabur karena web lambat, dan peringkat SEO Google bisnis Anda naik secara organik tanpa trik murahan.",
     },
     {
+      index: "04",
+      title: "Garansi Bug 30 Hari & 100% Hak Milik",
       icon: ShieldCheck,
-      iconBg: "bg-[#18202A] text-sky-400 border-sky-500/30",
-      tag: "KEPASTIAN KERJA",
-      title: "Fixed-Scope Agreement & Garansi 30 Hari Bebas Bug",
-      description:
-        "Daftar modul, tenggat waktu, dan biaya disepakati tertulis di awal sebelum penulisan kode dimulai. Setelah sistem diluncurkan, Anda dilindungi masa garansi aktif 30 hari untuk perbaikan bug tanpa biaya tambahan.",
-      metrics: [
-        "Dokumen spesifikasi modul tertulis tanpa biaya tersembunyi",
-        "Masa uji coba staging demo sebelum pembayaran termin akhir",
-        "Garansi perbaikan bug responsif 30 hari pascapeluncuran",
+      tag: "POST-DEPLOYMENT SLA",
+      summary:
+        "Anda memegang penuh seluruh source code, database, dan akun hosting. Kami mendampingi selama masa adaptasi operasional.",
+      specs: [
+        "Akses repositori GitHub private diserahkan 100% ke klien",
+        "Garansi perbaikan bug dan cacat logika aktif selama 30 hari penuh",
+        "Panduan SOP pengoperasian sistem dalam bentuk video & PDF ringkas",
       ],
+      impact:
+        "Bebas rasa was-was. Tidak ada keterikatan sepihak (vendor lock-in) atau biaya tebusan lisensi di kemudian hari.",
     },
   ];
 
   return (
-    <section id="standar-kualitas" className="scroll-mt-28 py-20 sm:py-24 bg-[#17181C] border-b border-[#2E323B]">
-      <div id="standar-rekayasa" className="scroll-mt-28 sr-only" />
+    <section
+      id="standar-kualitas"
+      className="scroll-mt-24 py-24 sm:py-32 bg-white border-b border-neutral-200 relative overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1C1E24] border border-[#2E323B] text-xs font-mono font-medium text-[#F9B637] mb-4 shadow-sm">
-            <Compass className="w-3.5 h-3.5 text-[#FB6C00]" />
-            <span>STANDAR REKAYASA · THE NAKAMI STANDARD</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-4">
-            Fondasi rekayasa kami di setiap baris kode.
-          </h2>
-          <p className="text-[#94A3B8] text-base sm:text-lg leading-relaxed">
-            Apapun jalur yang Anda pilih, kualitas eksekusi kami berpijak pada empat standar kerja studio yang tidak pernah kami kompromikan.
-          </p>
-        </div>
+        {/* Editorial 2-Column Split: Asymmetrical Awwwards Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          {/* Left Column (Sticky Editorial Manifesto & Verified Metrics) */}
+          <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-8">
+            <div>
+              <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-[#FB6C00] font-bold mb-3">
+                <span>[ ARSITEKTUR // STANDAR REKAYASA ]</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A0A0A] tracking-tight font-[var(--font-display)] leading-[1.12]">
+                Kami menolak kode rapuh.
+              </h2>
+              <p className="mt-4 text-neutral-600 text-base leading-relaxed">
+                Setiap baris kode yang meninggalkan editor kami harus lolos uji ketahanan. Bukan sekadar berjalan di layar pengembang, tapi siap bertahan di server produksi dan mudah dipahami manusia.
+              </p>
+            </div>
 
-        {/* 4 Standards Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-8">
-          {standards.map((std, idx) => {
-            const Icon = std.icon;
-            return (
-              <div
-                key={idx}
-                className="rounded-3xl bg-[#1C1E24] border border-[#2E323B] hover:border-[#FB6C00]/50 p-7 sm:p-9 shadow-md hover:shadow-glow-warm/10 transition-all flex flex-col justify-between"
-              >
-                <div>
-                  {/* Top: Icon & Tag */}
-                  <div className="flex items-center justify-between gap-3 mb-6">
-                    <div
-                      className={`w-12 h-12 rounded-2xl border flex items-center justify-center shrink-0 ${std.iconBg}`}
-                    >
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-[#242730] text-[#CBD5E1] border border-[#2E323B]">
-                      {std.tag}
+            {/* Architectural Data Matrix (Verified Benchmarks) */}
+            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-neutral-200">
+              <div className="p-4 rounded-2xl bg-[#FAFAFA] border border-neutral-200">
+                <div className="text-3xl sm:text-4xl font-extrabold text-[#0A0A0A] font-[var(--font-display)]">
+                  98<span className="text-[#FB6C00]">+</span>
+                </div>
+                <div className="mt-1 text-xs font-mono text-neutral-500 uppercase tracking-wider">
+                  LIGHTHOUSE PERF
+                </div>
+                <p className="mt-2 text-xs text-neutral-600 leading-normal">
+                  Kecepatan muat kilat di jaringan mobile 4G Indonesia.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-[#FAFAFA] border border-neutral-200">
+                <div className="text-3xl sm:text-4xl font-extrabold text-[#0A0A0A] font-[var(--font-display)]">
+                  0<span className="text-neutral-400">Rp</span>
+                </div>
+                <div className="mt-1 text-xs font-mono text-neutral-500 uppercase tracking-wider">
+                  BIAYA BULANAN KASIR
+                </div>
+                <p className="mt-2 text-xs text-neutral-600 leading-normal">
+                  Milik Anda seutuhnya tanpa biaya langganan software wajib.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-[#FAFAFA] border border-neutral-200">
+                <div className="text-3xl sm:text-4xl font-extrabold text-[#0A0A0A] font-[var(--font-display)]">
+                  100<span className="text-[#FB6C00]">%</span>
+                </div>
+                <div className="mt-1 text-xs font-mono text-neutral-500 uppercase tracking-wider">
+                  KEPEMILIKAN KODE
+                </div>
+                <p className="mt-2 text-xs text-neutral-600 leading-normal">
+                  Source code &amp; database diserahkan penuh ke tangan Anda.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-[#FAFAFA] border border-neutral-200">
+                <div className="text-3xl sm:text-4xl font-extrabold text-[#0A0A0A] font-[var(--font-display)]">
+                  30<span className="text-[#E73F1E]">D</span>
+                </div>
+                <div className="mt-1 text-xs font-mono text-neutral-500 uppercase tracking-wider">
+                  ACTIVE SLA GARANSI
+                </div>
+                <p className="mt-2 text-xs text-neutral-600 leading-normal">
+                  Perbaikan bug operasional gratis 30 hari pasca live.
+                </p>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-neutral-900 text-white flex items-center justify-between">
+              <div className="text-xs">
+                <div className="font-mono text-[#F9B637] font-semibold">ZERO TECHNICAL DEBT</div>
+                <div className="text-neutral-400 mt-0.5">Sistem siap diaudit oleh tim IT eksternal</div>
+              </div>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+            </div>
+          </div>
+
+          {/* Right Column (Numbered Architectural Specification Ledger) */}
+          <div className="lg:col-span-7 space-y-6">
+            {standards.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.index}
+                  className="rounded-3xl bg-[#FAFAFA] border border-neutral-200 hover:border-neutral-400 p-6 sm:p-8 transition-all duration-200 hover:shadow-md"
+                >
+                  {/* Top Metadata Line */}
+                  <div className="flex items-center justify-between border-b border-neutral-200 pb-4 mb-5">
+                    <span className="font-mono text-xs font-bold text-[#FB6C00] tracking-widest">
+                      {"//"} {item.index} — {item.tag}
                     </span>
+                    <div className="w-8 h-8 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-neutral-700">
+                      <Icon className="w-4 h-4" />
+                    </div>
                   </div>
 
-                  {/* Title & Description */}
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 font-[var(--font-display)] leading-snug">
-                    {std.title}
+                  {/* Title & Core Summary */}
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#0A0A0A] font-[var(--font-display)] mb-2">
+                    {item.title}
                   </h3>
-                  <p className="text-sm text-[#94A3B8] leading-relaxed mb-6">
-                    {std.description}
+                  <p className="text-sm text-neutral-600 leading-relaxed mb-6">
+                    {item.summary}
                   </p>
-                </div>
 
-                {/* Metrics / Verified Items */}
-                <div className="pt-5 border-t border-[#2E323B] space-y-2.5">
-                  {std.metrics.map((metric, mIdx) => (
-                    <div key={mIdx} className="flex items-start gap-2.5 text-xs text-[#CBD5E1]">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                      <span className="leading-relaxed font-medium">{metric}</span>
+                  {/* Technical Specs List */}
+                  <div className="space-y-2 mb-6 p-4 rounded-2xl bg-white border border-neutral-200">
+                    <div className="text-[11px] font-mono font-bold text-neutral-400 uppercase tracking-wider mb-2">
+                      SPESIFIKASI IMPLEMENTASI
                     </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                    {item.specs.map((spec, sIdx) => (
+                      <div key={sIdx} className="flex items-start gap-2.5 text-xs text-neutral-700">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#FB6C00] shrink-0 mt-0.5" />
+                        <span>{spec}</span>
+                      </div>
+                    ))}
+                  </div>
 
-        {/* Forward Transition Banner to Service Catalog */}
-        <div className="mt-14 pt-8 border-t border-[#2E323B] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <div>
-            <div className="text-sm font-bold text-white">
-              Siap melihat modul spesifik untuk bisnis Anda atau paket bimbingan IT?
-            </div>
-            <div className="text-xs text-[#94A3B8]">
-              Pilih modul aplikasi siap rilis atau jadwalkan sesi live code review bersama engineer.
-            </div>
+                  {/* Real World Impact */}
+                  <div className="pt-4 border-t border-neutral-200/60 flex items-start gap-2 text-xs text-neutral-500">
+                    <span className="font-mono font-bold text-neutral-900 shrink-0">IMPACT:</span>
+                    <span>{item.impact}</span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3">
-            <a
-              href="#layanan-bisnis"
-              onClick={() => {
-                if (typeof window !== "undefined") {
-                  window.dispatchEvent(
-                    new CustomEvent("nakami:switch-track", { detail: { track: "biz" } })
-                  );
-                }
-              }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-[#121316] font-bold text-xs sm:text-sm shadow-glow-warm hover:brightness-110 transition-all cursor-pointer"
-            >
-              <span>Katalog Modul Bisnis</span>
-              <ArrowRight className="w-4 h-4 text-[#121316]" />
-            </a>
-            <a
-              href="#mentoring-it"
-              onClick={() => {
-                if (typeof window !== "undefined") {
-                  window.dispatchEvent(
-                    new CustomEvent("nakami:switch-track", { detail: { track: "edu" } })
-                  );
-                }
-              }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#242730] hover:bg-[#2C303B] border border-[#2E323B] text-white font-semibold text-xs sm:text-sm shadow-sm transition-colors cursor-pointer"
-            >
-              <span>Paket Mentoring IT</span>
-              <ArrowRight className="w-4 h-4 text-[#94A3B8]" />
-            </a>
-          </div>
+
         </div>
 
       </div>

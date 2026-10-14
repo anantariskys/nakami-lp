@@ -24,8 +24,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#121316",
-  colorScheme: "dark",
+  themeColor: "#FFFFFF",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -127,7 +127,7 @@ export default function RootLayout({
       lang="id"
       className={`${montserrat.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth antialiased`}
     >
-      <body className="min-h-screen bg-[#121316] text-[#F1F5F9] font-sans selection:bg-[#FB6C00] selection:text-white">
+      <body className="min-h-screen bg-white text-[#0A0A0A] font-sans selection:bg-[#FB6C00] selection:text-white">
         {children}
       </body>
     </html>

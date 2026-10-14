@@ -1,376 +1,415 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { createWhatsAppUrl } from "@/lib/constants";
+import React, { useState, useMemo } from "react";
 import {
+  MessageCircle,
+  Check,
   Store,
   GraduationCap,
-  Calculator,
-  MessageCircle,
-  Clock,
-  Coins,
   ShieldCheck,
-  ArrowRight,
-  ArrowDown,
 } from "lucide-react";
-
-interface ServiceOption {
-  id: string;
-  name: string;
-  category: "biz" | "edu";
-  code: string;
-  baseTimeline: string;
-  basePrice: string;
-  summary: string;
-}
-
-const SERVICE_OPTIONS: ServiceOption[] = [
-  {
-    id: "web-biz",
-    name: "Website Profil Bisnis & Landing Page",
-    category: "biz",
-    code: "BIZ-01",
-    baseTimeline: "7-14 hari kerja",
-    basePrice: "Mulai Rp 2.500.000",
-    summary: "Website kustom Next.js/Tailwind responsif, SEO siap saing, domain & integrasi WhatsApp.",
-  },
-  {
-    id: "pos-biz",
-    name: "Aplikasi Kasir (POS) & Stok Multi-Outlet",
-    category: "biz",
-    code: "BIZ-02",
-    baseTimeline: "14-25 hari kerja",
-    basePrice: "Mulai Rp 4.500.000",
-    summary: "Sistem kasir web/cloud tanpa biaya langganan bulanan per device, print struk & scan barcode.",
-  },
-  {
-    id: "booking-biz",
-    name: "Sistem Booking Jadwal & Reservasi",
-    category: "biz",
-    code: "BIZ-03",
-    baseTimeline: "10-18 hari kerja",
-    basePrice: "Mulai Rp 3.500.000",
-    summary: "Portal booking mandiri cegah jadwal bentrok, kalender interaktif & notifikasi otomatis.",
-  },
-  {
-    id: "custom-biz",
-    name: "Software Internal Kustom / ERP Mini",
-    category: "biz",
-    code: "BIZ-04",
-    baseTimeline: "Mulai 3 minggu",
-    basePrice: "Sesuai lingkup kerja",
-    summary: "Software operasional tim disesuaikan persis dengan SOP unik bisnis Anda tanpa kompromi.",
-  },
-  {
-    id: "debug-edu",
-    name: "Live Debugging 1-on-1 & Code Review",
-    category: "edu",
-    code: "EDU-01",
-    baseTimeline: "1-2 jam per sesi",
-    basePrice: "Mulai Rp 150.000 / jam",
-    summary: "Sesi investigasi error sistematis via Google Meet + rekaman video sesi untuk dipelajari lagi.",
-  },
-  {
-    id: "db-edu",
-    name: "Mentoring Arsitektur Database & API",
-    category: "edu",
-    code: "EDU-02",
-    baseTimeline: "3 sesi terarah",
-    basePrice: "Mulai Rp 400.000 / paket",
-    summary: "Bimbingan perancangan ERD, normalisasi, dan REST API terstandar industri untuk fondasi skripsi.",
-  },
-  {
-    id: "defense-edu",
-    name: "Simulasi Sidang Skripsi IT & Bedah Kode",
-    category: "edu",
-    code: "EDU-03",
-    baseTimeline: "Paket intensif 2 sesi",
-    basePrice: "Mulai Rp 550.000 / paket",
-    summary: "Simulasi pertanyaan dosen penguji, bedah alur algoritma, dan persiapan mental hingga siap 100%.",
-  },
-];
+import { createWhatsAppUrl } from "@/lib/constants";
 
 export function DiscoveryAuditForm() {
-  const [targetCategory, setTargetCategory] = useState<"biz" | "edu">("biz");
-  const [selectedServiceId, setSelectedServiceId] = useState<string>("web-biz");
-  const [name, setName] = useState<string>("");
-  const [projectNote, setProjectNote] = useState<string>("");
+  const [track, setTrack] = useState<"biz" | "edu">("biz");
+  const [selectedModule, setSelectedModule] = useState<string>("pos");
+  const [addOns, setAddOns] = useState<string[]>([]);
+  const [clientName, setClientName] = useState("");
+  const [clientPhone, setClientPhone] = useState("");
+  const [projectNotes, setProjectNotes] = useState("");
 
-  const handleCategorySwitch = (cat: "biz" | "edu") => {
-    setTargetCategory(cat);
-    const firstMatch = SERVICE_OPTIONS.find((s) => s.category === cat);
-    if (firstMatch) {
-      setSelectedServiceId(firstMatch.id);
-    }
+  const bizModules = [
+    {
+      id: "landing",
+      name: "Website Profil & Portofolio Kredibel",
+      basePrice: 1500000,
+      priceLabel: "Rp 1.500.000",
+      timeline: "5 - 7 Hari",
+      desc: "Web responsif berkecepatan tinggi, SEO Google siap tayang, dan domain resmi .com / .id.",
+    },
+    {
+      id: "pos",
+      name: "Sistem Kasir (POS) & Stok Multi-Outlet",
+      basePrice: 3500000,
+      priceLabel: "Rp 3.500.000",
+      timeline: "10 - 14 Hari",
+      desc: "Kasir offline-first, cetak struk thermal Bluetooth, rekap laba otomatis, dan 0 biaya langganan bulanan.",
+    },
+    {
+      id: "booking",
+      name: "Sistem Booking & Jadwal Otomatis",
+      basePrice: 2800000,
+      priceLabel: "Rp 2.800.000",
+      timeline: "7 - 10 Hari",
+      desc: "Reservasi online mandiri pelanggan, integrasi WhatsApp notification, dan kalender anti-bentrok.",
+    },
+    {
+      id: "erp",
+      name: "Aplikasi Manajemen Operasional Kustom",
+      basePrice: 6000000,
+      priceLabel: "Mulai Rp 6.000.000",
+      timeline: "20 - 30 Hari",
+      desc: "Sistem internal terpadu, workflow persetujuan, manajemen gudang, dan hak akses bertingkat.",
+    },
+  ];
+
+  const eduModules = [
+    {
+      id: "debugging",
+      name: "Sesi 1-on-1 Debugging & Bedah Logika",
+      basePrice: 150000,
+      priceLabel: "Rp 150.000 / sesi",
+      timeline: "Sesi 90 Menit",
+      desc: "Live Google Meet screen-share untuk memecahkan error kode spesifik dan tracing alur data.",
+    },
+    {
+      id: "database",
+      name: "Arsitektur Database (ERD) & REST API",
+      basePrice: 450000,
+      priceLabel: "Rp 450.000",
+      timeline: "2 - 3 Hari",
+      desc: "Normalisasi tabel database tugas akhir, relasi foreign-key, dan perancangan endpoint API.",
+    },
+    {
+      id: "skripsi-full",
+      name: "Pendampingan Komprehensif Skripsi IT",
+      basePrice: 1200000,
+      priceLabel: "Rp 1.200.000",
+      timeline: "30 Hari Penuh",
+      desc: "Bimbingan arsitektur sistem dari awal sampai akhir, bedah kode baris per baris, dan simulasi sidang.",
+    },
+  ];
+
+  const currentModules = track === "biz" ? bizModules : eduModules;
+  const currentModuleData =
+    currentModules.find((m) => m.id === selectedModule) || currentModules[0];
+
+  const bizAddOns = [
+    { id: "qris", name: "Integrasi Payment Gateway QRIS Otomatis", price: 500000 },
+    { id: "printer", name: "Pengadaan & Setup Printer Thermal Bluetooth", price: 650000 },
+    { id: "express", name: "Prioritas Express Delivery (< 7 Hari)", price: 800000 },
+  ];
+
+  const eduAddOns = [
+    { id: "simulasi-extra", name: "Simulasi Sidang Skripsi Tambahan (+90 Menit)", price: 150000 },
+    { id: "diagram-uml", name: "Pendampingan Diagram UML (Use Case, Sequence)", price: 200000 },
+    { id: "hosting-deploy", name: "Bimbingan Deploy ke VPS / Vercel Live", price: 150000 },
+  ];
+
+  const currentAddOns = track === "biz" ? bizAddOns : eduAddOns;
+
+  const toggleAddOn = (id: string) => {
+    setAddOns((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
   };
 
-  useEffect(() => {
-    const handleHashChange = () => {
-      const currentHash = window.location.hash;
-      if (currentHash === "#mentoring-it" || currentHash === "#manifesto-etis") {
-        handleCategorySwitch("edu");
-      } else if (currentHash === "#layanan-bisnis") {
-        handleCategorySwitch("biz");
+  const calculatedTotal = useMemo(() => {
+    let total = currentModuleData.basePrice;
+    currentAddOns.forEach((addon) => {
+      if (addOns.includes(addon.id)) {
+        total += addon.price;
       }
-    };
+    });
+    return total;
+  }, [currentModuleData, addOns, currentAddOns]);
 
-    const handleCustomTrackSwitch = (e: Event) => {
-      const customEvent = e as CustomEvent<{ track: "biz" | "edu" }>;
-      if (customEvent.detail?.track) {
-        handleCategorySwitch(customEvent.detail.track);
-      }
-    };
+  const formattedTotal = useMemo(() => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      maximumFractionDigits: 0,
+    }).format(calculatedTotal);
+  }, [calculatedTotal]);
 
-    window.addEventListener("hashchange", handleHashChange);
-    window.addEventListener("nakami:switch-track", handleCustomTrackSwitch);
+  const generateWhatsAppMessage = () => {
+    const selectedAddonNames = currentAddOns
+      .filter((a) => addOns.includes(a.id))
+      .map((a) => a.name);
 
-    // Initial sync
-    const timer = setTimeout(() => {
-      handleHashChange();
-    }, 0);
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("hashchange", handleHashChange);
-      window.removeEventListener("nakami:switch-track", handleCustomTrackSwitch);
-    };
-  }, []);
-
-  const filteredServices = SERVICE_OPTIONS.filter(
-    (item) => item.category === targetCategory
-  );
-
-  const activeService =
-    SERVICE_OPTIONS.find((s) => s.id === selectedServiceId) ||
-    filteredServices[0];
-
-  const generateWhatsAppMessage = (): string => {
-    const sender = name.trim() ? name.trim() : "Calon Klien";
-    const noteText = projectNote.trim()
-      ? `\nCatatan kebutuhan: ${projectNote.trim()}`
-      : "";
-
-    return `Halo Nakami Studio, saya ${sender}. Saya ingin konsultasi paket ${activeService.code} (${activeService.name}).${noteText}\nMohon info jadwal diskusi awal 15 menit.`;
+    let msg = `*HALO NAKAMI STUDIO — ESTIMASI PROYEK*\n\n`;
+    msg += `*Nama Klien:* ${clientName || "-"}\n`;
+    msg += `*No. Kontak:* ${clientPhone || "-"}\n`;
+    msg += `*Kategori:* ${track === "biz" ? "Solusi Bisnis & UMKM" : "Mentoring Mahasiswa IT"}\n`;
+    msg += `*Modul Utama:* ${currentModuleData.name}\n`;
+    msg += `*Timeline Estimasi:* ${currentModuleData.timeline}\n`;
+    
+    if (selectedAddonNames.length > 0) {
+      msg += `*Add-ons:* \n- ${selectedAddonNames.join("\n- ")}\n`;
+    }
+    
+    msg += `*Perkiraan Investasi:* ${formattedTotal}\n`;
+    if (projectNotes) {
+      msg += `*Catatan Khusus:* ${projectNotes}\n`;
+    }
+    msg += `\nMohon informasi ketersediaan jadwal audit/konsultasi 15 menit awal. Terima kasih!`;
+    return msg;
   };
 
   return (
-    <section id="kalkulator-estimasi" className="scroll-mt-28 py-20 sm:py-24 bg-[#121316] border-b border-[#2E323B]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="kalkulator-estimasi"
+      className="scroll-mt-24 py-24 sm:py-32 bg-white border-b border-neutral-200 relative overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1C1E24] border border-[#2E323B] text-xs font-mono font-medium text-[#F9B637] mb-4 shadow-sm">
-            <Calculator className="w-3.5 h-3.5 text-[#FB6C00]" />
-            <span>KALKULATOR ESTIMASI LINGKUP &amp; BIAYA</span>
+        {/* Editorial Header */}
+        <div className="max-w-3xl mb-14 sm:mb-18">
+          <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-[#FB6C00] font-bold mb-3">
+            <span>[ ESTIMATOR INTERAKTIF // TRANSPARAN ]</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-4">
-            Hitung estimasi proyek dalam hitungan detik.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A0A0A] tracking-tight font-[var(--font-display)] leading-[1.12]">
+            Hitung perkiraan lingkup &amp; biaya proyek Anda.
           </h2>
-          <p className="text-[#94A3B8] text-base sm:text-lg leading-relaxed">
-            Dapatkan gambaran durasi pengerjaan, kisaran biaya, dan format kolaborasi sebelum memulai sesi diskusi awal.
+          <p className="mt-4 text-neutral-600 text-base sm:text-lg leading-relaxed">
+            Gunakan kalkulator interaktif ini untuk memetakan modul yang Anda butuhkan. Dapatkan rincian instan dan kirim langsung ke tim kami untuk audit awal 15 menit.
           </p>
         </div>
 
-        {/* Estimator Container */}
-        <div className="rounded-[32px] sm:rounded-[40px] bg-[#1C1E24] border border-[#2E323B] p-6 sm:p-10 lg:p-12 shadow-lg">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        {/* Calculator Main Layout: 2 Columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          
+          {/* Left Column: Interactive Controls */}
+          <div className="lg:col-span-7 space-y-8">
             
-            {/* Left Column: Interactive Inputs */}
-            <div className="lg:col-span-7 space-y-7">
-              
-              {/* Category Segment Selector */}
-              <div>
-                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#94A3B8] mb-3">
-                  1. Pilih Kategori Kebutuhan
-                </label>
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    type="button"
-                    onClick={() => handleCategorySwitch("biz")}
-                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border text-sm font-bold transition-all cursor-pointer ${
-                      targetCategory === "biz"
-                        ? "bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-[#121316] border-[#FB6C00] shadow-glow-warm"
-                        : "bg-[#17181C] text-[#94A3B8] border-[#2E323B] hover:text-white hover:border-[#3F4450]"
-                    }`}
-                  >
-                    <Store className="w-4 h-4 shrink-0" />
-                    <span>Sistem Bisnis UMKM</span>
-                  </button>
+            {/* Step 1: Choose Track */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#FAFAFA] border border-neutral-200">
+              <span className="font-mono text-xs font-bold text-neutral-400 uppercase tracking-wider block mb-4">
+                01 // PILIH KATEGORI KEBUTUHAN
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setTrack("biz");
+                    setSelectedModule("pos");
+                    setAddOns([]);
+                  }}
+                  className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                    track === "biz"
+                      ? "bg-white border-[#FB6C00] shadow-sm ring-1 ring-[#FB6C00]"
+                      : "bg-white/60 border-neutral-200 hover:border-neutral-300"
+                  }`}
+                >
+                  <Store className={`w-5 h-5 mb-2 ${track === "biz" ? "text-[#FB6C00]" : "text-neutral-500"}`} />
+                  <div className="font-bold text-sm text-[#0A0A0A]">Bisnis &amp; UMKM</div>
+                  <div className="text-xs text-neutral-500 mt-1">Sistem kasir, POS, web profil, otomasi</div>
+                </button>
 
-                  <button
-                    type="button"
-                    onClick={() => handleCategorySwitch("edu")}
-                    className={`flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border text-sm font-bold transition-all cursor-pointer ${
-                      targetCategory === "edu"
-                        ? "bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-[#121316] border-[#FB6C00] shadow-glow-warm"
-                        : "bg-[#17181C] text-[#94A3B8] border-[#2E323B] hover:text-white hover:border-[#3F4450]"
-                    }`}
-                  >
-                    <GraduationCap className="w-4 h-4 shrink-0" />
-                    <span>Mentoring Coding IT</span>
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setTrack("edu");
+                    setSelectedModule("debugging");
+                    setAddOns([]);
+                  }}
+                  className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                    track === "edu"
+                      ? "bg-white border-[#E73F1E] shadow-sm ring-1 ring-[#E73F1E]"
+                      : "bg-white/60 border-neutral-200 hover:border-neutral-300"
+                  }`}
+                >
+                  <GraduationCap className={`w-5 h-5 mb-2 ${track === "edu" ? "text-[#E73F1E]" : "text-neutral-500"}`} />
+                  <div className="font-bold text-sm text-[#0A0A0A]">Mentoring Mahasiswa IT</div>
+                  <div className="text-xs text-neutral-500 mt-1">Bimbingan logika, tugas akhir, simulasi sidang</div>
+                </button>
               </div>
+            </div>
 
-              {/* Specific Service Package Radio Group */}
-              <div>
-                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#94A3B8] mb-3">
-                  2. Pilih Modul Layanan
-                </label>
-                <div className="space-y-2.5">
-                  {filteredServices.map((srv) => (
-                    <button
-                      key={srv.id}
-                      type="button"
-                      onClick={() => setSelectedServiceId(srv.id)}
-                      className={`w-full text-left p-3.5 sm:p-4 rounded-2xl border transition-all flex items-center justify-between gap-4 cursor-pointer ${
-                        selectedServiceId === srv.id
-                          ? "bg-[#242730] border-[#FB6C00] shadow-sm ring-1 ring-[#FB6C00]"
-                          : "bg-[#17181C] border-[#2E323B] hover:bg-[#202228] hover:border-[#3F4450]"
+            {/* Step 2: Choose Primary Module */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#FAFAFA] border border-neutral-200">
+              <span className="font-mono text-xs font-bold text-neutral-400 uppercase tracking-wider block mb-4">
+                02 // PILIH SPESIFIKASI MODUL UTAMA
+              </span>
+              <div className="space-y-3">
+                {currentModules.map((mod) => (
+                  <button
+                    key={mod.id}
+                    type="button"
+                    onClick={() => setSelectedModule(mod.id)}
+                    className={`w-full p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-start justify-between gap-4 ${
+                      selectedModule === mod.id
+                        ? "bg-white border-neutral-900 shadow-sm ring-1 ring-neutral-900"
+                        : "bg-white/60 border-neutral-200 hover:border-neutral-300"
+                    }`}
+                  >
+                    <div>
+                      <div className="font-bold text-sm text-[#0A0A0A]">{mod.name}</div>
+                      <div className="text-xs text-neutral-500 mt-1 leading-relaxed">{mod.desc}</div>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <div className="font-mono text-xs font-bold text-[#FB6C00]">{mod.priceLabel}</div>
+                      <div className="font-mono text-[11px] text-neutral-400 mt-1">{mod.timeline}</div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Step 3: Optional Add-ons */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#FAFAFA] border border-neutral-200">
+              <span className="font-mono text-xs font-bold text-neutral-400 uppercase tracking-wider block mb-4">
+                03 // FITUR TAMBAHAN / ADD-ONS (OPSIONAL)
+              </span>
+              <div className="space-y-2.5">
+                {currentAddOns.map((addon) => {
+                  const isChecked = addOns.includes(addon.id);
+                  return (
+                    <label
+                      key={addon.id}
+                      onClick={() => toggleAddOn(addon.id)}
+                      className={`flex items-center justify-between p-3.5 rounded-xl border text-xs cursor-pointer transition-colors ${
+                        isChecked
+                          ? "bg-white border-[#FB6C00] text-neutral-900 font-semibold"
+                          : "bg-white/60 border-neutral-200 text-neutral-600 hover:bg-white"
                       }`}
                     >
                       <div className="flex items-center gap-3">
-                        <span
-                          className={`font-mono text-xs font-bold px-2 py-0.5 rounded ${
-                            selectedServiceId === srv.id
-                              ? "bg-[#FB6C00]/20 text-[#F9B637]"
-                              : "bg-[#242730] text-[#94A3B8]"
+                        <div
+                          className={`w-4 h-4 rounded flex items-center justify-center border transition-colors ${
+                            isChecked
+                              ? "bg-[#FB6C00] border-[#FB6C00] text-white"
+                              : "border-neutral-300 bg-white"
                           }`}
                         >
-                          {srv.code}
-                        </span>
-                        <span className="text-sm font-bold text-white">
-                          {srv.name}
-                        </span>
+                          {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
+                        </div>
+                        <span>{addon.name}</span>
                       </div>
-                      <span className="font-mono text-xs font-semibold text-[#F9B637] shrink-0">
-                        {srv.basePrice}
+                      <span className="font-mono text-neutral-500">
+                        +{new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(addon.price)}
                       </span>
-                    </button>
-                  ))}
-                </div>
+                    </label>
+                  );
+                })}
               </div>
-
-              {/* Optional Name & Context Note */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label
-                    htmlFor="client-name"
-                    className="block text-xs font-mono font-bold uppercase tracking-wider text-[#94A3B8] mb-2"
-                  >
-                    Nama Anda / Usaha (Opsional)
-                  </label>
-                  <input
-                    id="client-name"
-                    type="text"
-                    placeholder="Contoh: Budi / Toko Maju"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#17181C] border border-[#2E323B] text-white placeholder-[#6B7280] text-sm focus:outline-hidden focus:ring-2 focus:ring-[#FB6C00]"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="project-note"
-                    className="block text-xs font-mono font-bold uppercase tracking-wider text-[#94A3B8] mb-2"
-                  >
-                    Catatan Khusus (Opsional)
-                  </label>
-                  <input
-                    id="project-note"
-                    type="text"
-                    placeholder="Contoh: Butuh integrasi barcode"
-                    value={projectNote}
-                    onChange={(e) => setProjectNote(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#17181C] border border-[#2E323B] text-white placeholder-[#6B7280] text-sm focus:outline-hidden focus:ring-2 focus:ring-[#FB6C00]"
-                  />
-                </div>
-              </div>
-
             </div>
 
-            {/* Right Column: Live Summary & Direct WhatsApp Action */}
-            <div className="lg:col-span-5 rounded-3xl bg-[#17181C] border border-[#2E323B] p-6 sm:p-7 shadow-sm">
-              <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#94A3B8] mb-4 pb-3 border-t border-transparent border-b border-[#2E323B] flex items-center justify-between">
-                <span>RINGKASAN ESTIMASI</span>
-                <span className="text-[#FB6C00]">{activeService.code}</span>
+            {/* Step 4: Contact Information */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#FAFAFA] border border-neutral-200">
+              <span className="font-mono text-xs font-bold text-neutral-400 uppercase tracking-wider block mb-4">
+                04 // INFORMASI ANDA (UNTUK DISKUSI)
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-xs font-semibold text-neutral-700 mb-1.5">
+                    Nama / Usaha Anda
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Contoh: Budi (Kopi Nusantara)"
+                    value={clientName}
+                    onChange={(e) => setClientName(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-200 text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-hidden focus:border-[#FB6C00] focus:ring-1 focus:ring-[#FB6C00]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-neutral-700 mb-1.5">
+                    Nomor WhatsApp
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Contoh: 081234567890"
+                    value={clientPhone}
+                    onChange={(e) => setClientPhone(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-200 text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-hidden focus:border-[#FB6C00] focus:ring-1 focus:ring-[#FB6C00]"
+                  />
+                </div>
               </div>
+              <div>
+                <label className="block text-xs font-semibold text-neutral-700 mb-1.5">
+                  Catatan Kebutuhan Tambahan (Opsional)
+                </label>
+                <textarea
+                  rows={2}
+                  placeholder="Ceritakan gambaran singkat sistem atau kesulitan kodingan Anda..."
+                  value={projectNotes}
+                  onChange={(e) => setProjectNotes(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl bg-white border border-neutral-200 text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-hidden focus:border-[#FB6C00] focus:ring-1 focus:ring-[#FB6C00]"
+                />
+              </div>
+            </div>
 
-              <h3 className="text-xl font-bold text-white mb-2 font-[var(--font-display)]">
-                {activeService.name}
-              </h3>
-              <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed mb-6">
-                {activeService.summary}
-              </p>
+          </div>
 
-              {/* Metrics Box */}
-              <div className="space-y-3.5 mb-7 p-4 rounded-2xl bg-[#242730] border border-[#2E323B]">
-                <div className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2 text-[#94A3B8]">
-                    <Clock className="w-4 h-4 text-[#94A3B8]" />
-                    <span>Estimasi Durasi</span>
-                  </div>
-                  <span className="font-bold text-white font-mono">
-                    {activeService.baseTimeline}
+          {/* Right Column: Live Summary Ledger (Sticky) */}
+          <div className="lg:col-span-5 lg:sticky lg:top-28">
+            <div className="rounded-3xl bg-neutral-900 text-white p-8 sm:p-10 border border-neutral-800 shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle,rgba(251,108,0,0.15)_0%,transparent_70%)] pointer-events-none blur-2xl" />
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between border-b border-neutral-800 pb-4 mb-6">
+                  <span className="font-mono text-xs font-bold text-[#F9B637] uppercase tracking-wider">
+                    ESTIMASI RINGKASAN
+                  </span>
+                  <span className="font-mono text-xs text-neutral-400">
+                    REAL-TIME SYNC
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2 text-[#94A3B8]">
-                    <Coins className="w-4 h-4 text-[#94A3B8]" />
-                    <span>Kisaran Investasi</span>
+                <div className="mb-6">
+                  <div className="text-xs text-neutral-400 mb-1 font-mono uppercase">
+                    ESTIMASI TOTAL INVESTASI
                   </div>
-                  <span className="font-bold text-[#F9B637] font-mono text-sm">
-                    {activeService.basePrice}
-                  </span>
+                  <div className="text-3xl sm:text-4xl font-extrabold text-white font-[var(--font-display)]">
+                    {formattedTotal}
+                  </div>
+                  <div className="mt-2 text-xs text-neutral-400">
+                    *Estimasi awal. Biaya final disepakati dalam kontrak fixed-scope.
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2 text-[#94A3B8]">
+                <div className="space-y-3 py-6 border-y border-neutral-800 text-xs">
+                  <div className="flex justify-between text-neutral-300">
+                    <span className="text-neutral-400">Kategori:</span>
+                    <span className="font-semibold text-white">
+                      {track === "biz" ? "Solusi Bisnis & UMKM" : "Mentoring IT & Skripsi"}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-neutral-300">
+                    <span className="text-neutral-400">Modul Utama:</span>
+                    <span className="font-semibold text-white text-right max-w-[200px]">
+                      {currentModuleData.name}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-neutral-300">
+                    <span className="text-neutral-400">Estimasi Durasi:</span>
+                    <span className="font-mono text-[#F9B637]">
+                      {currentModuleData.timeline}
+                    </span>
+                  </div>
+                  {addOns.length > 0 && (
+                    <div className="flex justify-between text-neutral-300">
+                      <span className="text-neutral-400">Add-ons ({addOns.length}):</span>
+                      <span className="text-neutral-200">Termasuk</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between text-neutral-300">
+                    <span className="text-neutral-400">Garansi:</span>
+                    <span className="text-emerald-400">30 Hari Active SLA</span>
+                  </div>
+                </div>
+
+                <div className="pt-6">
+                  <a
+                    href={createWhatsAppUrl(generateWhatsAppMessage())}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-full bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-white font-bold text-sm hover:opacity-95 shadow-md active:scale-95 transition-all"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    <span>Kirim Rincian ke WhatsApp</span>
+                  </a>
+
+                  <p className="mt-4 text-[11px] text-center text-neutral-400 flex items-center justify-center gap-1.5">
                     <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                    <span>Jaminan Garansi</span>
-                  </div>
-                  <span className="font-semibold text-emerald-400">
-                    30 Hari Bebas Bug &amp; Source Code
-                  </span>
+                    <span>Tanpa kewajiban membeli. Diskusi awal 15 menit 100% gratis.</span>
+                  </p>
                 </div>
               </div>
-
-              {/* Action Button */}
-              <a
-                href={createWhatsAppUrl(generateWhatsAppMessage())}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-full bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-[#121316] font-bold text-sm shadow-glow-warm hover:brightness-110 transition-all"
-              >
-                <MessageCircle className="w-4 h-4 shrink-0 text-[#121316]" />
-                <span>Konsultasikan Rincian via WA</span>
-                <ArrowRight className="w-4 h-4 shrink-0 text-[#121316]" />
-              </a>
-
-              <p className="text-center text-[11px] text-[#6B7280] mt-3">
-                Diskusi 15 menit awal bebas biaya dan tanpa kewajiban apa pun.
-              </p>
             </div>
-
           </div>
-        </div>
 
-        {/* Forward Bridge to FAQ */}
-        <div className="mt-12 text-center">
-          <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 px-5 py-3 rounded-2xl bg-[#1C1E24] border border-[#2E323B] text-xs text-[#94A3B8] shadow-sm">
-            <span className="font-medium">
-              Masih memiliki pertanyaan seputar garansi 30 hari, hak milik kode, atau alur kerja?
-            </span>
-            <a
-              href="#faq"
-              className="inline-flex items-center gap-1 font-bold text-[#FB6C00] hover:text-[#FFDD9C] transition-colors underline-offset-4 hover:underline"
-            >
-              <span>Pelajari Tanya Jawab (FAQ)</span>
-              <ArrowDown className="w-3.5 h-3.5" />
-            </a>
-          </div>
         </div>
 
       </div>

@@ -1,82 +1,95 @@
 "use client";
 
 import React from "react";
+import { MessageCircle, ArrowRight, ShieldCheck, Clock, Sparkles } from "lucide-react";
 import { createWhatsAppUrl } from "@/lib/constants";
-import { MessageCircle, ShieldCheck, Clock, Lock, ArrowUpRight } from "lucide-react";
 
 export function FinalBanner() {
   return (
-    <section id="konsultasi-akhir" className="scroll-mt-28 py-20 sm:py-24 bg-[#121316] border-b border-[#2E323B]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 sm:py-32 bg-white relative overflow-hidden border-b border-neutral-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Warm Showcase Closing Card */}
-        <div className="rounded-[32px] sm:rounded-[44px] bg-[#1C1E24] border border-[#2E323B] p-8 sm:p-14 lg:p-16 text-center relative overflow-hidden shadow-lg">
-
-          {/* Subtle warm ambient glow */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 0%, rgba(255, 87, 34, 0.10) 0%, rgba(245, 158, 11, 0.04) 50%, transparent 80%)",
-            }}
-          />
+        {/* High-Impact Architectural Banner Container */}
+        <div className="rounded-3xl bg-[#0A0A0A] text-white p-10 sm:p-16 lg:p-20 relative overflow-hidden shadow-2xl">
           
-          {/* Eyebrow Pill */}
-          <div className="relative inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#242730] border border-[#FB6C00]/30 text-xs font-mono font-bold text-[#F9B637] mb-6 shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-[#FB6C00]" />
-            <span>KONSULTASI AWAL 15 MENIT BEBAS BIAYA</span>
-          </div>
+          {/* Subtle Halftone Grid Texture */}
+          <div
+            className="absolute inset-0 pointer-events-none opacity-15"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, #FB6C00 1px, transparent 1px), linear-gradient(to bottom, #FB6C00 1px, transparent 1px)",
+              backgroundSize: "60px 60px",
+            }}
+            aria-hidden="true"
+          />
 
-          {/* Heading */}
-          <h2 className="relative text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-6 max-w-3xl mx-auto leading-[1.15]">
-            Siap memajukan sistem bisnis Anda atau{" "}
-            <span className="bg-gradient-to-r from-[#FFDD9C] via-[#FB6C00] to-[#E73F1E] bg-clip-text text-transparent">mengamankan kelulusan</span> skripsi?
-          </h2>
+          {/* Warm Ambient Radial Glow */}
+          <div
+            className="absolute -bottom-24 -left-24 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(251,108,0,0.25)_0%,transparent_70%)] pointer-events-none blur-3xl"
+            aria-hidden="true"
+          />
 
-          {/* Subheading */}
-          <p className="relative text-[#94A3B8] text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-            Diskusikan kebutuhan proyek Anda langsung bersama tim engineer Nakami. Kami hitungkan spesifikasi, durasi pengerjaan, dan estimasi biaya secara transparan sebelum Anda memutuskan.
-          </p>
-
-          {/* Action Button Group */}
-          <div className="relative flex flex-wrap items-center justify-center gap-3.5 mb-10">
-            <a
-              href={createWhatsAppUrl(
-                "Halo Nakami Studio, saya ingin konsultasi 15 menit via WhatsApp..."
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-[#121316] font-bold text-base shadow-glow-warm hover:brightness-110 transition-all active:translate-y-px"
-            >
-              <MessageCircle className="w-5 h-5" />
-              <span>Mulai Diskusi via WhatsApp</span>
-              <ArrowUpRight className="w-5 h-5" />
-            </a>
-
-            <a
-              href="#kalkulator-estimasi"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-[#242730] hover:bg-[#2C303B] border border-[#2E323B] text-white font-semibold text-base transition-colors shadow-sm"
-            >
-              <span>Hitung Estimasi Mandiri</span>
-            </a>
-          </div>
-
-          {/* Trust Footnotes */}
-          <div className="relative flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-[#94A3B8] font-medium pt-8 border-t border-[#2E323B]">
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-[#FB6C00]" />
-              <span>Respons Cepat via WhatsApp</span>
+          <div className="relative z-10 max-w-4xl mx-auto text-center">
+            
+            {/* Top Monospace Tag */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-neutral-900 border border-neutral-700 text-[#F9B637] text-xs font-mono tracking-widest uppercase mb-8">
+              <span className="w-2 h-2 rounded-full bg-[#FB6C00] animate-pulse" />
+              <span>MULAI DISKUSI TEKNIS SEKARANG</span>
             </div>
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>Tanpa Biaya &amp; Tanpa Ikatan</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Lock className="w-4 h-4 text-[#94A3B8]" />
-              <span>Kerahasiaan Ide Terjamin</span>
-            </div>
-          </div>
 
+            {/* Giant Editorial Headline */}
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-[var(--font-display)] leading-[1.12] mb-6 text-white">
+              Cukup berkutat dengan bug &amp; sistem manual.{" "}
+              <span className="bg-gradient-to-r from-[#FB6C00] via-[#E73F1E] to-[#F9B637] bg-clip-text text-transparent">
+                Mari bangun arsitektur yang solid.
+              </span>
+            </h2>
+
+            {/* Subtitle */}
+            <p className="text-base sm:text-lg text-neutral-300 max-w-2xl mx-auto mb-10 sm:mb-12 leading-relaxed">
+              Konsultasikan kendala operasional kasir bisnis Anda atau diskusikan error kode tugas akhir Anda langsung dengan senior engineer Nakami Studio.
+            </p>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
+              <a
+                href={createWhatsAppUrl(
+                  "Halo Nakami Studio, saya ingin konsultasi kebutuhan sistem bisnis / mentoring IT..."
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2.5 h-14 px-8 rounded-full bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-white font-bold text-base hover:opacity-95 active:scale-95 shadow-xl transition-all"
+              >
+                <MessageCircle className="w-5 h-5" />
+                <span>Konsultasi Cepat via WhatsApp</span>
+              </a>
+
+              <a
+                href="#kalkulator-estimasi"
+                className="inline-flex items-center justify-center gap-2 h-14 px-8 rounded-full bg-neutral-900 hover:bg-neutral-800 text-white border border-neutral-700 font-semibold text-base transition-colors"
+              >
+                <span>Hitung Estimasi Proyek</span>
+                <ArrowRight className="w-4 h-4 text-neutral-400" />
+              </a>
+            </div>
+
+            {/* Trust Footer Ledger */}
+            <div className="pt-8 border-t border-neutral-800/80 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono text-neutral-400">
+              <div className="flex items-center justify-center gap-2">
+                <Clock className="w-4 h-4 text-[#FB6C00]" />
+                <span>RESPON DALAM &lt; 15 MENIT</span>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                <Sparkles className="w-4 h-4 text-emerald-400" />
+                <span>15 MENIT AUDIT AWAL GRATIS</span>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#FB6C00]" />
+                <span>100% KEPEMILIKAN SOURCE CODE</span>
+              </div>
+            </div>
+
+          </div>
         </div>
 
       </div>

@@ -1,213 +1,178 @@
 "use client";
 
 import React from "react";
-import {
-  ShieldCheck,
-  FileCheck,
-  Layers,
-  CheckCircle2,
-  GraduationCap,
-  ArrowRight,
-  Calculator,
-} from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 
 export function PricingPhilosophySection() {
+  const principles = [
+    {
+      num: "01",
+      title: "Audit Teknis Awal 15 Menit",
+      desc: "Sebelum sepeser pun uang muka dibayarkan, kami bedah diagram alur bisnis Anda untuk memastikan sistem benar-benar menyelesaikan masalah, bukan sekadar gaya-gayaan.",
+      badge: "GRATIS & NON-BINDING",
+    },
+    {
+      num: "02",
+      title: "Kontrak Fixed-Scope Tertulis",
+      desc: "Daftar fitur, batas modul, dan tanggal serah terima dikunci dalam dokumen hitam di atas putih. Tidak ada lonjakan tagihan mendadak di tengah proyek.",
+      badge: "KEPASTIAN ANGGARAN",
+    },
+    {
+      num: "03",
+      title: "Protokol Change Request",
+      desc: "Jika Anda ingin menambah fitur baru di tengah pengembangan, kami hitung estimasi jam kerja tambahannya secara transparan sebelum dikerjakan.",
+      badge: "KONTROL PENUH",
+    },
+  ];
+
+  const milestones = [
+    {
+      step: "TERMIN 01",
+      pct: "50%",
+      title: "Kickoff & Blueprint Arsitektur",
+      desc: "Komitmen awal untuk memulai perancangan skema database, wireframe UI, dan inisialisasi server staging.",
+      checklist: [
+        "Desain skema database (ERD) tervalidasi",
+        "Setup repositori private & CI/CD pipeline",
+        "Prototipe antarmuka UI komponen utama",
+      ],
+    },
+    {
+      step: "TERMIN 02",
+      pct: "30%",
+      title: "Live Staging Demo & Uji Fungsional",
+      desc: "Sistem sudah hidup di URL staging privat. Anda menguji langsung transaksi kasir, input data, dan alur operasional.",
+      checklist: [
+        "Aplikasi berfungsi penuh di server testing",
+        "Klien mencoba alur transaksi secara nyata",
+        "Iterasi revisi bug minor tahap fungsional",
+      ],
+    },
+    {
+      step: "TERMIN 03",
+      pct: "20%",
+      title: "Handover Penuh & Rilis Produksi",
+      desc: "Penyerahan seluruh kredensial repositori, database produksi, setup domain resmi, dan pelatihan staf operasional.",
+      checklist: [
+        "Deployment ke domain resmi & server utama",
+        "Serah terima 100% source code GitHub",
+        "Masa garansi bug aktif 30 hari dimulai",
+      ],
+    },
+  ];
+
   return (
-    <section id="transparansi-biaya" className="scroll-mt-28 py-20 sm:py-24 bg-[#121316] border-b border-[#2E323B]">
+    <section
+      id="transparansi-biaya"
+      className="scroll-mt-24 py-24 sm:py-32 bg-white border-b border-neutral-200 relative overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1C1E24] border border-[#2E323B] text-xs font-mono font-medium text-[#F9B637] mb-4 shadow-sm">
-            <FileCheck className="w-3.5 h-3.5 text-[#FB6C00]" />
-            <span>TRANSPARANSI KONTRAK &amp; BIAYA</span>
+        {/* Editorial Section Header */}
+        <div className="max-w-3xl mb-16 sm:mb-20">
+          <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-[#FB6C00] font-bold mb-3">
+            <span>[ TATA KELOLA KONTRAK // 0 HIDDEN FEES ]</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight font-[var(--font-display)] mb-4">
-            Biaya pasti berdasar lingkup kerja tertulis.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0A0A0A] tracking-tight font-[var(--font-display)] leading-[1.12]">
+            Tanpa jebakan harga di tengah jalan.
           </h2>
-          <p className="text-[#94A3B8] text-base sm:text-lg leading-relaxed">
-            Kami menerapkan sistem fixed-scope agreement: modul, tenggat pengerjaan, dan biaya disepakati tertulis di awal sebelum penulisan kode dimulai. Tanpa biaya tersembunyi.
+          <p className="mt-4 text-neutral-600 text-base sm:text-lg leading-relaxed">
+            Setiap rupiah yang Anda bayarkan terikat langsung dengan deliverable nyata yang bisa Anda uji dan sentuh secara objektif. Bukan sekadar janji estimasi.
           </p>
         </div>
 
-        {/* 3 Core Principles */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <div className="p-7 rounded-3xl border border-[#2E323B] bg-[#1C1E24] hover:border-[#FB6C00]/40 shadow-md transition-all">
-            <div className="w-10 h-10 rounded-xl bg-[#242730] border border-[#2E323B] text-[#FB6C00] flex items-center justify-center mb-4">
-              <FileCheck className="w-5 h-5" />
+        {/* 3 Core Principles: Architectural Ledger */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 sm:mb-20">
+          {principles.map((item) => (
+            <div
+              key={item.num}
+              className="rounded-3xl bg-[#FAFAFA] border border-neutral-200 p-8 flex flex-col justify-between hover:border-neutral-400 transition-colors"
+            >
+              <div>
+                <div className="flex items-center justify-between border-b border-neutral-200 pb-4 mb-6">
+                  <span className="font-mono text-2xl font-extrabold text-neutral-300">
+                    {item.num}
+                  </span>
+                  <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-white border border-neutral-200 text-[#FB6C00] tracking-wider uppercase">
+                    {item.badge}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold text-[#0A0A0A] font-[var(--font-display)] mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-neutral-600 leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
             </div>
-            <h3 className="text-lg font-bold text-white mb-2 font-[var(--font-display)]">
-              Audit Kebutuhan 15 Menit Awal
-            </h3>
-            <p className="text-sm text-[#94A3B8] leading-relaxed">
-              Diskusi awal untuk memetakan kendala nyata operasional bisnis atau skripsi Anda sebelum ada komitmen finansial apa pun.
-            </p>
-          </div>
-
-          <div className="p-7 rounded-3xl border border-[#2E323B] bg-[#1C1E24] hover:border-emerald-500/40 shadow-md transition-all">
-            <div className="w-10 h-10 rounded-xl bg-[#242730] border border-[#2E323B] text-emerald-400 flex items-center justify-center mb-4">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <h3 className="text-lg font-bold text-white mb-2 font-[var(--font-display)]">
-              Fixed-Scope Agreement
-            </h3>
-            <p className="text-sm text-[#94A3B8] leading-relaxed">
-              Spesifikasi modul, daftar fitur, dan tanggal selesai dikunci secara transparan dalam dokumen kesepakatan tertulis.
-            </p>
-          </div>
-
-          <div className="p-7 rounded-3xl border border-[#2E323B] bg-[#1C1E24] hover:border-[#F9B637]/40 shadow-md transition-all">
-            <div className="w-10 h-10 rounded-xl bg-[#242730] border border-[#2E323B] text-[#F9B637] flex items-center justify-center mb-4">
-              <Layers className="w-5 h-5" />
-            </div>
-            <h3 className="text-lg font-bold text-white mb-2 font-[var(--font-display)]">
-              Protokol Change Request
-            </h3>
-            <p className="text-sm text-[#94A3B8] leading-relaxed">
-              Jika ada ide penambahan fitur di tengah jalan, kami hitung estimasi terpisah tanpa mengganggu tenggat rilis modul utama.
-            </p>
-          </div>
+          ))}
         </div>
 
-        {/* 3-Milestone Payment Scheme for UMKM */}
-        <div className="rounded-[32px] sm:rounded-[40px] border border-[#2E323B] bg-[#1C1E24] p-6 sm:p-10 lg:p-12 shadow-lg mb-10">
-          <div className="max-w-2xl mx-auto text-center mb-10">
-            <span className="text-xs font-mono uppercase tracking-wider text-[#FB6C00] font-bold">
-              SKEMA PEMBAYARAN BERTARAF 3 TERMIN UMKM
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-2 font-[var(--font-display)]">
-              Pembayaran mengikuti progres yang terbukti berjalan.
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            {/* Step 1 */}
-            <div className="rounded-2xl border border-[#2E323B] bg-[#17181C] p-6 flex flex-col justify-between shadow-sm">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="font-mono text-xs font-bold px-2.5 py-1 rounded bg-[#242730] text-[#CBD5E1] border border-[#2E323B]">
-                    TERMIN 01
-                  </span>
-                  <span className="text-xl font-extrabold text-[#FB6C00] font-[var(--font-display)]">50%</span>
-                </div>
-                <h4 className="text-base font-bold text-white mb-2">
-                  Uang Muka &amp; Kickoff Proyek
-                </h4>
-                <p className="text-xs text-[#94A3B8] leading-relaxed mb-4">
-                  Dibayarkan setelah dokumen lingkup kerja disepakati bersama.
-                </p>
-                <div className="space-y-2 text-xs text-[#CBD5E1]">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Perancangan arsitektur database</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Setup repositori kode &amp; server dev</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Penyusunan desain antarmuka sistem</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="rounded-2xl border border-[#2E323B] bg-[#17181C] p-6 flex flex-col justify-between shadow-sm">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="font-mono text-xs font-bold px-2.5 py-1 rounded bg-[#242730] text-[#CBD5E1] border border-[#2E323B]">
-                    TERMIN 02
-                  </span>
-                  <span className="text-xl font-extrabold text-[#FB6C00] font-[var(--font-display)]">30%</span>
-                </div>
-                <h4 className="text-base font-bold text-white mb-2">
-                  Staging Demo &amp; Uji Coba Klien
-                </h4>
-                <p className="text-xs text-[#94A3B8] leading-relaxed mb-4">
-                  Dibayarkan setelah seluruh modul inti selesai dan dapat dicoba langsung di server staging.
-                </p>
-                <div className="space-y-2 text-xs text-[#CBD5E1]">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Link staging demo aktif untuk dicoba</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Uji alur transaksi kasir / booking</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Sesi revisi penyempurnaan alur kerja</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="rounded-2xl border border-[#2E323B] bg-[#17181C] p-6 flex flex-col justify-between shadow-sm">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="font-mono text-xs font-bold px-2.5 py-1 rounded bg-[#242730] text-[#CBD5E1] border border-[#2E323B]">
-                    TERMIN 03
-                  </span>
-                  <span className="text-xl font-extrabold text-[#FB6C00] font-[var(--font-display)]">20%</span>
-                </div>
-                <h4 className="text-base font-bold text-white mb-2">
-                  Pelunasan, Handover &amp; Garansi
-                </h4>
-                <p className="text-xs text-[#94A3B8] leading-relaxed mb-4">
-                  Dibayarkan saat serah terima penuh, sistem live, dan garansi bug 30 hari aktif.
-                </p>
-                <div className="space-y-2 text-xs text-[#CBD5E1]">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Handover full source code repositori Git</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Pelatihan staf / tim hingga lancar</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Garansi perbaikan bug aktif 30 hari</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        {/* Mentoring IT Model Note + Forward Bridge to Estimator */}
-        <div className="rounded-2xl bg-[#1C1E24] border border-[#2E323B] p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-[#242730] border border-[#2E323B] text-white flex items-center justify-center shrink-0 mt-0.5">
-              <GraduationCap className="w-5 h-5 text-[#F9B637]" />
-            </div>
+        {/* Milestone Timeline Showcase: 3 Termin Pipeline */}
+        <div className="rounded-3xl bg-[#FAFAFA] border border-neutral-200 p-8 sm:p-12 lg:p-14">
+          <div className="border-b border-neutral-200 pb-6 mb-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#94A3B8] mb-1">
-                SKEMA MENTORING IT MAHASISWA
-              </div>
-              <h4 className="text-base font-bold text-white mb-1">
-                Transparan per sesi atau paket bimbingan sebelum jadwal dimulai
-              </h4>
-              <p className="text-xs sm:text-sm text-[#94A3B8] max-w-2xl leading-relaxed">
-                Biaya dihitung per jam (mulai Rp 150rb) atau per paket terarah tanpa tagihan berulang. Sudah mencakup video rekaman sesi privat dan garansi tanya jawab lanjutan.
-              </p>
+              <span className="font-mono text-xs font-bold text-[#FB6C00] tracking-wider uppercase">
+                ALUR PEMBAYARAN PROYEK PENGEMBANGAN
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0A0A0A] font-[var(--font-display)] mt-1">
+                Protokol Termin 50 - 30 - 20 Berbasis Milestone
+              </h3>
+            </div>
+            <div className="font-mono text-xs px-3 py-1.5 rounded-full bg-white border border-neutral-200 text-neutral-700 shrink-0 self-start sm:self-auto">
+              PEMBAYARAN DICAIRKAN HANYA SETELAH BUKTI VERIFIKASI
             </div>
           </div>
 
-          <a
-            href="#kalkulator-estimasi"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-[#FB6C00] to-[#E73F1E] text-[#121316] font-bold text-xs sm:text-sm shadow-glow-warm hover:brightness-110 transition-all shrink-0 w-full md:w-auto"
-          >
-            <Calculator className="w-4 h-4 text-[#121316]" />
-            <span>Simulasikan di Kalkulator</span>
-            <ArrowRight className="w-4 h-4 text-[#121316]" />
-          </a>
+          {/* 3 Step Pipeline Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
+            {milestones.map((ms) => (
+              <div
+                key={ms.step}
+                className="rounded-2xl bg-white border border-neutral-200 p-6 sm:p-8 flex flex-col justify-between relative shadow-xs"
+              >
+                <div>
+                  <div className="flex items-center justify-between border-b border-neutral-100 pb-4 mb-5">
+                    <span className="font-mono text-xs font-bold text-neutral-500">
+                      {ms.step}
+                    </span>
+                    <span className="text-2xl font-extrabold text-[#FB6C00] font-[var(--font-display)]">
+                      {ms.pct}
+                    </span>
+                  </div>
+
+                  <h4 className="text-lg font-bold text-[#0A0A0A] font-[var(--font-display)] mb-2">
+                    {ms.title}
+                  </h4>
+                  <p className="text-xs text-neutral-600 leading-relaxed mb-6">
+                    {ms.desc}
+                  </p>
+
+                  <div className="space-y-2 pt-4 border-t border-neutral-100">
+                    <div className="text-[10px] font-mono font-bold text-neutral-400 uppercase tracking-wider mb-2">
+                      CHECKPOINT PENCAIRAN:
+                    </div>
+                    {ms.checklist.map((check, cIdx) => (
+                      <div key={cIdx} className="flex items-start gap-2 text-xs text-neutral-700">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#FB6C00] shrink-0 mt-0.5" />
+                        <span>{check}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom Clarification for Mentoring */}
+          <div className="mt-8 pt-6 border-t border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500 font-mono">
+            <span>
+              * Catatan untuk Mentoring Mahasiswa IT: Pembayaran dilakukan per sesi atau per paket bimbingan sebelum jadwal mentoring dimulai.
+            </span>
+            <span className="text-neutral-900 font-bold shrink-0">
+              100% REFUND JIKA SESI BATAL DARI PIHAK MENTOR
+            </span>
+          </div>
         </div>
 
       </div>
