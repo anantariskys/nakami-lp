@@ -1,133 +1,107 @@
 import type { Metadata, Viewport } from "next";
-import { Montserrat, Inter, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
+import { SITE } from "@/lib/site";
 import "./globals.css";
 
-const montserrat = Montserrat({
+const display = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-montserrat",
+  variable: "--font-bricolage",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
 });
 
-const inter = Inter({
+const sans = Geist({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-geist",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const mono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
+  variable: "--font-geist-mono",
   display: "swap",
-  weight: ["400", "500", "700"],
 });
 
 export const viewport: Viewport = {
-  themeColor: "#FFFFFF",
+  themeColor: "#111214",
   colorScheme: "light",
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nakamistudio.com"),
+  metadataBase: new URL(SITE.url),
   title: {
-    default: "Nakami Studio | Solusi Web Bisnis & Mentoring Coding 1-on-1",
-    template: "%s | Nakami Studio",
+    default: SITE.title,
+    template: `%s | ${SITE.name}`,
   },
-  description:
-    "Solusi website dan aplikasi kasir untuk UMKM, serta live mentoring coding 1-on-1 etis untuk mahasiswa IT.",
-  applicationName: "Nakami Studio",
-  authors: [{ name: "Nanta & Kamilia", url: "https://nakamistudio.com" }],
-  generator: "Next.js 16",
+  description: SITE.description,
+  applicationName: SITE.name,
   keywords: [
-    "jasa pembuatan website umkm",
-    "software kasir kustom",
-    "otomasi sistem bisnis",
-    "aplikasi web custom indonesia",
-    "mentoring coding 1 on 1",
-    "bimbingan arsitektur software",
-    "belajar debugging pemula",
-    "bimbingan kode tugas akhir etis",
-    "code review 1 on 1",
+    "jasa pembuatan aplikasi",
+    "software house indonesia",
+    "jasa pembuatan aplikasi web",
+    "jasa pembuatan aplikasi android",
+    "aplikasi kasir custom",
+    "sistem informasi bisnis",
+    "jasa pembuatan sistem erp",
+    "aplikasi booking online",
+    "integrasi api",
     "nakami studio",
   ],
-  referrer: "origin-when-cross-origin",
-  creator: "Nakami Studio",
-  publisher: "Nakami Studio",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  alternates: {
-    canonical: "/",
-  },
+  authors: [{ name: SITE.name, url: SITE.url }],
+  creator: SITE.name,
+  publisher: SITE.name,
+  category: "technology",
+  formatDetection: { email: false, address: false, telephone: false },
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Nakami Studio | Solusi Web Bisnis & Mentoring Coding 1-on-1",
-    description:
-      "Layanan web kustom dan software kasir untuk bisnis, serta mentoring coding 1-on-1 etis tanpa joki.",
-    url: "https://nakamistudio.com",
-    siteName: "Nakami Studio",
-    locale: "id_ID",
     type: "website",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Nakami Studio | Solusi Web Bisnis & Mentoring Coding 1-on-1",
-        type: "image/png",
-      },
-    ],
+    url: SITE.url,
+    siteName: SITE.name,
+    locale: SITE.locale,
+    title: SITE.title,
+    description: SITE.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nakami Studio | Solusi Web Bisnis & Mentoring Coding 1-on-1",
-    description:
-      "Layanan web kustom dan software kasir untuk bisnis, serta mentoring coding 1-on-1 etis tanpa joki.",
-    creator: "@nakamistudio",
-    site: "@nakamistudio",
-    images: ["/og-image.png"],
+    title: SITE.title,
+    description: SITE.description,
   },
   robots: {
     index: true,
     follow: true,
-    nocache: false,
     googleBot: {
       index: true,
       follow: true,
-      noimageindex: false,
-      "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
   icons: {
     icon: [
-      { url: "/favicon.ico" },
+      { url: "/favicon.ico", sizes: "any" },
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/icon.svg", type: "image/svg+xml" },
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
-  manifest: "/site.webmanifest",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+// Runs before first paint: lets CSS hide animated elements only when JS is on,
+// so crawlers and no-JS visitors always get fully visible content.
+const JS_FLAG = `document.documentElement.classList.add("js")`;
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="id"
-      className={`${montserrat.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth antialiased`}
+      suppressHydrationWarning
+      className={`${display.variable} ${sans.variable} ${mono.variable} antialiased`}
     >
-      <body className="min-h-screen bg-white text-[#0A0A0A] font-sans selection:bg-[#FB6C00] selection:text-white">
+      <body>
+        <Script id="js-flag" strategy="beforeInteractive">
+          {JS_FLAG}
+        </Script>
         {children}
       </body>
     </html>
