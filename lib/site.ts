@@ -6,7 +6,7 @@ export const SITE = {
   description:
     "Jasa pembuatan aplikasi untuk bisnis: kasir & stok, booking online, aplikasi HP, dan aplikasi kantor yang dibuat sesuai cara kerja Anda. Harga disepakati di awal, aplikasinya milik Anda, perbaikan gratis 30 hari.",
   email: "nakamistudio.id@gmail.com",
-  whatsapp: "6281234567890",
+  whatsapp: "6285608675771",
   instagram: "https://instagram.com/nakamistudio",
   github: "https://github.com/nakamistudio",
 } as const;

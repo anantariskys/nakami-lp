@@ -1,4 +1,4 @@
-export const WHATSAPP_NUMBER = "6281234567890";
+export const WHATSAPP_NUMBER = "6285608675771";
 export const OFFICIAL_EMAIL = "nakamistudio.id@gmail.com";
 export const INSTAGRAM_HANDLE = "@nakamistudio";
 export const INSTAGRAM_URL = "https://instagram.com/nakamistudio";

@@ -15,7 +15,7 @@ export function JsonLd() {
         description:
           "Solusi pembuatan website bisnis, software kasir kustom UMKM, dan live mentoring coding 1-on-1 etis tanpa joki.",
         email: "nakamistudio.id@gmail.com",
-        telephone: "+6281234567890",
+        telephone: "+6285608675771",
         priceRange: "Rp 150.000 - Rp 15.000.000",
         address: {
           "@type": "PostalAddress",
