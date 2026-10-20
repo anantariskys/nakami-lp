@@ -3,6 +3,7 @@
 import { useRef, useState, type FormEvent } from "react";
 import { ArrowUpRight, Check } from "lucide-react";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
+import { afterIdle } from "@/lib/idle";
 import { BRIEF_BUDGETS, BRIEF_NEEDS } from "@/lib/content";
 import { SITE, whatsappUrl } from "@/lib/site";
 import { cn } from "@/lib/cn";
@@ -18,17 +19,24 @@ export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
 
   useGSAP(
-    () => {
-      gsap.matchMedia().add(MOTION_OK, () => {
-        // Logo assembles itself as the section scrolls in.
-        const tl = gsap.timeline({
-          scrollTrigger: { trigger: root.current, start: "top 70%", end: "top 10%", scrub: 1 },
-        });
-        tl.from('[data-logo-part="left"]', { yPercent: 40, autoAlpha: 0 }, 0)
-          .from('[data-logo-part="right"]', { yPercent: -40, autoAlpha: 0 }, 0)
-          .from('[data-logo-part="band"]', { scale: 0.6, rotate: -12, autoAlpha: 0, transformOrigin: "50% 50%" }, 0.1);
-      });
-    },
+    (_, contextSafe) =>
+      afterIdle(
+        contextSafe!(() => {
+          gsap.matchMedia().add(MOTION_OK, () => {
+            // Logo assembles itself as the section scrolls in.
+            const tl = gsap.timeline({
+              scrollTrigger: { trigger: root.current, start: "top 70%", end: "top 10%", scrub: 1 },
+            });
+            tl.from('[data-logo-part="left"]', { yPercent: 40, autoAlpha: 0 }, 0)
+              .from('[data-logo-part="right"]', { yPercent: -40, autoAlpha: 0 }, 0)
+              .from(
+                '[data-logo-part="band"]',
+                { scale: 0.6, rotate: -12, autoAlpha: 0, transformOrigin: "50% 50%" },
+                0.1,
+              );
+          });
+        }),
+      ),
     { scope: root },
   );
 
@@ -45,14 +53,14 @@ export function Contact() {
     }
     const data = new FormData(form);
     const message = [
-      "Halo Nakami Studio, saya ingin mendiskusikan proyek.",
+      "Halo Nakami Studio, saya ingin konsultasi soal aplikasi untuk usaha saya.",
       "",
       `Nama: ${data.get("name")}`,
       data.get("company") ? `Bisnis: ${data.get("company")}` : null,
       needs.length ? `Kebutuhan: ${needs.join(", ")}` : null,
-      `Perkiraan anggaran: ${budget}`,
+      `Perkiraan dana: ${budget}`,
       "",
-      `Cerita singkat: ${data.get("message")}`,
+      `Kendala: ${data.get("message")}`,
     ]
       .filter((line) => line !== null)
       .join("\n");
@@ -68,23 +76,26 @@ export function Contact() {
       aria-labelledby="kontak-title"
       className="grain relative isolate overflow-hidden bg-night py-28 text-paper md:py-40"
     >
-      <div aria-hidden className="pointer-events-none absolute -right-40 top-10 -z-10 size-[40rem] rounded-full bg-orange/20 blur-[140px]" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-60 -top-20 -z-10 size-[56rem] bg-[radial-gradient(closest-side,rgba(251,108,0,0.2),transparent)]"
+      />
 
       <div className="container-x grid gap-16 lg:grid-cols-[1fr_minmax(0,34rem)] lg:gap-20">
         <div className="flex flex-col">
           <SectionLabel index="06" tone="dark">
-            Mulai proyek
+            Mulai dari obrolan
           </SectionLabel>
           <h2
             id="kontak-title"
             data-split
             className="mt-6 max-w-[14ch] font-display text-[clamp(2.5rem,6vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.045em]"
           >
-            Ceritakan masalahnya. Kami rancang sistemnya.
+            Ceritakan kendalanya. Kami carikan jalan keluarnya.
           </h2>
           <p data-reveal className="mt-8 max-w-md text-lg leading-relaxed text-white/60">
-            Isi ringkasan singkat di samping, lalu lanjutkan percakapan di WhatsApp. Kami membalas di jam
-            kerja.
+            Tidak perlu istilah teknis. Ceritakan saja dengan bahasa Anda sendiri, lalu kita lanjutkan obrolannya di
+            WhatsApp.
           </p>
 
           <div className="mt-auto hidden pt-16 lg:block" aria-hidden>
@@ -93,7 +104,7 @@ export function Contact() {
 
           <dl data-reveal className="mt-12 grid gap-6 border-t border-white/10 pt-8 sm:grid-cols-2 lg:mt-12">
             <div>
-              <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/40">Email</dt>
+              <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/55">Email</dt>
               <dd className="mt-2">
                 <a href={`mailto:${SITE.email}`} className="text-white/85 transition-colors hover:text-orange">
                   {SITE.email}
@@ -101,7 +112,7 @@ export function Contact() {
               </dd>
             </div>
             <div>
-              <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/40">Jam kerja</dt>
+              <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/55">Jam kerja</dt>
               <dd className="mt-2 text-white/85">Senin–Sabtu, 09.00–21.00 WIB</dd>
             </div>
           </dl>
@@ -115,7 +126,7 @@ export function Contact() {
           aria-describedby="brief-hint"
         >
           <fieldset>
-            <legend className="text-sm font-medium">Apa yang ingin Anda bangun?</legend>
+            <legend className="text-sm font-medium">Apa yang Anda butuhkan? (boleh pilih lebih dari satu)</legend>
             <div className="mt-3 flex flex-wrap gap-2">
               {BRIEF_NEEDS.map((need) => {
                 const checked = needs.includes(need);
@@ -139,7 +150,7 @@ export function Contact() {
           </fieldset>
 
           <fieldset className="mt-7">
-            <legend className="text-sm font-medium">Perkiraan anggaran</legend>
+            <legend className="text-sm font-medium">Perkiraan dana</legend>
             <div className="mt-3 grid grid-cols-2 gap-1 rounded-2xl bg-paper-3 p-1 sm:grid-cols-5">
               {BRIEF_BUDGETS.map((b) => (
                 <label
@@ -149,7 +160,14 @@ export function Contact() {
                     budget === b ? "bg-paper font-medium text-ink shadow-sm" : "text-muted hover:text-ink",
                   )}
                 >
-                  <input type="radio" name="budget" value={b} className="sr-only" checked={budget === b} onChange={() => setBudget(b)} />
+                  <input
+                    type="radio"
+                    name="budget"
+                    value={b}
+                    className="sr-only"
+                    checked={budget === b}
+                    onChange={() => setBudget(b)}
+                  />
                   {b}
                 </label>
               ))}
@@ -161,15 +179,15 @@ export function Contact() {
             <Field label="Nama bisnis" name="company" autoComplete="organization" optional />
           </div>
           <div className="mt-4">
-            <Field label="Cerita singkat kebutuhan Anda" name="message" textarea required />
+            <Field label="Ceritakan kendala yang ingin dibenahi" name="message" textarea required />
           </div>
 
           <p id="brief-hint" className={cn("mt-4 text-xs", status === "error" ? "text-crimson" : "text-faint")}>
             {status === "error"
-              ? "Mohon isi nama dan cerita singkat terlebih dahulu."
+              ? "Mohon isi nama dan ceritakan sedikit kendalanya dulu."
               : status === "sent"
                 ? "Pesan sudah disiapkan di WhatsApp. Tinggal tekan kirim."
-                : "Formulir ini tidak menyimpan data apa pun. Ringkasan akan dibuka di WhatsApp."}
+                : "Data Anda tidak kami simpan di sini. Pesan akan terbuka di WhatsApp, tinggal tekan kirim."}
           </p>
 
           <button
@@ -180,9 +198,12 @@ export function Contact() {
               aria-hidden
               className="absolute inset-0 origin-left scale-x-0 bg-sunset transition-transform duration-700 ease-out-expo group-hover/submit:scale-x-100"
             />
-            <span className="relative">Kirim ringkasan via WhatsApp</span>
+            <span className="relative">Lanjutkan di WhatsApp</span>
             <span className="relative grid size-10 place-items-center rounded-full bg-orange transition-colors duration-500 group-hover/submit:bg-ink">
-              <ArrowUpRight className="size-4 transition-transform duration-500 ease-out-expo group-hover/submit:rotate-45" aria-hidden />
+              <ArrowUpRight
+                className="size-4 transition-transform duration-500 ease-out-expo group-hover/submit:rotate-45"
+                aria-hidden
+              />
             </span>
           </button>
         </form>
@@ -208,7 +229,14 @@ function Field({ label, name, autoComplete, required, optional, textarea }: Fiel
       {textarea ? (
         <textarea name={name} required={required} rows={4} placeholder={label} className={cn(shared, "resize-none")} />
       ) : (
-        <input name={name} type="text" required={required} autoComplete={autoComplete} placeholder={label} className={shared} />
+        <input
+          name={name}
+          type="text"
+          required={required}
+          autoComplete={autoComplete}
+          placeholder={label}
+          className={shared}
+        />
       )}
       <span className="pointer-events-none absolute left-4 top-4 origin-left text-[0.95rem] text-faint transition-all duration-300 ease-out-expo peer-focus:top-2 peer-focus:text-[11px] peer-focus:text-orange peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-[11px]">
         {label}

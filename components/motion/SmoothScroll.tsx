@@ -13,7 +13,10 @@ declare global {
 /** Lenis smooth scrolling driven by GSAP's ticker so ScrollTrigger stays in sync. */
 export function SmoothScroll() {
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    ScrollTrigger.config({ ignoreMobileResize: true });
+    // Touch devices already have native momentum scrolling.
+    const wanted = window.matchMedia("(prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine)");
+    if (!wanted.matches) return;
 
     const lenis = new Lenis({ lerp: 0.11, anchors: { offset: -72 } });
     window.__lenis = lenis;

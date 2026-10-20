@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
@@ -37,14 +36,14 @@ export const metadata: Metadata = {
   applicationName: SITE.name,
   keywords: [
     "jasa pembuatan aplikasi",
-    "software house indonesia",
-    "jasa pembuatan aplikasi web",
+    "jasa pembuatan aplikasi bisnis",
     "jasa pembuatan aplikasi android",
-    "aplikasi kasir custom",
-    "sistem informasi bisnis",
-    "jasa pembuatan sistem erp",
+    "jasa pembuatan website usaha",
+    "aplikasi kasir untuk toko",
+    "aplikasi stok barang",
     "aplikasi booking online",
-    "integrasi api",
+    "aplikasi untuk umkm",
+    "software house indonesia",
     "nakami studio",
   ],
   authors: [{ name: SITE.name, url: SITE.url }],
@@ -87,23 +86,10 @@ export const metadata: Metadata = {
   },
 };
 
-// Runs before first paint: lets CSS hide animated elements only when JS is on,
-// so crawlers and no-JS visitors always get fully visible content.
-const JS_FLAG = `document.documentElement.classList.add("js")`;
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="id"
-      suppressHydrationWarning
-      className={`${display.variable} ${sans.variable} ${mono.variable} antialiased`}
-    >
-      <body>
-        <Script id="js-flag" strategy="beforeInteractive">
-          {JS_FLAG}
-        </Script>
-        {children}
-      </body>
+    <html lang="id" className={`${display.variable} ${sans.variable} ${mono.variable} antialiased`}>
+      <body>{children}</body>
     </html>
   );
 }

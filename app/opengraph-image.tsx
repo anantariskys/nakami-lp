@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const alt = "Nakami Studio — Jasa pembuatan aplikasi & sistem kustom";
+export const alt = "Nakami Studio — Jasa pembuatan aplikasi untuk bisnis";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -34,10 +34,10 @@ export default async function OpengraphImage() {
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 76, fontWeight: 700, lineHeight: 1.02, letterSpacing: -3, maxWidth: 900 }}>
-            Kami membangun aplikasi yang menjalankan bisnis Anda.
+            Kami buatkan aplikasi yang meringankan kerja bisnis Anda.
           </div>
           <div style={{ marginTop: 28, fontSize: 26, color: "rgba(255,255,255,0.6)" }}>
-            Aplikasi web · Mobile · Sistem internal · Integrasi
+            Kasir & stok · Booking online · Aplikasi HP · Aplikasi kantor
           </div>
         </div>
       </div>

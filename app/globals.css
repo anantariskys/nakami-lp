@@ -14,11 +14,14 @@
   --color-line: #e5e5e5;
   --color-line-strong: #d4d4d4;
   --color-muted: #525252;
-  --color-faint: #a3a3a3;
+  /* #737373 keeps small helper text at WCAG AA (4.7:1) on white */
+  --color-faint: #737373;
 
   /* Brand — warm tech */
   --color-crimson: #e73f1e;
   --color-orange: #fb6c00;
+  /* Darker step of the brand orange for small text on light backgrounds (AA) */
+  --color-orange-ink: #c2410c;
   --color-amber: #f9b637;
   --color-peach: #ffdd9c;
   --color-success: #10b981;
@@ -39,6 +42,42 @@
   }
 }
 
+/*
+ * Hero entrance: pure CSS, and never fully hidden. First-paint metrics (FCP /
+ * LCP) only count text that is visible in the first main-thread paint, so the
+ * words start half-revealed and the copy only slides, without fading.
+ */
+@keyframes word-rise {
+  from {
+    transform: translate3d(0, 55%, 0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translate3d(0, 24px, 0);
+  }
+}
+
+@keyframes drop-in {
+  from {
+    transform: translate3d(0, -120%, 0);
+  }
+}
+
+/* `backwards` (not `both`): once finished, GSAP owns these transforms again. */
+.hero-word {
+  animation: word-rise 1.2s var(--ease-out-expo) backwards;
+}
+
+.hero-fade {
+  animation: slide-up 1.4s var(--ease-out-expo) 0.15s backwards;
+}
+
+.nav-drop {
+  animation: drop-in 1.2s var(--ease-out-expo) 0.5s backwards;
+}
+
 @keyframes dash {
   to {
     stroke-dashoffset: -20;
@@ -50,7 +89,6 @@
     background-color: var(--color-paper);
     color: var(--color-ink);
     -webkit-text-size-adjust: 100%;
-    text-rendering: optimizeLegibility;
   }
 
   body {
@@ -104,8 +142,7 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.07;
-    mix-blend-mode: overlay;
+    opacity: 0.035;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
@@ -136,23 +173,7 @@
   }
 }
 
-/*
- * Pre-hydration hiding for GSAP-driven reveals. The `js` class is set by an
- * inline script in <head>, so no-JS visitors and crawlers always see content.
- */
-.js [data-reveal],
-.js [data-split],
-.js [data-hero] {
-  visibility: hidden;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .js [data-reveal],
-  .js [data-split],
-  .js [data-hero] {
-    visibility: visible;
-  }
-
   *,
   ::before,
   ::after {

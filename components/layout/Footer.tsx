@@ -33,13 +33,13 @@ export function Footer() {
             <span className="font-display text-lg font-semibold tracking-tight">{SITE.name}</span>
           </div>
           <p className="mt-5 text-sm leading-relaxed text-white/50">
-            Jasa pembuatan aplikasi web, mobile, dan sistem kustom untuk bisnis di Indonesia.
+            Jasa pembuatan aplikasi untuk bisnis di Indonesia, dibuat sesuai cara kerja Anda.
           </p>
         </div>
 
         {columns.map((col) => (
           <nav key={col.title} aria-label={col.title}>
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/35">{col.title}</p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/55">{col.title}</p>
             <ul className="mt-5 space-y-3">
               {col.links.map((link) => {
                 const external = link.href.startsWith("http");
@@ -61,7 +61,7 @@ export function Footer() {
         ))}
       </div>
 
-      <div className="container-x mt-20 flex flex-col gap-3 border-t border-white/10 py-6 text-xs text-white/40 sm:flex-row sm:justify-between">
+      <div className="container-x mt-20 flex flex-col gap-3 border-t border-white/10 py-6 text-xs text-white/55 sm:flex-row sm:justify-between">
         <p>
           © <CurrentYear /> {SITE.name}. Seluruh hak dilindungi.
         </p>

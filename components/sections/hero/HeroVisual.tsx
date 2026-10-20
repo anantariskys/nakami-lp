@@ -10,14 +10,14 @@ const SIDEBAR = [
 ];
 
 const KPIS = [
-  { label: "Omzet hari ini", value: "12,4", unit: "jt", delta: "+18%" },
+  { label: "Penjualan hari ini", value: "12,4", unit: "jt", delta: "+18%" },
   { label: "Pesanan", value: "248", unit: "", delta: "+32" },
-  { label: "Stok kritis", value: "6", unit: "item", delta: "3 outlet" },
+  { label: "Stok hampir habis", value: "6", unit: "barang", delta: "3 cabang" },
 ];
 
 const ORDERS = [
-  { id: "#1042", outlet: "Outlet Dinoyo", total: "Rp 186.000", status: "Lunas" },
-  { id: "#1041", outlet: "Outlet Sudirman", total: "Rp 92.500", status: "Diproses" },
+  { id: "#1042", outlet: "Cabang Dinoyo", total: "Rp 186.000", status: "Lunas" },
+  { id: "#1041", outlet: "Cabang Sudirman", total: "Rp 92.500", status: "Diproses" },
   { id: "#1040", outlet: "Online", total: "Rp 1.240.000", status: "Lunas" },
 ];
 
@@ -84,7 +84,7 @@ export function HeroVisual() {
               <div className="mb-2 flex items-center justify-between text-[10px] text-white/45 md:text-[11px]">
                 <span>Penjualan 7 hari</span>
                 <span className="flex items-center gap-1.5">
-                  <span className="size-1.5 rounded-full bg-orange" /> Semua outlet
+                  <span className="size-1.5 rounded-full bg-orange" /> Semua cabang
                 </span>
               </div>
               <svg viewBox="0 0 560 100" className="h-20 w-full md:h-28" preserveAspectRatio="none" aria-hidden>
@@ -137,13 +137,13 @@ export function HeroVisual() {
 
       {/* Floating: new order notification */}
       <div data-hv="float" data-depth="1.4" className="absolute -left-4 top-[18%] hidden md:block lg:-left-16">
-        <div className="flex w-64 items-start gap-3 rounded-2xl bg-paper/95 p-3.5 text-ink shadow-[0_24px_60px_-20px_rgba(0,0,0,0.5)] backdrop-blur">
+        <div className="flex w-64 items-start gap-3 rounded-2xl bg-paper p-3.5 text-ink shadow-[0_24px_60px_-20px_rgba(0,0,0,0.5)]">
           <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-orange/10 text-orange">
             <Bell className="size-4" />
           </span>
           <div className="min-w-0">
             <p className="text-xs font-semibold">Pesanan baru #1043</p>
-            <p className="mt-0.5 text-[11px] text-muted">Outlet Dinoyo · Rp 214.000</p>
+            <p className="mt-0.5 text-[11px] text-muted">Cabang Dinoyo · Rp 214.000</p>
           </div>
           <span className="ml-auto text-[10px] text-faint">baru</span>
         </div>
@@ -151,11 +151,11 @@ export function HeroVisual() {
 
       {/* Floating: stock sync */}
       <div data-hv="float" data-depth="0.8" className="absolute -bottom-6 left-[8%] md:-bottom-8">
-        <div className="w-56 rounded-2xl bg-night-3/95 p-3.5 text-paper shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] ring-1 ring-white/10 backdrop-blur md:w-64">
+        <div className="w-56 rounded-2xl bg-night-3 p-3.5 text-paper shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] ring-1 ring-white/10 md:w-64">
           <div className="flex items-center gap-2 text-xs">
             <CircleCheck className="size-4 text-success" />
-            <span className="font-medium">Stok tersinkron</span>
-            <span className="ml-auto font-mono text-[10px] text-white/40">3 outlet</span>
+            <span className="font-medium">Stok semua cabang cocok</span>
+            <span className="ml-auto font-mono text-[10px] text-white/40">3 cabang</span>
           </div>
           <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10">
             <div data-hv="sync" className="h-full w-full origin-left rounded-full bg-sunset" />
@@ -171,7 +171,7 @@ export function HeroVisual() {
             <p className="flex items-center gap-1.5 text-[11px] font-semibold">
               <CalendarCheck className="size-3.5 text-orange" /> Pilih jadwal
             </p>
-            <p className="text-[10px] text-muted">Kamis, 24 Okt</p>
+            <p className="text-[10px] text-muted">Sabtu, 24 Okt</p>
             <div className="mt-2.5 grid grid-cols-3 gap-1.5">
               {["09:00", "10:30", "13:00", "14:30", "16:00", "19:00"].map((t, i) => (
                 <span

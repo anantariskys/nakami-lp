@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
-import { gsap, ScrollTrigger, useGSAP, MOTION_OK } from "@/lib/gsap";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { afterIdle } from "@/lib/idle";
 import { NAV_LINKS } from "@/lib/content";
 import { DEFAULT_WA_MESSAGE, SITE, whatsappUrl } from "@/lib/site";
 import { cn } from "@/lib/cn";
@@ -19,35 +20,37 @@ export function Navbar() {
 
   // Hide on scroll down, reveal on scroll up; track the section in view.
   useGSAP(
-    () => {
+    (_, contextSafe) => {
       const bar = root.current!;
-      const show = gsap.quickTo(bar, "yPercent", { duration: 0.5, ease: "power3.out" });
 
-      ScrollTrigger.create({
-        start: 0,
-        end: "max",
-        onUpdate: (self) => {
-          if (self.scroll() < 120) show(0);
-          else show(self.direction === 1 ? -130 : 0);
-        },
-      });
+      // Scroll tracking isn't needed for first paint; set it up when idle.
+      return afterIdle(
+        contextSafe!(() => {
+          const show = gsap.quickTo(bar, "yPercent", { duration: 0.5, ease: "power3.out" });
 
-      NAV_LINKS.forEach(({ href }) => {
-        const section = document.querySelector(href);
-        if (!section) return;
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top 45%",
-          end: "bottom 45%",
-          refreshPriority: -1, // measure after the pinned process section
-          onToggle: (self) => self.isActive && setActive(href),
-          onLeaveBack: () => href === NAV_LINKS[0].href && setActive(null),
-        });
-      });
+          ScrollTrigger.create({
+            start: 0,
+            end: "max",
+            onUpdate: (self) => {
+              if (self.scroll() < 120) show(0);
+              else show(self.direction === 1 ? -130 : 0);
+            },
+          });
 
-      gsap.matchMedia().add(MOTION_OK, () => {
-        gsap.from(bar, { yPercent: -120, duration: 1.2, delay: 0.9 });
-      });
+          NAV_LINKS.forEach(({ href }) => {
+            const section = document.querySelector(href);
+            if (!section) return;
+            ScrollTrigger.create({
+              trigger: section,
+              start: "top 45%",
+              end: "bottom 45%",
+              refreshPriority: -1, // measure after the pinned process section
+              onToggle: (self) => self.isActive && setActive(href),
+              onLeaveBack: () => href === NAV_LINKS[0].href && setActive(null),
+            });
+          });
+        }),
+      );
     },
     { scope: root },
   );
@@ -114,16 +117,13 @@ export function Navbar() {
 
   return (
     <>
-      <header
-        ref={root}
-        className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-5 md:pt-4"
-      >
+      <header ref={root} className="nav-drop fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-5 md:pt-4">
         <nav
           aria-label="Navigasi utama"
           className={cn(
             "mx-auto flex h-14 max-w-6xl items-center justify-between rounded-full pl-4 pr-2 transition-[background-color,box-shadow,backdrop-filter] duration-500",
             scrolled || open
-              ? "bg-night/80 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.5)] ring-1 ring-white/10 backdrop-blur-xl"
+              ? "bg-night/90 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.5)] ring-1 ring-white/10 backdrop-blur-md"
               : "bg-transparent",
           )}
         >
@@ -133,7 +133,10 @@ export function Navbar() {
             className="group flex items-center gap-2.5 text-paper"
             aria-label={`${SITE.name} — kembali ke atas`}
           >
-            <LogoMark id="nav-logo" className="h-7 w-auto transition-transform duration-500 ease-out-expo group-hover:-rotate-6 group-hover:scale-110" />
+            <LogoMark
+              id="nav-logo"
+              className="h-7 w-auto transition-transform duration-500 ease-out-expo group-hover:-rotate-6 group-hover:scale-110"
+            />
             <Wordmark />
           </a>
 
@@ -170,7 +173,7 @@ export function Navbar() {
           <div className="flex items-center gap-2">
             <div className="hidden sm:block">
               <MagneticButton href={whatsappUrl(DEFAULT_WA_MESSAGE)} variant="light">
-                Diskusikan proyek
+                Konsultasi gratis
               </MagneticButton>
             </div>
             <button
@@ -223,9 +226,9 @@ export function Navbar() {
         </ul>
         <div className="overflow-hidden">
           <div data-menu-item className="space-y-4">
-            <p className="text-sm text-white/50">Punya proyek dalam pikiran?</p>
+            <p className="text-sm text-white/50">Punya kendala yang ingin dibenahi?</p>
             <MagneticButton href={whatsappUrl(DEFAULT_WA_MESSAGE)} variant="light" size="lg">
-              Diskusikan via WhatsApp
+              Konsultasi gratis via WhatsApp
             </MagneticButton>
           </div>
         </div>

@@ -1,115 +1,163 @@
 export const NAV_LINKS = [
   { href: "#layanan", label: "Layanan" },
-  { href: "#proses", label: "Proses" },
-  { href: "#investasi", label: "Investasi" },
-  { href: "#faq", label: "FAQ" },
+  { href: "#proses", label: "Cara Kerja" },
+  { href: "#investasi", label: "Biaya" },
+  { href: "#faq", label: "Tanya Jawab" },
 ] as const;
-
-export type ServiceVisual = "web" | "mobile" | "pos" | "booking" | "erp" | "integration";
 
 export interface Service {
   id: string;
-  visual: ServiceVisual;
   title: string;
   summary: string;
   points: string[];
-  stack: string[];
+  /** Everyday examples, so non-technical readers can picture it. */
+  examples: string[];
+  /** Screenshot of a real mockup page, captured from /mockups/[id]. */
+  image: { src: string; alt: string; device: "desktop" | "phone" };
 }
 
 export const SERVICES: Service[] = [
   {
     id: "aplikasi-web",
-    visual: "web",
-    title: "Aplikasi Web Kustom",
+    title: "Website & Aplikasi Web",
     summary:
-      "Portal pelanggan, dashboard operasional, sampai produk SaaS. Dibangun dari nol sesuai cara tim Anda bekerja, bukan sebaliknya.",
-    points: ["Multi-role & hak akses", "Dashboard & laporan", "SEO & performa tinggi"],
-    stack: ["Next.js", "React", "Node.js", "PostgreSQL"],
+      "Aplikasi yang dibuka lewat browser di laptop atau HP, tanpa perlu install. Cocok untuk mengelola pesanan, data pelanggan, dan laporan penjualan.",
+    points: [
+      "Akses berbeda untuk pemilik, admin, dan karyawan",
+      "Laporan dan grafik penjualan langsung jadi",
+      "Mudah ditemukan pelanggan di Google",
+    ],
+    examples: ["Halaman pesanan pelanggan", "Laporan penjualan", "Website usaha"],
+    image: {
+      src: "/services/aplikasi-web.webp",
+      alt: "Contoh aplikasi web: halaman ringkasan penjualan toko dengan grafik dan daftar pesanan",
+      device: "desktop",
+    },
   },
   {
     id: "aplikasi-mobile",
-    visual: "mobile",
-    title: "Aplikasi Mobile",
+    title: "Aplikasi HP (Android & iPhone)",
     summary:
-      "Aplikasi Android dan iOS dari satu basis kode. Untuk pelanggan, kurir, atau tim lapangan yang butuh akses di mana saja.",
-    points: ["Android & iOS", "Notifikasi push", "Mode offline"],
-    stack: ["React Native", "Flutter", "Firebase"],
+      "Aplikasi yang bisa diunduh pelanggan atau tim Anda dari Play Store dan App Store. Pesan, bayar, dan pantau status langsung dari genggaman.",
+    points: [
+      "Satu aplikasi untuk Android dan iPhone",
+      "Pemberitahuan langsung muncul di HP",
+      "Tetap bisa dipakai saat sinyal lemah",
+    ],
+    examples: ["Aplikasi pesan-antar", "Aplikasi member", "Aplikasi tim lapangan"],
+    image: {
+      src: "/services/aplikasi-mobile.webp",
+      alt: "Contoh aplikasi HP: aplikasi pemesanan kopi dengan menu dan keranjang",
+      device: "phone",
+    },
   },
   {
-    id: "kasir-inventori",
-    visual: "pos",
-    title: "Kasir & Inventori",
+    id: "kasir-stok",
+    title: "Aplikasi Kasir & Stok",
     summary:
-      "Sistem POS multi-outlet dengan stok yang sinkron real-time. Tanpa biaya langganan per perangkat, tanpa rekap manual tiap malam.",
-    points: ["Scan barcode & struk", "Stok antar gudang", "Laporan laba-rugi"],
-    stack: ["Web & Tablet", "Thermal Printer", "Excel Export"],
+      "Kasir untuk satu toko atau banyak cabang. Stok berkurang sendiri setiap ada penjualan, dan laporan harian langsung jadi tanpa rekap manual.",
+    points: [
+      "Scan barcode dan cetak struk",
+      "Stok semua cabang terlihat di satu layar",
+      "Laporan untung-rugi otomatis",
+    ],
+    examples: ["Kafe & resto", "Toko retail", "Apotek"],
+    image: {
+      src: "/services/kasir-stok.webp",
+      alt: "Contoh aplikasi kasir: daftar menu, keranjang belanja, dan total pembayaran",
+      device: "desktop",
+    },
   },
   {
-    id: "reservasi",
-    visual: "booking",
-    title: "Reservasi & Booking",
+    id: "booking-online",
+    title: "Sistem Booking Online",
     summary:
-      "Pelanggan memilih jadwal sendiri, sistem yang mengatur kuota. Cocok untuk klinik, salon, studio, rental, dan jasa berbasis jadwal.",
-    points: ["Kalender slot otomatis", "DP via payment gateway", "Pengingat WhatsApp"],
-    stack: ["Midtrans", "Xendit", "WhatsApp API"],
+      "Pelanggan memilih jadwal sendiri lewat HP, jadwal tidak pernah bentrok, dan uang muka bisa dibayar saat itu juga.",
+    points: [
+      "Jadwal tidak bisa dipesan dua kali",
+      "Bayar DP lewat transfer, QRIS, atau e-wallet",
+      "Pengingat otomatis lewat WhatsApp",
+    ],
+    examples: ["Klinik & dokter gigi", "Salon & barbershop", "Studio & rental"],
+    image: {
+      src: "/services/booking-online.webp",
+      alt: "Contoh sistem booking: kalender dengan pilihan jam yang tersedia",
+      device: "desktop",
+    },
   },
   {
-    id: "sistem-internal",
-    visual: "erp",
-    title: "Sistem Internal & ERP",
+    id: "operasional-kantor",
+    title: "Aplikasi Operasional Kantor",
     summary:
-      "SPK, approval berjenjang, invoice, dan pelacakan pekerjaan dalam satu tempat. Dirancang mengikuti SOP Anda, lengkap dengan audit trail.",
-    points: ["Workflow approval", "Audit trail", "Integrasi dokumen"],
-    stack: ["NestJS", "Laravel", "MySQL", "Redis"],
+      "Pengajuan, persetujuan atasan, surat perintah kerja, sampai tagihan tersimpan rapi di satu tempat dan mengikuti alur kerja kantor Anda.",
+    points: [
+      "Persetujuan bertahap dari staf ke atasan",
+      "Tercatat siapa mengubah apa, dan kapan",
+      "Dokumen dan tagihan dibuat otomatis",
+    ],
+    examples: ["Pengajuan dana", "Surat perintah kerja", "Absensi & cuti"],
+    image: {
+      src: "/services/operasional-kantor.webp",
+      alt: "Contoh aplikasi kantor: daftar pengajuan dengan status menunggu, ditinjau, dan disetujui",
+      device: "desktop",
+    },
   },
   {
-    id: "integrasi",
-    visual: "integration",
-    title: "Integrasi & Otomasi",
+    id: "sambungkan-aplikasi",
+    title: "Menyambungkan Aplikasi",
     summary:
-      "Hubungkan aplikasi yang sudah Anda pakai. Pembayaran, akuntansi, marketplace, dan notifikasi berjalan otomatis tanpa input ulang.",
-    points: ["REST & Webhook", "Sinkronisasi data", "Otomasi notifikasi"],
-    stack: ["REST API", "Webhook", "Cron Jobs"],
+      "Sudah memakai aplikasi lain? Kami sambungkan supaya data mengalir sendiri dan tidak perlu diketik ulang: pembayaran, pembukuan, marketplace, sampai WhatsApp.",
+    points: [
+      "Data pindah otomatis antar aplikasi",
+      "Tidak ada lagi input data dua kali",
+      "Pemberitahuan terkirim sendiri",
+    ],
+    examples: ["Pesanan marketplace", "Pembukuan otomatis", "Notifikasi WhatsApp"],
+    image: {
+      src: "/services/sambungkan-aplikasi.webp",
+      alt: "Contoh halaman pengaturan yang menyambungkan pembayaran, pembukuan, marketplace, dan WhatsApp",
+      device: "desktop",
+    },
   },
 ];
 
 export interface ProcessStep {
   title: string;
-  duration: string;
+  when: string;
   body: string;
-  output: string;
+  youGet: string;
 }
 
 export const PROCESS: ProcessStep[] = [
   {
-    title: "Discovery",
-    duration: "1–3 hari · gratis",
-    body: "Kami duduk bersama Anda, memetakan alur kerja yang sekarang, dan menemukan bagian yang paling menghabiskan waktu.",
-    output: "Dokumen ruang lingkup & estimasi biaya",
+    title: "Kami dengarkan dulu",
+    when: "Gratis · 30 menit",
+    body: "Ngobrol santai tentang cara kerja bisnis Anda sehari-hari: apa yang paling menyita waktu, dan apa yang ingin dibenahi.",
+    youGet: "Rangkuman kebutuhan, perkiraan biaya, dan lama pengerjaan secara tertulis",
   },
   {
-    title: "Desain & Prototipe",
-    duration: "1–2 minggu",
-    body: "Alur dan tampilan dirancang lebih dulu dalam prototipe yang bisa diklik. Anda menyetujui sebelum satu baris kode ditulis.",
-    output: "Prototipe interaktif & desain UI",
+    title: "Kami gambarkan aplikasinya",
+    when: "1–2 minggu",
+    body: "Sebelum dibuat, Anda bisa melihat dan mencoba contoh tampilannya. Ingin mengubah sesuatu? Di tahap inilah tempatnya.",
+    youGet: "Contoh tampilan yang bisa Anda klik dan coba sendiri",
   },
   {
-    title: "Development",
-    duration: "Sprint 2 mingguan",
-    body: "Fitur dibangun bertahap. Setiap akhir sprint ada demo dan akses staging, jadi Anda melihat progres, bukan hanya mendengar kabar.",
-    output: "Demo rutin & akses staging",
+    title: "Kami kerjakan, Anda pantau",
+    when: "Laporan tiap 2 minggu",
+    body: "Setiap dua minggu kami tunjukkan hasilnya dan Anda bisa langsung mencobanya. Tidak ada masa menunggu tanpa kabar.",
+    youGet: "Akses ke versi uji coba yang terus diperbarui",
   },
   {
-    title: "Uji & Rilis",
-    duration: "1 minggu",
-    body: "Pengujian menyeluruh, migrasi data lama, lalu peluncuran. Tim Anda dilatih sampai benar-benar lancar memakai sistemnya.",
-    output: "Aplikasi live & sesi pelatihan",
+    title: "Kami pasang & ajari tim Anda",
+    when: "± 1 minggu",
+    body: "Aplikasi diuji menyeluruh, data lama dipindahkan, lalu tim Anda kami latih sampai benar-benar lancar memakainya.",
+    youGet: "Aplikasi siap pakai beserta panduan penggunaan",
   },
   {
-    title: "Pendampingan",
-    duration: "30 hari +",
-    body: "Garansi perbaikan bug selama 30 hari. Setelahnya, tersedia paket pemeliharaan bulanan bila dibutuhkan.",
-    output: "Source code, dokumentasi & dukungan",
+    title: "Kami tetap ada setelahnya",
+    when: "30 hari & seterusnya",
+    body: "Ada kendala setelah aplikasi dipakai? Selama 30 hari kami perbaiki gratis. Setelahnya, tersedia layanan perawatan bulanan.",
+    youGet: "Seluruh file aplikasi dan dukungan yang tetap berjalan",
   },
 ];
 
@@ -117,98 +165,78 @@ export const PRINCIPLES = [
   {
     value: 100,
     suffix: "%",
-    label: "Kepemilikan source code",
-    body: "Repositori, akses server, dan dokumentasi diserahkan penuh. Tidak ada vendor lock-in.",
+    label: "Aplikasinya milik Anda",
+    body: "Seluruh file aplikasi dan akses server kami serahkan. Anda bebas melanjutkan dengan siapa pun, tanpa terikat dengan kami.",
   },
   {
     value: 30,
     suffix: " hari",
-    label: "Garansi setelah rilis",
-    body: "Bug yang muncul dalam 30 hari setelah peluncuran kami perbaiki tanpa biaya tambahan.",
+    label: "Perbaikan gratis",
+    body: "Jika ada yang tidak berjalan semestinya dalam 30 hari setelah aplikasi dipakai, kami perbaiki tanpa biaya.",
   },
   {
     value: 2,
     suffix: " minggu",
-    label: "Siklus demo progres",
-    body: "Anda melihat aplikasi tumbuh setiap sprint, dan bisa mengoreksi arah sejak awal.",
+    label: "Laporan hasil yang rutin",
+    body: "Anda tidak menunggu sampai akhir. Setiap dua minggu, hasilnya bisa Anda lihat dan coba langsung.",
   },
-] as const;
-
-export const STACK = [
-  "Next.js",
-  "React",
-  "React Native",
-  "Flutter",
-  "TypeScript",
-  "Node.js",
-  "NestJS",
-  "Laravel",
-  "PostgreSQL",
-  "MySQL",
-  "Redis",
-  "Docker",
-  "Google Cloud",
-  "AWS",
-  "Midtrans",
-  "Xendit",
-  "WhatsApp Cloud API",
 ] as const;
 
 export const INDUSTRIES = [
-  "Retail & F&B",
+  "Kafe & Restoran",
+  "Toko & Retail",
   "Klinik & Kesehatan",
-  "Pendidikan",
-  "Logistik",
-  "Jasa Profesional",
-  "Properti",
-  "Manufaktur",
+  "Salon & Kecantikan",
+  "Sekolah & Kursus",
+  "Logistik & Ekspedisi",
+  "Jasa & Konsultan",
 ] as const;
 
-export interface PricingTier {
+export interface PricingPackage {
   name: string;
+  forWho: string;
   price: string;
-  note: string;
   timeline: string;
-  includes: string[];
+  highlights: string[];
   featured?: boolean;
 }
 
-export const PRICING: PricingTier[] = [
+export const PRICING: PricingPackage[] = [
   {
-    name: "Website Bisnis",
-    price: "Rp 2,5 jt",
-    note: "mulai dari",
-    timeline: "7–14 hari kerja",
-    includes: ["Desain kustom, bukan template", "SEO teknis & analytics", "Integrasi WhatsApp"],
+    name: "Website Usaha",
+    forWho: "Supaya usaha Anda terlihat terpercaya dan mudah ditemukan di Google.",
+    price: "2,5 jt",
+    timeline: "1–2 minggu",
+    highlights: ["Desain khusus untuk usaha Anda", "Tombol langsung ke WhatsApp", "Bisa dicari di Google"],
   },
   {
     name: "Sistem Booking",
-    price: "Rp 3,5 jt",
-    note: "mulai dari",
-    timeline: "10–18 hari kerja",
-    includes: ["Kalender & kuota slot", "Dashboard admin", "Notifikasi otomatis"],
+    forWho: "Untuk usaha berbasis jadwal yang lelah membalas chat reservasi.",
+    price: "3,5 jt",
+    timeline: "2–3 minggu",
+    highlights: ["Pelanggan pilih jadwal sendiri", "Bayar DP online", "Pengingat via WhatsApp"],
   },
   {
-    name: "Kasir & Inventori",
-    price: "Rp 4,5 jt",
-    note: "mulai dari",
-    timeline: "14–25 hari kerja",
-    includes: ["POS multi-outlet", "Stok real-time", "Laporan & export Excel"],
+    name: "Kasir & Stok",
+    forWho: "Untuk toko atau resto yang ingin stok dan laporan rapi tanpa rekap manual.",
+    price: "4,5 jt",
+    timeline: "3–5 minggu",
+    highlights: ["Bisa untuk banyak cabang", "Stok berkurang otomatis", "Laporan harian & bulanan"],
     featured: true,
-  },
-  {
-    name: "Aplikasi Kustom",
-    price: "Sesuai lingkup",
-    note: "estimasi tetap",
-    timeline: "mulai 3 minggu",
-    includes: ["Web, mobile, atau keduanya", "Sistem internal & ERP", "Integrasi pihak ketiga"],
   },
 ];
 
+export const INCLUDED = [
+  "Perbaikan gratis 30 hari",
+  "Seluruh file aplikasi jadi milik Anda",
+  "Pelatihan untuk tim Anda",
+  "Bantuan pemasangan di server",
+] as const;
+
 export const PAYMENT_TERMS = [
-  { percent: 50, label: "Uang muka", when: "Saat kontrak disepakati" },
-  { percent: 30, label: "Milestone", when: "Fitur inti selesai & didemokan" },
-  { percent: 20, label: "Pelunasan", when: "Serah terima & aplikasi live" },
+  { percent: 50, label: "Di awal", when: "Saat kesepakatan ditandatangani" },
+  { percent: 30, label: "Di tengah", when: "Setelah fitur utama selesai dan Anda coba" },
+  { percent: 20, label: "Di akhir", when: "Setelah aplikasi siap dipakai" },
 ] as const;
 
 export interface FaqItem {
@@ -218,50 +246,50 @@ export interface FaqItem {
 
 export const FAQS: FaqItem[] = [
   {
-    question: "Berapa biaya membuat aplikasi di Nakami Studio?",
+    question: "Berapa biaya membuat aplikasi?",
     answer:
-      "Tergantung ruang lingkup. Website bisnis mulai Rp 2,5 juta, sistem booking mulai Rp 3,5 juta, dan kasir & inventori mulai Rp 4,5 juta. Untuk aplikasi kustom, kami memberikan estimasi tetap setelah sesi discovery gratis, sehingga angka yang disepakati di kontrak tidak berubah di tengah jalan.",
+      "Tergantung kebutuhannya. Website usaha mulai Rp 2,5 juta, sistem booking mulai Rp 3,5 juta, dan kasir & stok mulai Rp 4,5 juta. Untuk aplikasi yang lebih khusus, kami berikan harga pasti setelah obrolan pertama yang gratis. Harga yang sudah disepakati tidak akan naik di tengah jalan.",
   },
   {
-    question: "Berapa lama proses pembuatannya?",
+    question: "Saya tidak paham teknologi. Apakah tetap bisa?",
     answer:
-      "Website bisnis umumnya 7–14 hari kerja, sistem kasir 14–25 hari kerja, dan aplikasi kustom mulai 3 minggu tergantung kompleksitas. Jadwal per milestone dituliskan di kontrak sebelum pengerjaan dimulai.",
+      "Sangat bisa. Banyak pemilik usaha juga tidak paham teknis, dan itu bukan masalah. Anda cukup menceritakan cara kerja bisnis Anda dan masalah yang ingin diselesaikan. Urusan teknisnya kami yang pikirkan, dan semuanya kami jelaskan dengan bahasa sehari-hari.",
   },
   {
-    question: "Siapa pemilik source code aplikasinya?",
+    question: "Berapa lama sampai aplikasinya bisa dipakai?",
     answer:
-      "Anda. Setelah pelunasan, seluruh source code, akses server, domain, dan dokumentasi teknis diserahkan sepenuhnya. Anda bebas melanjutkan pengembangan dengan tim mana pun.",
+      "Website usaha biasanya 1–2 minggu, sistem kasir 3–5 minggu, dan aplikasi yang lebih khusus mulai 3 minggu. Jadwalnya kami tuliskan sejak awal, lengkap dengan target di setiap tahap.",
   },
   {
-    question: "Saya sudah punya sistem lama. Bisa dilanjutkan atau diintegrasikan?",
+    question: "Setelah jadi, aplikasinya milik siapa?",
     answer:
-      "Bisa. Kami akan mengaudit sistem yang ada terlebih dahulu, lalu merekomendasikan apakah lebih efisien dikembangkan, diintegrasikan lewat API, atau dimigrasikan ke sistem baru beserta datanya.",
+      "Milik Anda sepenuhnya. Setelah pelunasan, seluruh file aplikasi, akses server, dan nama domain kami serahkan. Anda bebas melanjutkan pengembangannya dengan siapa pun.",
   },
   {
-    question: "Bagaimana skema pembayarannya?",
+    question: "Saya sudah punya aplikasi lain. Bisa disambungkan?",
     answer:
-      "Tiga termin yang terikat pada hasil kerja: 50% saat kontrak disepakati, 30% setelah fitur inti selesai dan didemokan, serta 20% setelah serah terima dan aplikasi live.",
+      "Bisa. Kami pelajari dulu aplikasi yang sedang Anda pakai, lalu sarankan pilihan paling hemat: disambungkan, dikembangkan, atau dipindahkan ke aplikasi baru beserta datanya.",
   },
   {
-    question: "Apa yang terjadi setelah aplikasi diluncurkan?",
+    question: "Bagaimana cara pembayarannya?",
     answer:
-      "Setiap proyek mendapat garansi perbaikan bug selama 30 hari. Setelah itu tersedia paket pemeliharaan bulanan untuk pembaruan keamanan, backup, monitoring, dan pengembangan fitur kecil.",
+      "Dibayar tiga kali sesuai kemajuan pekerjaan: 50% saat kesepakatan ditandatangani, 30% setelah fitur utama selesai dan Anda coba, lalu 20% setelah aplikasi siap dipakai.",
   },
   {
-    question: "Saya tidak paham teknis. Apakah tetap bisa?",
+    question: "Kalau ada masalah setelah aplikasi dipakai?",
     answer:
-      "Tentu. Anda cukup menceritakan masalah dan cara kerja bisnis Anda. Kami yang menerjemahkannya menjadi rancangan sistem, dan semua keputusan teknis dijelaskan dalam bahasa yang mudah dipahami.",
+      "Selama 30 hari pertama, kami perbaiki gratis. Setelah itu tersedia layanan perawatan bulanan untuk pembaruan keamanan, cadangan data, dan penambahan fitur kecil.",
   },
 ];
 
 export const BRIEF_NEEDS = [
+  "Website usaha",
   "Aplikasi web",
-  "Aplikasi mobile",
-  "Kasir & inventori",
-  "Booking",
-  "Sistem internal",
-  "Integrasi",
-  "Website bisnis",
+  "Aplikasi HP",
+  "Kasir & stok",
+  "Booking online",
+  "Aplikasi kantor",
+  "Menyambungkan aplikasi",
 ] as const;
 
 export const BRIEF_BUDGETS = [

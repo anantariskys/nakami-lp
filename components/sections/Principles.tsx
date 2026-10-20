@@ -1,17 +1,18 @@
-import { PRINCIPLES, STACK } from "@/lib/content";
+import { PRINCIPLES } from "@/lib/content";
+import { TECH } from "@/lib/tech";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
 export function Principles() {
   return (
     <section aria-labelledby="prinsip-title" className="relative overflow-hidden bg-paper py-28 md:py-40">
       <div className="container-x">
-        <SectionLabel index="03">Komitmen</SectionLabel>
+        <SectionLabel index="03">Janji kami</SectionLabel>
         <h2
           id="prinsip-title"
           data-split
           className="mt-6 max-w-[20ch] font-display text-[clamp(2.25rem,5vw,4.25rem)] font-semibold leading-[1] tracking-[-0.04em]"
         >
-          Hal-hal yang kami tulis di kontrak, bukan di brosur.
+          Janji yang kami tuliskan hitam di atas putih.
         </h2>
 
         <div data-reveal-group className="mt-16 grid gap-4 md:mt-20 md:grid-cols-3">
@@ -35,33 +36,42 @@ export function Principles() {
         </div>
       </div>
 
-      <div className="mt-24 md:mt-32" aria-label="Teknologi yang kami gunakan">
-        <p data-reveal className="container-x mb-8 font-mono text-[11px] uppercase tracking-[0.18em] text-faint">
-          Teknologi yang kami gunakan
-        </p>
-        <Marquee items={STACK} />
-        <Marquee items={[...STACK].reverse()} reverse />
+      <div className="mt-24 md:mt-32">
+        <div data-reveal className="container-x mb-10 flex flex-col justify-between gap-3 md:flex-row md:items-end">
+          <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">Teknologi yang kami pakai</h3>
+          <p className="max-w-md text-sm text-muted">
+            Teknologi modern yang juga dipakai perusahaan teknologi besar: andal, aman, dan mudah dirawat
+            dalam jangka panjang.
+          </p>
+        </div>
+        <LogoMarquee />
       </div>
     </section>
   );
 }
 
-function Marquee({ items, reverse = false }: { items: readonly string[]; reverse?: boolean }) {
+function LogoMarquee() {
   return (
-    <div className="group relative flex overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+    <div
+      data-marquee
+      className="group relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
+    >
       {[0, 1].map((copy) => (
         <ul
           key={copy}
           aria-hidden={copy === 1 || undefined}
-          className="flex shrink-0 animate-marquee items-center gap-3 pr-3 [--marquee-duration:55s] group-hover:[animation-play-state:paused]"
-          style={reverse ? { animationDirection: "reverse" } : undefined}
+          className="flex shrink-0 animate-marquee items-center gap-3 pr-3 [--marquee-duration:60s] [animation-play-state:paused] group-data-running:[animation-play-state:running] group-hover:[animation-play-state:paused]"
         >
-          {items.map((item) => (
+          {TECH.map((icon) => (
             <li
-              key={item}
-              className="whitespace-nowrap rounded-full border border-line px-5 py-2.5 font-display text-lg font-medium tracking-tight text-ink/70 transition-colors duration-300 hover:border-ink hover:text-ink md:text-xl"
+              key={icon.slug}
+              style={{ "--brand": `#${icon.hex}` } as React.CSSProperties}
+              className="flex items-center gap-3 whitespace-nowrap rounded-2xl border border-line bg-paper px-5 py-4 text-ink/45 transition-[color,border-color] duration-300 hover:border-(--brand)/40 hover:text-(--brand)"
             >
-              {item}
+              <svg viewBox="0 0 24 24" className="size-7 shrink-0 fill-current" aria-hidden>
+                <path d={icon.path} />
+              </svg>
+              <span className="text-sm font-medium text-ink/70">{icon.title}</span>
             </li>
           ))}
         </ul>

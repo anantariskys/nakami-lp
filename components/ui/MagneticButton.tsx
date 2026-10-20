@@ -84,7 +84,7 @@ export function MagneticButton({
       {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       {...rest}
       className={cn(
-        "group/btn relative isolate inline-flex shrink-0 items-center whitespace-nowrap justify-center overflow-hidden rounded-full font-medium tracking-[-0.01em] transition-colors duration-500 ease-out-expo will-change-transform",
+        "group/btn relative isolate inline-flex shrink-0 items-center whitespace-nowrap justify-center overflow-hidden rounded-full font-medium tracking-[-0.01em] transition-colors duration-500 ease-out-expo",
         size === "lg" ? "h-14 gap-3 pl-7 pr-2.5 text-[0.95rem]" : "h-12 gap-2.5 pl-5 pr-2 text-sm",
         !icon && (size === "lg" ? "pr-7" : "pr-5"),
         VARIANTS[variant],
