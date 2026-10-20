@@ -56,13 +56,13 @@ export function Services() {
               data-split
               className="mt-6 max-w-[17ch] font-display text-[clamp(2.25rem,5vw,4.25rem)] font-semibold leading-[1] tracking-[-0.04em]"
             >
-              Aplikasi apa yang bisa kami buatkan?
+              Solusi yang kami kembangkan.
             </h2>
           </div>
           <p data-reveal className="max-w-sm text-muted">
-            <span className="hidden lg:inline">Arahkan kursor ke tiap layanan untuk melihat contoh tampilannya.</span>
-            <span className="lg:hidden">Setiap layanan dilengkapi contoh tampilan aplikasinya.</span> Semua bisa
-            disesuaikan dengan cara kerja usaha Anda.
+            <span className="hidden lg:inline">Arahkan kursor pada setiap layanan untuk melihat contoh tampilannya.</span>
+            <span className="lg:hidden">Setiap layanan dilengkapi contoh tampilan aplikasi.</span> Seluruhnya dapat
+            disesuaikan dengan proses bisnis Anda.
           </p>
         </div>
 
@@ -174,13 +174,13 @@ export function Services() {
                 </ul>
                 <a
                   href={whatsappUrl(
-                    `Halo Nakami Studio, saya tertarik dibuatkan ${service.title.toLowerCase()}. Usaha saya:`,
+                    `Halo Nakami Studio, saya ingin berkonsultasi mengenai layanan ${service.title}. Bisnis saya bergerak di bidang:`,
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group/link mt-6 inline-flex items-center gap-2 text-sm font-medium text-orange"
                 >
-                  Tanya soal {service.title.toLowerCase()}
+                  Konsultasikan layanan ini
                   <ArrowUpRight className="size-4 transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
                 </a>
               </div>

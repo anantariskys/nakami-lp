@@ -84,14 +84,14 @@ export function Process() {
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <SectionLabel tone="dark">
-              Cara kerja
+              Proses kerja
             </SectionLabel>
             <h2
               id="proses-title"
               data-split
-              className="mt-6 max-w-[18ch] font-display text-[clamp(2.25rem,4.6vw,4rem)] font-semibold leading-[1] tracking-[-0.04em]"
+              className="mt-6 max-w-[22ch] font-display text-[clamp(2.25rem,4.6vw,4rem)] font-semibold leading-[1] tracking-[-0.04em]"
             >
-              Apa yang akan kami lakukan untuk Anda.
+              Apa yang kami kerjakan untuk Anda, tahap demi tahap.
             </h2>
           </div>
           <div className="hidden w-64 lg:block" aria-hidden>
@@ -99,7 +99,7 @@ export function Process() {
               <div data-progress className="h-px w-full origin-left scale-x-0 bg-sunset" />
             </div>
             <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-white/55">
-              Gulir untuk melihat langkahnya
+              Gulir untuk melihat setiap tahap
             </p>
           </div>
         </div>
@@ -113,7 +113,7 @@ export function Process() {
           <li
             key={step.title}
             data-step
-            className="group relative flex flex-col overflow-hidden rounded-[1.75rem] bg-night-2 p-7 ring-1 ring-white/[0.07] transition-colors duration-500 hover:bg-night-3 md:p-9 lg:h-[29rem] lg:w-[26rem]"
+            className="group relative flex flex-col overflow-hidden rounded-[1.75rem] bg-night-2 p-7 ring-1 ring-white/[0.07] transition-colors duration-500 hover:bg-night-3 md:p-9 lg:h-[32rem] lg:w-[26rem]"
           >
             <div className="flex items-start justify-between">
               <span
@@ -139,7 +139,7 @@ export function Process() {
              
               className="mt-6 flex flex-col gap-1.5 border-t border-white/10 pt-5 text-sm text-white/80"
             >
-              <span className="shrink-0 font-mono text-[10px] uppercase tracking-wider text-orange">Anda dapat</span>
+              <span className="shrink-0 font-mono text-[10px] uppercase tracking-wider text-orange">Hasil</span>
               <span>{step.youGet}</span>
             </p>
           </li>

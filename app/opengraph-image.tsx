@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const alt = "Nakami Studio — Jasa pembuatan aplikasi untuk bisnis";
+export const alt = "Nakami Studio — Jasa pembuatan aplikasi bisnis";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -34,10 +34,10 @@ export default async function OpengraphImage() {
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 76, fontWeight: 700, lineHeight: 1.02, letterSpacing: -3, maxWidth: 900 }}>
-            Kami buatkan aplikasi yang meringankan kerja bisnis Anda.
+            Aplikasi bisnis yang dirancang mengikuti cara Anda bekerja.
           </div>
           <div style={{ marginTop: 28, fontSize: 26, color: "rgba(255,255,255,0.6)" }}>
-            Kasir & stok · Booking online · Aplikasi HP · Aplikasi kantor
+            Kasir & inventori · Reservasi online · Aplikasi mobile · Aplikasi operasional
           </div>
         </div>
       </div>

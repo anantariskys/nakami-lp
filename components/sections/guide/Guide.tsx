@@ -8,18 +8,18 @@ export function Guide() {
       <div className="container-x">
         <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
           <div>
-            <SectionLabel>Panduan singkat</SectionLabel>
+            <SectionLabel>Panduan</SectionLabel>
             <h2
               id="panduan-title"
               data-split
               className="mt-6 max-w-[18ch] font-display text-[clamp(2.25rem,5vw,4.25rem)] font-semibold leading-[1] tracking-[-0.04em]"
             >
-              Website, aplikasi web, atau aplikasi HP?
+              Website, aplikasi web, atau aplikasi mobile?
             </h2>
           </div>
           <p data-reveal className="max-w-sm text-muted">
-            Tiga istilah ini sering tertukar. Ini bedanya dalam bahasa sehari-hari, supaya Anda bisa menimbang
-            sebelum ngobrol dengan kami.
+            Ketiganya kerap dianggap sama, padahal fungsinya berbeda. Ringkasan berikut membantu Anda menentukan
+            solusi yang paling tepat sebelum berdiskusi dengan kami.
           </p>
         </div>
 
@@ -30,12 +30,12 @@ export function Guide() {
         <div className="mt-24 grid gap-6 md:mt-32 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <h3 data-split className="max-w-[20ch] font-display text-[clamp(1.75rem,3.6vw,3rem)] font-semibold leading-[1.05] tracking-[-0.035em]">
-              Pakai aplikasi jadi, atau buat sendiri?
+              Berlangganan aplikasi jadi, atau membangun sendiri?
             </h3>
           </div>
           <p data-reveal className="max-w-sm text-muted">
-            Aplikasi jadi murah di awal tapi dibayar terus. Aplikasi sendiri butuh biaya di depan, lalu jadi milik
-            Anda. Geser angkanya untuk melihat kapan masing-masing lebih hemat.
+            Aplikasi jadi lebih ringan di awal namun berbiaya rutin. Aplikasi sendiri membutuhkan investasi di
+            depan dan sepenuhnya menjadi aset Anda. Sesuaikan angkanya untuk melihat titik impasnya.
           </p>
         </div>
 

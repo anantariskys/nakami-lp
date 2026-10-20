@@ -2,9 +2,9 @@ export const SITE = {
   name: "Nakami Studio",
   url: "https://nakamistudio.com",
   locale: "id_ID",
-  title: "Nakami Studio — Jasa Pembuatan Aplikasi untuk Bisnis",
+  title: "Nakami Studio — Jasa Pembuatan Aplikasi Bisnis",
   description:
-    "Jasa pembuatan aplikasi untuk bisnis: kasir & stok, booking online, aplikasi HP, dan aplikasi kantor yang dibuat sesuai cara kerja Anda. Harga disepakati di awal, aplikasinya milik Anda, perbaikan gratis 30 hari.",
+    "Jasa pembuatan aplikasi bisnis: sistem kasir & inventori, reservasi online, aplikasi mobile, dan aplikasi operasional yang dirancang sesuai proses kerja Anda. Biaya transparan, kepemilikan penuh, dan garansi 30 hari.",
   email: "nakamistudio.id@gmail.com",
   whatsapp: "6285608675771",
   instagram: "https://instagram.com/nakamistudio",
@@ -16,4 +16,4 @@ export function whatsappUrl(message: string): string {
 }
 
 export const DEFAULT_WA_MESSAGE =
-  "Halo Nakami Studio, saya ingin konsultasi soal pembuatan aplikasi untuk usaha saya.";
+  "Halo Nakami Studio, saya ingin berkonsultasi mengenai pembuatan aplikasi untuk bisnis saya.";

@@ -34,7 +34,7 @@ export function AppCompare() {
       {/* Desktop: full comparison table */}
       <div
         role="table"
-        aria-label="Perbandingan website, aplikasi web, dan aplikasi HP"
+        aria-label="Perbandingan website, aplikasi web, dan aplikasi mobile"
         className="hidden md:block"
         onMouseLeave={() => setFocus(null)}
       >
@@ -43,7 +43,7 @@ export function AppCompare() {
             Aspek
           </span>
           <p aria-hidden className="self-end pb-2 text-xs leading-relaxed text-faint">
-            Arahkan kursor ke salah satu kolom untuk menyorotnya.
+            Arahkan kursor pada kolom untuk menyorotnya.
           </p>
           {APP_KINDS.map((kind) => {
             const Icon = ICONS[kind.id];

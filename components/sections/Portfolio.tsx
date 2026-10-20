@@ -33,11 +33,11 @@ export function Portfolio() {
               data-split
               className="mt-6 max-w-[16ch] font-display text-[clamp(2.25rem,5vw,4.25rem)] font-semibold leading-[1] tracking-[-0.04em]"
             >
-              Aplikasi yang sudah dipakai setiap hari.
+              Hasil kerja kami.
             </h2>
           </div>
           <p data-reveal className="max-w-sm text-muted">
-            Beberapa usaha yang sudah kami bantu, beserta apa yang berubah setelah aplikasinya dipakai.
+            Sejumlah proyek yang telah kami selesaikan, beserta dampaknya bagi operasional klien.
           </p>
         </div>
 
@@ -101,11 +101,11 @@ function ProjectCard({ project: p, featured = false, sample }: { project: Projec
 
         <dl className="mt-6 grid gap-4 text-[0.95rem] leading-relaxed">
           <div>
-            <dt className="text-xs font-medium uppercase tracking-wider text-faint">Sebelumnya</dt>
+            <dt className="text-xs font-medium uppercase tracking-wider text-faint">Tantangan</dt>
             <dd className="mt-1 text-muted">{p.problem}</dd>
           </div>
           <div>
-            <dt className="text-xs font-medium uppercase tracking-wider text-orange-ink">Sesudahnya</dt>
+            <dt className="text-xs font-medium uppercase tracking-wider text-orange-ink">Hasil</dt>
             <dd className="mt-1 text-ink">{p.result}</dd>
           </div>
         </dl>

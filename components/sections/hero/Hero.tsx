@@ -8,17 +8,17 @@ import { afterIdle } from "@/lib/idle";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { HeroVisual } from "./HeroVisual";
 
-const CAPABILITIES = ["Kasir & stok", "Booking online", "Aplikasi HP", "Aplikasi kantor"];
+const CAPABILITIES = ["Kasir & inventori", "Reservasi online", "Aplikasi mobile", "Aplikasi operasional"];
 
 const HEADLINE: Array<{ text: string; accent?: boolean }> = [
-  { text: "Kami" },
-  { text: "buatkan" },
-  { text: "aplikasi" },
-  { text: "yang" },
-  { text: "meringankan", accent: true },
-  { text: "kerja" },
+  { text: "Aplikasi" },
   { text: "bisnis" },
-  { text: "Anda." },
+  { text: "yang" },
+  { text: "dirancang" },
+  { text: "mengikuti", accent: true },
+  { text: "cara" },
+  { text: "Anda" },
+  { text: "bekerja." },
 ];
 
 export function Hero() {
@@ -156,7 +156,7 @@ export function Hero() {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-60" />
               <span className="relative inline-flex size-2 rounded-full bg-success" />
             </span>
-            Jasa pembuatan aplikasi · Indonesia
+            Pengembangan aplikasi bisnis · Indonesia
           </p>
 
           <h1
@@ -179,15 +179,16 @@ export function Hero() {
 
           <div className="hero-fade mt-10 grid gap-8 md:mt-12 md:grid-cols-[minmax(0,34rem)_1fr] md:items-end">
             <p className="text-pretty text-base leading-relaxed text-white/65 md:text-lg">
-              Pencatatan stok, kasir, jadwal pelanggan, sampai laporan harian. Kami buatkan aplikasinya sesuai cara
-              kerja Anda, dengan harga yang disepakati di awal. Setelah jadi, aplikasinya sepenuhnya milik Anda.
+              Dari sistem kasir dan inventori hingga reservasi online dan aplikasi operasional, kami membangun
+              solusi yang sesuai dengan proses bisnis Anda. Biaya ditetapkan di awal, dan seluruh hak atas aplikasi
+              menjadi milik Anda.
             </p>
             <div className="flex flex-wrap items-center gap-3 md:justify-end">
               <MagneticButton href={whatsappUrl(DEFAULT_WA_MESSAGE)} variant="light" size="lg">
-                Konsultasi gratis
+                Jadwalkan konsultasi
               </MagneticButton>
               <MagneticButton href="#layanan" variant="ghost-dark" size="lg" icon={false}>
-                Lihat contoh aplikasi
+                Lihat layanan
               </MagneticButton>
             </div>
             <ul className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/55 md:col-span-2">

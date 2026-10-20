@@ -40,23 +40,23 @@ export const SAMPLE_PROJECTS: Project[] = [
     id: "contoh-kasir",
     client: "Nama usaha klien",
     sector: "Kafe & Restoran",
-    title: "Aplikasi kasir & stok untuk 3 cabang",
+    title: "Sistem kasir & inventori untuk 3 cabang",
     problem: "Ceritakan kondisi sebelum ada aplikasi, misalnya stok dicatat manual di buku tiap malam.",
     result: "Ceritakan perubahan setelahnya, misalnya laporan harian langsung jadi tanpa rekap manual.",
     highlight: { value: "00 menit", label: "contoh angka hasil" },
     image: { src: "/services/kasir-stok.webp", alt: "Contoh tampilan aplikasi kasir" },
-    tags: ["Kasir", "Stok", "Multi cabang"],
+    tags: ["Kasir", "Inventori", "Multi cabang"],
     year: 2026,
   },
   {
     id: "contoh-booking",
     client: "Nama usaha klien",
     sector: "Klinik & Kesehatan",
-    title: "Sistem booking online",
+    title: "Sistem reservasi online",
     problem: "Kondisi sebelum.",
     result: "Hasil setelahnya.",
     image: { src: "/services/booking-online.webp", alt: "Contoh tampilan sistem booking" },
-    tags: ["Booking", "Pembayaran DP"],
+    tags: ["Reservasi", "Pembayaran DP"],
     year: 2026,
   },
   {
@@ -66,8 +66,8 @@ export const SAMPLE_PROJECTS: Project[] = [
     title: "Aplikasi pengajuan dana kantor",
     problem: "Kondisi sebelum.",
     result: "Hasil setelahnya.",
-    image: { src: "/services/operasional-kantor.webp", alt: "Contoh tampilan aplikasi kantor" },
-    tags: ["Aplikasi kantor", "Persetujuan"],
+    image: { src: "/services/operasional-kantor.webp", alt: "Contoh tampilan aplikasi operasional" },
+    tags: ["Aplikasi operasional", "Persetujuan"],
     year: 2026,
   },
 ];
@@ -77,10 +77,10 @@ export const SHOW_PORTFOLIO = PROJECTS.length > 0 || process.env.NODE_ENV !== "p
 export const NAV_LINKS: ReadonlyArray<{ href: string; label: string }> = [
   { href: "#layanan", label: "Layanan" },
   { href: "#panduan", label: "Panduan" },
-  { href: "#proses", label: "Cara Kerja" },
+  { href: "#proses", label: "Proses" },
   ...(SHOW_PORTFOLIO ? [{ href: "#portfolio", label: "Portfolio" }] : []),
-  { href: "#investasi", label: "Biaya" },
-  { href: "#faq", label: "Tanya Jawab" },
+  { href: "#investasi", label: "Investasi" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -93,20 +93,23 @@ export const APP_KINDS: Array<{ id: AppKind; name: string; analogy: string; exam
   {
     id: "website",
     name: "Website",
-    analogy: "Ibarat etalase toko. Orang datang, melihat-lihat, lalu menghubungi Anda.",
-    example: "Profil usaha, katalog produk, halaman promo",
+    analogy:
+      "Berfungsi sebagai etalase digital: memperkenalkan bisnis Anda dan mengarahkan calon pelanggan untuk menghubungi Anda.",
+    example: "Profil perusahaan, katalog produk, halaman promosi",
   },
   {
     id: "webapp",
     name: "Aplikasi Web",
-    analogy: "Ibarat kantor yang bisa dibuka dari browser mana saja. Tempat tim bekerja setiap hari.",
-    example: "Kasir, stok, booking, pengajuan dana, laporan",
+    analogy:
+      "Berfungsi sebagai kantor digital yang dapat diakses dari browser mana pun, tempat tim mengelola pekerjaan sehari-hari.",
+    example: "Kasir, inventori, reservasi, pengajuan dana, laporan",
   },
   {
     id: "mobile",
-    name: "Aplikasi HP",
-    analogy: "Ibarat kartu member di saku pelanggan. Selalu ada di HP dan bisa menyapa lewat notifikasi.",
-    example: "Pesan-antar, member & poin, aplikasi kurir",
+    name: "Aplikasi Mobile",
+    analogy:
+      "Berfungsi seperti kartu anggota di ponsel pelanggan: selalu tersedia dan dapat mengirimkan notifikasi secara langsung.",
+    example: "Pemesanan & pengantaran, program loyalitas, aplikasi kurir",
   },
 ];
 
@@ -117,15 +120,15 @@ export const APP_COMPARISON: Array<{
   values: Record<AppKind, { text: string; level?: 1 | 2 | 3; ok?: boolean }>;
 }> = [
   {
-    label: "Cara membuka",
+    label: "Cara mengakses",
     values: {
-      website: { text: "Lewat browser" },
-      webapp: { text: "Lewat browser, perlu login" },
-      mobile: { text: "Diunduh dari Play Store / App Store" },
+      website: { text: "Melalui browser" },
+      webapp: { text: "Melalui browser, dengan login" },
+      mobile: { text: "Diunduh dari Play Store & App Store" },
     },
   },
   {
-    label: "Perlu install?",
+    label: "Perlu instalasi",
     values: {
       website: { text: "Tidak", ok: true },
       webapp: { text: "Tidak", ok: true },
@@ -133,7 +136,7 @@ export const APP_COMPARISON: Array<{
     },
   },
   {
-    label: "Bisa dipakai tanpa internet",
+    label: "Dapat digunakan offline",
     values: {
       website: { text: "Tidak", ok: false },
       webapp: { text: "Sebagian fitur", ok: true },
@@ -141,25 +144,25 @@ export const APP_COMPARISON: Array<{
     },
   },
   {
-    label: "Kirim notifikasi ke HP",
+    label: "Notifikasi ke ponsel",
     values: {
-      website: { text: "Tidak", ok: false },
-      webapp: { text: "Lewat WhatsApp / email", ok: true },
-      mobile: { text: "Ya, langsung muncul di HP", ok: true },
+      website: { text: "Tidak tersedia", ok: false },
+      webapp: { text: "Melalui WhatsApp atau email", ok: true },
+      mobile: { text: "Ya, notifikasi langsung", ok: true },
     },
   },
   {
-    label: "Biaya pembuatan",
-    hint: "Perbandingan kasar, bukan harga pasti",
+    label: "Biaya pengembangan",
+    hint: "Perbandingan relatif",
     values: {
-      website: { text: "Paling hemat", level: 1 },
+      website: { text: "Paling efisien", level: 1 },
       webapp: { text: "Menengah", level: 2 },
-      mobile: { text: "Paling besar", level: 3 },
+      mobile: { text: "Paling tinggi", level: 3 },
     },
   },
   {
-    label: "Lama pembuatan",
-    hint: "Perkiraan umum",
+    label: "Waktu pengerjaan",
+    hint: "Estimasi umum",
     values: {
       website: { text: "1–2 minggu", level: 1 },
       webapp: { text: "3–6 minggu", level: 2 },
@@ -173,7 +176,7 @@ export interface Service {
   title: string;
   summary: string;
   points: string[];
-  /** Everyday examples, so non-technical readers can picture it. */
+  /** Concrete use cases, so non-technical readers can picture it. */
   examples: string[];
   /** Screenshot of a real mockup page, captured from /mockups/[id]. */
   image: { src: string; alt: string; device: "desktop" | "phone" };
@@ -184,13 +187,13 @@ export const SERVICES: Service[] = [
     id: "aplikasi-web",
     title: "Website & Aplikasi Web",
     summary:
-      "Aplikasi yang dibuka lewat browser di laptop atau HP, tanpa perlu install. Cocok untuk mengelola pesanan, data pelanggan, dan laporan penjualan.",
+      "Aplikasi berbasis browser yang dapat diakses dari laptop maupun ponsel tanpa instalasi. Ideal untuk mengelola pesanan, data pelanggan, dan laporan penjualan.",
     points: [
-      "Akses berbeda untuk pemilik, admin, dan karyawan",
-      "Laporan dan grafik penjualan langsung jadi",
-      "Mudah ditemukan pelanggan di Google",
+      "Hak akses terpisah untuk pemilik, admin, dan staf",
+      "Laporan dan grafik penjualan otomatis",
+      "Dioptimalkan agar mudah ditemukan di Google",
     ],
-    examples: ["Halaman pesanan pelanggan", "Laporan penjualan", "Website usaha"],
+    examples: ["Portal pelanggan", "Dashboard penjualan", "Website perusahaan"],
     image: {
       src: "/services/aplikasi-web.webp",
       alt: "Contoh aplikasi web: halaman ringkasan penjualan toko dengan grafik dan daftar pesanan",
@@ -199,86 +202,86 @@ export const SERVICES: Service[] = [
   },
   {
     id: "aplikasi-mobile",
-    title: "Aplikasi HP (Android & iPhone)",
+    title: "Aplikasi Mobile (Android & iOS)",
     summary:
-      "Aplikasi yang bisa diunduh pelanggan atau tim Anda dari Play Store dan App Store. Pesan, bayar, dan pantau status langsung dari genggaman.",
+      "Aplikasi yang dapat diunduh pelanggan maupun tim Anda melalui Play Store dan App Store, untuk pemesanan, pembayaran, dan pemantauan status secara langsung.",
     points: [
-      "Satu aplikasi untuk Android dan iPhone",
-      "Pemberitahuan langsung muncul di HP",
-      "Tetap bisa dipakai saat sinyal lemah",
+      "Satu aplikasi untuk Android dan iOS",
+      "Notifikasi langsung ke ponsel pengguna",
+      "Tetap berfungsi saat koneksi terbatas",
     ],
-    examples: ["Aplikasi pesan-antar", "Aplikasi member", "Aplikasi tim lapangan"],
+    examples: ["Aplikasi pemesanan", "Program loyalitas", "Aplikasi tim lapangan"],
     image: {
       src: "/services/aplikasi-mobile.webp",
-      alt: "Contoh aplikasi HP: aplikasi pemesanan kopi dengan menu dan keranjang",
+      alt: "Contoh aplikasi mobile: aplikasi pemesanan kopi dengan menu dan keranjang",
       device: "phone",
     },
   },
   {
     id: "kasir-stok",
-    title: "Aplikasi Kasir & Stok",
+    title: "Sistem Kasir & Inventori",
     summary:
-      "Kasir untuk satu toko atau banyak cabang. Stok berkurang sendiri setiap ada penjualan, dan laporan harian langsung jadi tanpa rekap manual.",
+      "Sistem kasir untuk satu gerai maupun banyak cabang. Stok diperbarui otomatis di setiap transaksi, dan laporan harian tersedia tanpa rekap manual.",
     points: [
-      "Scan barcode dan cetak struk",
-      "Stok semua cabang terlihat di satu layar",
-      "Laporan untung-rugi otomatis",
+      "Pemindai barcode dan cetak struk",
+      "Stok seluruh cabang dalam satu tampilan",
+      "Laporan laba-rugi otomatis",
     ],
-    examples: ["Kafe & resto", "Toko retail", "Apotek"],
+    examples: ["Kafe & restoran", "Toko retail", "Apotek"],
     image: {
       src: "/services/kasir-stok.webp",
-      alt: "Contoh aplikasi kasir: daftar menu, keranjang belanja, dan total pembayaran",
+      alt: "Contoh sistem kasir: daftar menu, keranjang belanja, dan total pembayaran",
       device: "desktop",
     },
   },
   {
     id: "booking-online",
-    title: "Sistem Booking Online",
+    title: "Sistem Reservasi Online",
     summary:
-      "Pelanggan memilih jadwal sendiri lewat HP, jadwal tidak pernah bentrok, dan uang muka bisa dibayar saat itu juga.",
+      "Pelanggan memilih jadwal secara mandiri, jadwal tidak pernah bentrok, dan uang muka dapat dibayarkan langsung saat pemesanan.",
     points: [
-      "Jadwal tidak bisa dipesan dua kali",
-      "Bayar DP lewat transfer, QRIS, atau e-wallet",
-      "Pengingat otomatis lewat WhatsApp",
+      "Mencegah pemesanan ganda secara otomatis",
+      "Pembayaran DP via transfer, QRIS, atau e-wallet",
+      "Pengingat otomatis melalui WhatsApp",
     ],
     examples: ["Klinik & dokter gigi", "Salon & barbershop", "Studio & rental"],
     image: {
       src: "/services/booking-online.webp",
-      alt: "Contoh sistem booking: kalender dengan pilihan jam yang tersedia",
+      alt: "Contoh sistem reservasi: kalender dengan pilihan jam yang tersedia",
       device: "desktop",
     },
   },
   {
     id: "operasional-kantor",
-    title: "Aplikasi Operasional Kantor",
+    title: "Aplikasi Operasional",
     summary:
-      "Pengajuan, persetujuan atasan, surat perintah kerja, sampai tagihan tersimpan rapi di satu tempat dan mengikuti alur kerja kantor Anda.",
+      "Pengajuan, persetujuan berjenjang, surat perintah kerja, hingga penagihan dikelola dalam satu sistem yang mengikuti alur kerja perusahaan Anda.",
     points: [
-      "Persetujuan bertahap dari staf ke atasan",
-      "Tercatat siapa mengubah apa, dan kapan",
+      "Alur persetujuan bertingkat",
+      "Riwayat perubahan tercatat lengkap",
       "Dokumen dan tagihan dibuat otomatis",
     ],
     examples: ["Pengajuan dana", "Surat perintah kerja", "Absensi & cuti"],
     image: {
       src: "/services/operasional-kantor.webp",
-      alt: "Contoh aplikasi kantor: daftar pengajuan dengan status menunggu, ditinjau, dan disetujui",
+      alt: "Contoh aplikasi operasional: daftar pengajuan dengan status menunggu, ditinjau, dan disetujui",
       device: "desktop",
     },
   },
   {
     id: "sambungkan-aplikasi",
-    title: "Menyambungkan Aplikasi",
+    title: "Integrasi Sistem",
     summary:
-      "Sudah memakai aplikasi lain? Kami sambungkan supaya data mengalir sendiri dan tidak perlu diketik ulang: pembayaran, pembukuan, marketplace, sampai WhatsApp.",
+      "Menghubungkan aplikasi yang sudah Anda gunakan, seperti pembayaran, akuntansi, marketplace, dan WhatsApp, agar data mengalir otomatis tanpa input ulang.",
     points: [
-      "Data pindah otomatis antar aplikasi",
-      "Tidak ada lagi input data dua kali",
-      "Pemberitahuan terkirim sendiri",
+      "Sinkronisasi data antar aplikasi",
+      "Menghilangkan input data berulang",
+      "Notifikasi terkirim secara otomatis",
     ],
-    examples: ["Pesanan marketplace", "Pembukuan otomatis", "Notifikasi WhatsApp"],
+    examples: ["Pesanan marketplace", "Pencatatan akuntansi", "Notifikasi WhatsApp"],
     image: {
       src: "/services/sambungkan-aplikasi.webp",
-      alt: "Contoh halaman pengaturan yang menyambungkan pembayaran, pembukuan, marketplace, dan WhatsApp",
+      alt: "Contoh halaman integrasi yang menghubungkan pembayaran, akuntansi, marketplace, dan WhatsApp",
       device: "desktop",
     },
   },
@@ -293,34 +296,34 @@ export interface ProcessStep {
 
 export const PROCESS: ProcessStep[] = [
   {
-    title: "Kami dengarkan dulu",
+    title: "Konsultasi & analisis kebutuhan",
     when: "Gratis · 30 menit",
-    body: "Ngobrol santai tentang cara kerja bisnis Anda sehari-hari: apa yang paling menyita waktu, dan apa yang ingin dibenahi.",
-    youGet: "Rangkuman kebutuhan, perkiraan biaya, dan lama pengerjaan secara tertulis",
+    body: "Kami mempelajari proses bisnis Anda, mengidentifikasi pekerjaan yang paling menyita waktu, dan menentukan prioritas yang perlu dibenahi.",
+    youGet: "Ringkasan kebutuhan, estimasi biaya, dan jadwal pengerjaan tertulis",
   },
   {
-    title: "Kami gambarkan aplikasinya",
+    title: "Perancangan & prototipe",
     when: "1–2 minggu",
-    body: "Sebelum dibuat, Anda bisa melihat dan mencoba contoh tampilannya. Ingin mengubah sesuatu? Di tahap inilah tempatnya.",
-    youGet: "Contoh tampilan yang bisa Anda klik dan coba sendiri",
+    body: "Sebelum pengembangan dimulai, Anda dapat melihat dan mencoba rancangan tampilannya. Seluruh penyesuaian dilakukan pada tahap ini.",
+    youGet: "Prototipe interaktif yang dapat Anda uji langsung",
   },
   {
-    title: "Kami kerjakan, Anda pantau",
-    when: "Laporan tiap 2 minggu",
-    body: "Setiap dua minggu kami tunjukkan hasilnya dan Anda bisa langsung mencobanya. Tidak ada masa menunggu tanpa kabar.",
+    title: "Pengembangan bertahap",
+    when: "Laporan setiap 2 minggu",
+    body: "Setiap dua minggu kami mempresentasikan progres yang dapat langsung Anda coba, sehingga perkembangan proyek selalu transparan.",
     youGet: "Akses ke versi uji coba yang terus diperbarui",
   },
   {
-    title: "Kami pasang & ajari tim Anda",
+    title: "Pengujian, peluncuran & pelatihan",
     when: "± 1 minggu",
-    body: "Aplikasi diuji menyeluruh, data lama dipindahkan, lalu tim Anda kami latih sampai benar-benar lancar memakainya.",
-    youGet: "Aplikasi siap pakai beserta panduan penggunaan",
+    body: "Aplikasi diuji secara menyeluruh, data lama dimigrasikan, dan tim Anda kami latih hingga siap menggunakannya secara mandiri.",
+    youGet: "Aplikasi siap digunakan beserta panduan penggunaan",
   },
   {
-    title: "Kami tetap ada setelahnya",
-    when: "30 hari & seterusnya",
-    body: "Ada kendala setelah aplikasi dipakai? Selama 30 hari kami perbaiki gratis. Setelahnya, tersedia layanan perawatan bulanan.",
-    youGet: "Seluruh file aplikasi dan dukungan yang tetap berjalan",
+    title: "Pendampingan purnajual",
+    when: "30 hari & selanjutnya",
+    body: "Selama 30 hari pertama, setiap kendala kami perbaiki tanpa biaya. Setelahnya tersedia layanan pemeliharaan bulanan.",
+    youGet: "Kode sumber lengkap dan dukungan berkelanjutan",
   },
 ];
 
@@ -328,31 +331,31 @@ export const PRINCIPLES = [
   {
     value: 100,
     suffix: "%",
-    label: "Aplikasinya milik Anda",
-    body: "Seluruh file aplikasi dan akses server kami serahkan. Anda bebas melanjutkan dengan siapa pun, tanpa terikat dengan kami.",
+    label: "Kepemilikan penuh",
+    body: "Kode sumber, akses server, dan dokumentasi diserahkan sepenuhnya. Anda bebas melanjutkan pengembangan bersama pihak mana pun.",
   },
   {
     value: 30,
     suffix: " hari",
-    label: "Perbaikan gratis",
-    body: "Jika ada yang tidak berjalan semestinya dalam 30 hari setelah aplikasi dipakai, kami perbaiki tanpa biaya.",
+    label: "Garansi perbaikan",
+    body: "Setiap kendala yang muncul dalam 30 hari setelah peluncuran kami perbaiki tanpa biaya tambahan.",
   },
   {
     value: 2,
     suffix: " minggu",
-    label: "Laporan hasil yang rutin",
-    body: "Anda tidak menunggu sampai akhir. Setiap dua minggu, hasilnya bisa Anda lihat dan coba langsung.",
+    label: "Laporan progres berkala",
+    body: "Hasil pekerjaan dapat Anda tinjau dan uji setiap dua minggu, bukan hanya di akhir proyek.",
   },
 ] as const;
 
 export const INDUSTRIES = [
   "Kafe & Restoran",
-  "Toko & Retail",
+  "Retail",
   "Klinik & Kesehatan",
   "Salon & Kecantikan",
-  "Sekolah & Kursus",
+  "Pendidikan & Kursus",
   "Logistik & Ekspedisi",
-  "Jasa & Konsultan",
+  "Jasa Profesional",
 ] as const;
 
 export interface PricingPackage {
@@ -366,40 +369,40 @@ export interface PricingPackage {
 
 export const PRICING: PricingPackage[] = [
   {
-    name: "Website Usaha",
-    forWho: "Supaya usaha Anda terlihat terpercaya dan mudah ditemukan di Google.",
+    name: "Website Bisnis",
+    forWho: "Membangun kredibilitas usaha dan memudahkan calon pelanggan menemukan Anda di Google.",
     price: "2,5 jt",
     timeline: "1–2 minggu",
-    highlights: ["Desain khusus untuk usaha Anda", "Tombol langsung ke WhatsApp", "Bisa dicari di Google"],
+    highlights: ["Desain eksklusif sesuai identitas bisnis", "Terhubung langsung ke WhatsApp", "Optimasi mesin pencari (SEO)"],
   },
   {
-    name: "Sistem Booking",
-    forWho: "Untuk usaha berbasis jadwal yang lelah membalas chat reservasi.",
+    name: "Sistem Reservasi",
+    forWho: "Untuk bisnis berbasis jadwal yang ingin mengotomatiskan proses reservasi pelanggan.",
     price: "3,5 jt",
     timeline: "2–3 minggu",
-    highlights: ["Pelanggan pilih jadwal sendiri", "Bayar DP online", "Pengingat via WhatsApp"],
+    highlights: ["Pemesanan jadwal secara mandiri", "Pembayaran DP online", "Pengingat otomatis via WhatsApp"],
   },
   {
-    name: "Kasir & Stok",
-    forWho: "Untuk toko atau resto yang ingin stok dan laporan rapi tanpa rekap manual.",
+    name: "Kasir & Inventori",
+    forWho: "Untuk toko dan restoran yang membutuhkan pencatatan stok dan laporan penjualan yang akurat.",
     price: "4,5 jt",
     timeline: "3–5 minggu",
-    highlights: ["Bisa untuk banyak cabang", "Stok berkurang otomatis", "Laporan harian & bulanan"],
+    highlights: ["Mendukung banyak cabang", "Stok terbarui otomatis", "Laporan harian dan bulanan"],
     featured: true,
   },
 ];
 
 export const INCLUDED = [
-  "Perbaikan gratis 30 hari",
-  "Seluruh file aplikasi jadi milik Anda",
+  "Garansi perbaikan 30 hari",
+  "Kepemilikan penuh kode sumber",
   "Pelatihan untuk tim Anda",
-  "Bantuan pemasangan di server",
+  "Pendampingan instalasi server",
 ] as const;
 
 export const PAYMENT_TERMS = [
-  { percent: 50, label: "Di awal", when: "Saat kesepakatan ditandatangani" },
-  { percent: 30, label: "Di tengah", when: "Setelah fitur utama selesai dan Anda coba" },
-  { percent: 20, label: "Di akhir", when: "Setelah aplikasi siap dipakai" },
+  { percent: 50, label: "Termin 1", when: "Saat penandatanganan kontrak" },
+  { percent: 30, label: "Termin 2", when: "Setelah fitur utama selesai dan disetujui" },
+  { percent: 20, label: "Termin 3", when: "Setelah aplikasi resmi digunakan" },
 ] as const;
 
 export interface FaqItem {
@@ -409,50 +412,50 @@ export interface FaqItem {
 
 export const FAQS: FaqItem[] = [
   {
-    question: "Berapa biaya membuat aplikasi?",
+    question: "Berapa biaya pembuatan aplikasi?",
     answer:
-      "Tergantung kebutuhannya. Website usaha mulai Rp 2,5 juta, sistem booking mulai Rp 3,5 juta, dan kasir & stok mulai Rp 4,5 juta. Untuk aplikasi yang lebih khusus, kami berikan harga pasti setelah obrolan pertama yang gratis. Harga yang sudah disepakati tidak akan naik di tengah jalan.",
+      "Biaya bergantung pada lingkup kebutuhan. Website bisnis mulai Rp 2,5 juta, sistem reservasi mulai Rp 3,5 juta, serta kasir dan inventori mulai Rp 4,5 juta. Untuk kebutuhan khusus, kami menyampaikan penawaran tertulis setelah sesi konsultasi gratis. Nilai yang telah disepakati tidak akan berubah selama pengerjaan.",
   },
   {
-    question: "Saya tidak paham teknologi. Apakah tetap bisa?",
+    question: "Apakah saya perlu memahami hal teknis?",
     answer:
-      "Sangat bisa. Banyak pemilik usaha juga tidak paham teknis, dan itu bukan masalah. Anda cukup menceritakan cara kerja bisnis Anda dan masalah yang ingin diselesaikan. Urusan teknisnya kami yang pikirkan, dan semuanya kami jelaskan dengan bahasa sehari-hari.",
+      "Tidak perlu. Cukup sampaikan bagaimana bisnis Anda berjalan dan kendala yang ingin diselesaikan. Seluruh aspek teknis kami tangani, dan setiap keputusan penting kami jelaskan dengan bahasa yang mudah dipahami.",
   },
   {
-    question: "Berapa lama sampai aplikasinya bisa dipakai?",
+    question: "Berapa lama proses pengerjaannya?",
     answer:
-      "Website usaha biasanya 1–2 minggu, sistem kasir 3–5 minggu, dan aplikasi yang lebih khusus mulai 3 minggu. Jadwalnya kami tuliskan sejak awal, lengkap dengan target di setiap tahap.",
+      "Website bisnis umumnya 1–2 minggu, sistem kasir 3–5 minggu, dan aplikasi khusus mulai 3 minggu. Jadwal lengkap beserta target setiap tahap tercantum dalam kontrak.",
   },
   {
-    question: "Setelah jadi, aplikasinya milik siapa?",
+    question: "Siapa pemilik aplikasi setelah selesai?",
     answer:
-      "Milik Anda sepenuhnya. Setelah pelunasan, seluruh file aplikasi, akses server, dan nama domain kami serahkan. Anda bebas melanjutkan pengembangannya dengan siapa pun.",
+      "Sepenuhnya milik Anda. Setelah pelunasan, kode sumber, akses server, dan domain kami serahkan. Anda bebas melanjutkan pengembangan bersama pihak mana pun.",
   },
   {
-    question: "Saya sudah punya aplikasi lain. Bisa disambungkan?",
+    question: "Apakah bisa diintegrasikan dengan sistem yang sudah ada?",
     answer:
-      "Bisa. Kami pelajari dulu aplikasi yang sedang Anda pakai, lalu sarankan pilihan paling hemat: disambungkan, dikembangkan, atau dipindahkan ke aplikasi baru beserta datanya.",
+      "Bisa. Kami mengevaluasi sistem yang sedang Anda gunakan, lalu merekomendasikan opsi yang paling efisien: integrasi, pengembangan lanjutan, atau migrasi ke sistem baru beserta datanya.",
   },
   {
-    question: "Bagaimana cara pembayarannya?",
+    question: "Bagaimana skema pembayarannya?",
     answer:
-      "Dibayar tiga kali sesuai kemajuan pekerjaan: 50% saat kesepakatan ditandatangani, 30% setelah fitur utama selesai dan Anda coba, lalu 20% setelah aplikasi siap dipakai.",
+      "Pembayaran dilakukan dalam tiga termin sesuai progres: 50% saat penandatanganan kontrak, 30% setelah fitur utama selesai dan disetujui, serta 20% setelah aplikasi resmi digunakan.",
   },
   {
-    question: "Kalau ada masalah setelah aplikasi dipakai?",
+    question: "Bagaimana jika terjadi kendala setelah aplikasi digunakan?",
     answer:
-      "Selama 30 hari pertama, kami perbaiki gratis. Setelah itu tersedia layanan perawatan bulanan untuk pembaruan keamanan, cadangan data, dan penambahan fitur kecil.",
+      "Selama 30 hari pertama, perbaikan kami lakukan tanpa biaya. Setelahnya tersedia layanan pemeliharaan bulanan yang mencakup pembaruan keamanan, pencadangan data, dan pengembangan fitur minor.",
   },
 ];
 
 export const BRIEF_NEEDS = [
-  "Website usaha",
+  "Website bisnis",
   "Aplikasi web",
-  "Aplikasi HP",
-  "Kasir & stok",
-  "Booking online",
-  "Aplikasi kantor",
-  "Menyambungkan aplikasi",
+  "Aplikasi mobile",
+  "Kasir & inventori",
+  "Reservasi online",
+  "Aplikasi operasional",
+  "Integrasi sistem",
 ] as const;
 
 export const BRIEF_BUDGETS = [
@@ -460,5 +463,5 @@ export const BRIEF_BUDGETS = [
   "Rp 5–15 jt",
   "Rp 15–50 jt",
   "> Rp 50 jt",
-  "Belum tahu",
+  "Belum pasti",
 ] as const;

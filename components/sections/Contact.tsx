@@ -53,14 +53,14 @@ export function Contact() {
     }
     const data = new FormData(form);
     const message = [
-      "Halo Nakami Studio, saya ingin konsultasi soal aplikasi untuk usaha saya.",
+      "Halo Nakami Studio, saya ingin berkonsultasi mengenai kebutuhan aplikasi untuk bisnis saya.",
       "",
       `Nama: ${data.get("name")}`,
-      data.get("company") ? `Bisnis: ${data.get("company")}` : null,
+      data.get("company") ? `Perusahaan: ${data.get("company")}` : null,
       needs.length ? `Kebutuhan: ${needs.join(", ")}` : null,
-      `Perkiraan dana: ${budget}`,
+      `Perkiraan anggaran: ${budget}`,
       "",
-      `Kendala: ${data.get("message")}`,
+      `Deskripsi kebutuhan: ${data.get("message")}`,
     ]
       .filter((line) => line !== null)
       .join("\n");
@@ -84,18 +84,18 @@ export function Contact() {
       <div className="container-x grid gap-16 lg:grid-cols-[1fr_minmax(0,34rem)] lg:gap-20">
         <div className="flex flex-col">
           <SectionLabel tone="dark">
-            Mulai dari obrolan
+            Konsultasi
           </SectionLabel>
           <h2
             id="kontak-title"
             data-split
             className="mt-6 max-w-[14ch] font-display text-[clamp(2.5rem,6vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.045em]"
           >
-            Ceritakan kendalanya. Kami carikan jalan keluarnya.
+            Diskusikan kebutuhan bisnis Anda.
           </h2>
           <p data-reveal className="mt-8 max-w-md text-lg leading-relaxed text-white/60">
-            Tidak perlu istilah teknis. Ceritakan saja dengan bahasa Anda sendiri, lalu kita lanjutkan obrolannya di
-            WhatsApp.
+            Sampaikan kendala bisnis Anda dengan bahasa Anda sendiri, tanpa istilah teknis. Kami akan
+            menindaklanjutinya melalui WhatsApp pada jam kerja.
           </p>
 
           <div className="mt-auto hidden pt-16 lg:block" aria-hidden>
@@ -126,7 +126,7 @@ export function Contact() {
           aria-describedby="brief-hint"
         >
           <fieldset>
-            <legend className="text-sm font-medium">Apa yang Anda butuhkan? (boleh pilih lebih dari satu)</legend>
+            <legend className="text-sm font-medium">Kebutuhan Anda (dapat memilih lebih dari satu)</legend>
             <div className="mt-3 flex flex-wrap gap-2">
               {BRIEF_NEEDS.map((need) => {
                 const checked = needs.includes(need);
@@ -150,7 +150,7 @@ export function Contact() {
           </fieldset>
 
           <fieldset className="mt-7">
-            <legend className="text-sm font-medium">Perkiraan dana</legend>
+            <legend className="text-sm font-medium">Perkiraan anggaran</legend>
             <div className="mt-3 grid grid-cols-2 gap-1 rounded-2xl bg-paper-3 p-1 sm:grid-cols-5">
               {BRIEF_BUDGETS.map((b) => (
                 <label
@@ -176,18 +176,18 @@ export function Contact() {
 
           <div className="mt-7 grid gap-4 sm:grid-cols-2">
             <Field label="Nama" name="name" autoComplete="name" required />
-            <Field label="Nama bisnis" name="company" autoComplete="organization" optional />
+            <Field label="Nama perusahaan" name="company" autoComplete="organization" optional />
           </div>
           <div className="mt-4">
-            <Field label="Ceritakan kendala yang ingin dibenahi" name="message" textarea required />
+            <Field label="Jelaskan kendala yang ingin diselesaikan" name="message" textarea required />
           </div>
 
           <p id="brief-hint" className={cn("mt-4 text-xs", status === "error" ? "text-crimson" : "text-faint")}>
             {status === "error"
-              ? "Mohon isi nama dan ceritakan sedikit kendalanya dulu."
+              ? "Mohon lengkapi nama dan deskripsi kebutuhan Anda."
               : status === "sent"
-                ? "Pesan sudah disiapkan di WhatsApp. Tinggal tekan kirim."
-                : "Data Anda tidak kami simpan di sini. Pesan akan terbuka di WhatsApp, tinggal tekan kirim."}
+                ? "Pesan Anda telah disiapkan di WhatsApp. Silakan tekan kirim."
+                : "Data tidak disimpan di situs ini. Pesan akan dibuka di WhatsApp untuk Anda kirimkan."}
           </p>
 
           <button
@@ -198,7 +198,7 @@ export function Contact() {
               aria-hidden
               className="absolute inset-0 origin-left scale-x-0 bg-sunset transition-transform duration-700 ease-out-expo group-hover/submit:scale-x-100"
             />
-            <span className="relative">Lanjutkan di WhatsApp</span>
+            <span className="relative">Kirim melalui WhatsApp</span>
             <span className="relative grid size-10 place-items-center rounded-full bg-orange transition-colors duration-500 group-hover/submit:bg-ink">
               <ArrowUpRight
                 className="size-4 transition-transform duration-500 ease-out-expo group-hover/submit:rotate-45"

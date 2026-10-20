@@ -15,23 +15,23 @@ export function Faq() {
     <section id="faq" aria-labelledby="faq-title" className="bg-paper py-28 md:py-40">
       <div className="container-x grid gap-14 lg:grid-cols-[minmax(0,26rem)_1fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <SectionLabel>Tanya jawab</SectionLabel>
+          <SectionLabel>FAQ</SectionLabel>
           <h2
             id="faq-title"
             data-split
             className="mt-6 font-display text-[clamp(2.25rem,5vw,4.25rem)] font-semibold leading-[1] tracking-[-0.04em]"
           >
-            Yang sering ditanyakan.
+            Pertanyaan yang sering diajukan.
           </h2>
           <p data-reveal className="mt-6 max-w-sm text-muted">
-            Masih ada yang ingin ditanyakan?{" "}
+            Belum menemukan jawaban yang Anda cari?{" "}
             <a
-              href={whatsappUrl("Halo Nakami Studio, saya punya pertanyaan:")}
+              href={whatsappUrl("Halo Nakami Studio, saya ingin bertanya:")}
               target="_blank"
               rel="noopener noreferrer"
               className="text-ink underline decoration-orange decoration-2 underline-offset-4 transition-colors hover:text-orange"
             >
-              Tanya langsung lewat WhatsApp
+              Hubungi kami melalui WhatsApp
             </a>{" "}
             atau email ke{" "}
             <a href={`mailto:${SITE.email}`} className="text-ink underline decoration-line-strong underline-offset-4 hover:text-orange">

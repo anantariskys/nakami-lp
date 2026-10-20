@@ -6,13 +6,13 @@ export function Principles() {
   return (
     <section aria-labelledby="prinsip-title" className="relative overflow-hidden bg-paper py-28 md:py-40">
       <div className="container-x">
-        <SectionLabel>Janji kami</SectionLabel>
+        <SectionLabel>Komitmen kami</SectionLabel>
         <h2
           id="prinsip-title"
           data-split
           className="mt-6 max-w-[20ch] font-display text-[clamp(2.25rem,5vw,4.25rem)] font-semibold leading-[1] tracking-[-0.04em]"
         >
-          Janji yang kami tuliskan hitam di atas putih.
+          Komitmen yang kami tuangkan dalam kontrak.
         </h2>
 
         <div data-reveal-group className="mt-16 grid gap-4 md:mt-20 md:grid-cols-3">
@@ -38,10 +38,9 @@ export function Principles() {
 
       <div className="mt-24 md:mt-32">
         <div data-reveal className="container-x mb-10 flex flex-col justify-between gap-3 md:flex-row md:items-end">
-          <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">Teknologi yang kami pakai</h3>
+          <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">Teknologi yang kami gunakan</h3>
           <p className="max-w-md text-sm text-muted">
-            Teknologi modern yang juga dipakai perusahaan teknologi besar: andal, aman, dan mudah dirawat
-            dalam jangka panjang.
+            Teknologi modern yang andal, aman, dan mudah dipelihara dalam jangka panjang.
           </p>
         </div>
         <LogoMarquee />

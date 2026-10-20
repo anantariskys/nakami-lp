@@ -95,11 +95,11 @@ export function CostCalculator() {
     <div ref={root} className="grid gap-4 lg:grid-cols-[22rem_1fr]">
       {/* Inputs */}
       <div className="rounded-[1.5rem] border border-line bg-paper p-6 md:p-7">
-        <p className="text-sm font-medium">Ubah angkanya sesuai usaha Anda</p>
+        <p className="text-sm font-medium">Sesuaikan dengan kondisi bisnis Anda</p>
         <div className="mt-6 space-y-6">
           <Slider
             label="Biaya langganan aplikasi jadi"
-            suffix="/ bulan per cabang"
+            suffix="per bulan, per cabang"
             value={inputs.subscription}
             min={100_000}
             max={1_000_000}
@@ -116,7 +116,7 @@ export function CostCalculator() {
             format={(v) => `${v}`}
           />
           <Slider
-            label="Biaya buat aplikasi sendiri"
+            label="Biaya pengembangan aplikasi sendiri"
             suffix="sekali bayar"
             value={inputs.build}
             min={3_000_000}
@@ -125,8 +125,8 @@ export function CostCalculator() {
             onChange={set("build")}
           />
           <Slider
-            label="Biaya perawatan aplikasi sendiri"
-            suffix="/ bulan"
+            label="Biaya pemeliharaan aplikasi sendiri"
+            suffix="per bulan"
             value={inputs.upkeep}
             min={0}
             max={2_000_000}
@@ -139,7 +139,7 @@ export function CostCalculator() {
           onClick={() => setInputs(DEFAULTS)}
           className="mt-6 text-xs text-muted underline decoration-line-strong underline-offset-4 hover:text-ink"
         >
-          Kembalikan ke contoh awal
+          Kembalikan ke nilai awal
         </button>
       </div>
 
@@ -153,26 +153,26 @@ export function CostCalculator() {
             <p className="mt-1 font-display text-3xl font-semibold tracking-tight md:text-4xl" aria-live="polite">
               {breakEven !== null ? (
                 <>
-                  Balik modal di <span className="text-orange-ink">bulan ke-{breakEven}</span>
+                  Titik impas pada <span className="text-orange-ink">bulan ke-{breakEven}</span>
                 </>
               ) : (
-                <>Dalam 3 tahun, berlangganan masih lebih hemat</>
+                <>Dalam 3 tahun, berlangganan lebih ekonomis</>
               )}
             </p>
             <p className="mt-1 text-sm text-muted">
               {breakEven !== null
-                ? `Setelah itu, aplikasi sendiri lebih hemat. Selisih di bulan ke-36: ${rupiah(savings)}.`
-                : "Dan itu tidak apa-apa. Aplikasi sendiri lebih cocok saat cara kerja Anda tidak terlayani aplikasi jadi."}
+                ? `Setelahnya, aplikasi sendiri lebih ekonomis. Selisih pada bulan ke-36: ${rupiah(savings)}.`
+                : "Aplikasi sendiri tetap layak dipertimbangkan bila proses bisnis Anda tidak terakomodasi oleh aplikasi jadi."}
             </p>
           </div>
           <ul className="flex gap-4 text-xs text-muted" aria-label="Keterangan grafik">
             <li className="flex items-center gap-2">
               <span className="h-0.5 w-4 rounded-full" style={{ background: COLOR_SUB }} aria-hidden />
-              Langganan aplikasi jadi
+              Berlangganan aplikasi jadi
             </li>
             <li className="flex items-center gap-2">
               <span className="h-0.5 w-4 rounded-full" style={{ background: COLOR_OWN }} aria-hidden />
-              Buat aplikasi sendiri
+              Membangun aplikasi sendiri
             </li>
           </ul>
         </div>
@@ -183,7 +183,7 @@ export function CostCalculator() {
             viewBox={`0 0 ${W} ${H}`}
             className="h-auto w-full touch-pan-y overflow-visible outline-none focus-visible:ring-2 focus-visible:ring-orange"
             role="img"
-            aria-label={`Grafik biaya kumulatif 36 bulan. Langganan ${rupiah(sub[MONTHS])}, aplikasi sendiri ${rupiah(own[MONTHS])}. Gunakan panah kiri dan kanan untuk melihat per bulan.`}
+            aria-label={`Grafik biaya kumulatif 36 bulan. Berlangganan ${rupiah(sub[MONTHS])}, aplikasi sendiri ${rupiah(own[MONTHS])}. Gunakan panah kiri dan kanan untuk melihat per bulan.`}
             tabIndex={0}
             onPointerMove={onPointer}
             onPointerLeave={() => setHover(null)}
@@ -216,7 +216,7 @@ export function CostCalculator() {
                   strokeDasharray="3 3"
                 />
                 <text x={x(breakEven) + 6} y={PAD.top + 10} className="fill-ink text-[11px] font-medium">
-                  Balik modal
+                  Titik impas
                 </text>
               </g>
             )}
@@ -246,27 +246,27 @@ export function CostCalculator() {
               }}
             >
               <p className="text-[11px] text-white/60">Bulan ke-{hover}</p>
-              <TooltipRow color={COLOR_SUB} value={rupiah(sub[hover])} label="Langganan" />
-              <TooltipRow color={COLOR_OWN} value={rupiah(own[hover])} label="Buat sendiri" />
+              <TooltipRow color={COLOR_SUB} value={rupiah(sub[hover])} label="Berlangganan" />
+              <TooltipRow color={COLOR_OWN} value={rupiah(own[hover])} label="Membangun sendiri" />
             </div>
           )}
         </div>
 
         <figcaption className="mt-4 text-xs leading-relaxed text-faint">
-          Angka hanya ilustrasi untuk membantu menimbang. Belum termasuk hal yang sulit dihitung, seperti fitur yang
-          tidak tersedia di aplikasi jadi atau data yang tersimpan di pihak lain.
+          Angka bersifat ilustratif sebagai bahan pertimbangan. Belum memperhitungkan faktor nonfinansial, seperti
+          fitur yang tidak tersedia pada aplikasi jadi atau kepemilikan data.
         </figcaption>
 
         <details className="mt-3 text-sm">
           <summary className="cursor-pointer text-xs text-muted underline decoration-line-strong underline-offset-4 hover:text-ink">
-            Lihat angkanya dalam tabel
+            Tampilkan dalam bentuk tabel
           </summary>
           <table className="mt-3 w-full text-left text-xs">
             <thead className="text-faint">
               <tr>
                 <th className="py-1.5 font-normal">Bulan</th>
-                <th className="py-1.5 font-normal">Langganan</th>
-                <th className="py-1.5 font-normal">Buat sendiri</th>
+                <th className="py-1.5 font-normal">Berlangganan</th>
+                <th className="py-1.5 font-normal">Membangun sendiri</th>
               </tr>
             </thead>
             <tbody>

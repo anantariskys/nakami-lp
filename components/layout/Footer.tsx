@@ -33,7 +33,7 @@ export function Footer() {
             <span className="font-display text-lg font-semibold tracking-tight">{SITE.name}</span>
           </div>
           <p className="mt-5 text-sm leading-relaxed text-white/50">
-            Jasa pembuatan aplikasi untuk bisnis di Indonesia, dibuat sesuai cara kerja Anda.
+            Jasa pengembangan aplikasi bisnis di Indonesia, dirancang sesuai proses kerja Anda.
           </p>
         </div>
 

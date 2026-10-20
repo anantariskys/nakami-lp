@@ -226,9 +226,9 @@ export function Navbar() {
         </ul>
         <div className="overflow-hidden">
           <div data-menu-item className="space-y-4">
-            <p className="text-sm text-white/50">Punya kendala yang ingin dibenahi?</p>
+            <p className="text-sm text-white/50">Siap mendiskusikan kebutuhan Anda?</p>
             <MagneticButton href={whatsappUrl(DEFAULT_WA_MESSAGE)} variant="light" size="lg">
-              Konsultasi gratis via WhatsApp
+              Konsultasi via WhatsApp
             </MagneticButton>
           </div>
         </div>
