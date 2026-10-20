@@ -1,13 +1,12 @@
 import { cn } from "@/lib/cn";
 
 interface SectionLabelProps {
-  index: string;
   children: React.ReactNode;
   tone?: "light" | "dark";
   className?: string;
 }
 
-export function SectionLabel({ index, children, tone = "light", className }: SectionLabelProps) {
+export function SectionLabel({ children, tone = "light", className }: SectionLabelProps) {
   return (
     <p
       data-reveal
@@ -17,7 +16,8 @@ export function SectionLabel({ index, children, tone = "light", className }: Sec
         className,
       )}
     >
-      <span className={tone === "light" ? "text-orange-ink" : "text-orange"}>{index}</span>
+      {/* Numbered by a CSS counter on <main>, so hidden sections never leave gaps. */}
+      <span aria-hidden className={cn("section-index", tone === "light" ? "text-orange-ink" : "text-orange")} />
       <span aria-hidden className={cn("h-px w-8", tone === "light" ? "bg-line-strong" : "bg-white/20")} />
       {children}
     </p>

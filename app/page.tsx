@@ -4,6 +4,9 @@ import { Hero } from "@/components/sections/hero/Hero";
 import { Statement } from "@/components/sections/Statement";
 import { Services } from "@/components/sections/services/Services";
 import { Process } from "@/components/sections/Process";
+import { Guide } from "@/components/sections/guide/Guide";
+import { Portfolio } from "@/components/sections/Portfolio";
+import { SHOW_PORTFOLIO } from "@/lib/content";
 import { Principles } from "@/components/sections/Principles";
 import { Pricing } from "@/components/sections/Pricing";
 import { Faq } from "@/components/sections/Faq";
@@ -28,7 +31,9 @@ export default function HomePage() {
         <Hero />
         <Statement />
         <Services />
+        <Guide />
         <Process />
+        {SHOW_PORTFOLIO && <Portfolio />}
         <Principles />
         <Pricing />
         <Faq />

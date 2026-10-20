@@ -83,7 +83,7 @@ export function Process() {
       <div className="container-x">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <SectionLabel index="02" tone="dark">
+            <SectionLabel tone="dark">
               Cara kerja
             </SectionLabel>
             <h2

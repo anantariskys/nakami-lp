@@ -50,7 +50,7 @@ export function Services() {
       <div className="container-x">
         <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
           <div>
-            <SectionLabel index="01">Layanan</SectionLabel>
+            <SectionLabel>Layanan</SectionLabel>
             <h2
               id="layanan-title"
               data-split
@@ -143,7 +143,7 @@ export function Services() {
             })}
           </ol>
 
-          <aside id="service-preview" aria-live="polite" className="hidden lg:block">
+          <aside id="service-preview" className="hidden lg:block">
             <div className="sticky top-24 overflow-hidden rounded-[1.75rem] bg-night p-6 text-paper">
               <div
                 aria-hidden

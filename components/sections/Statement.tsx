@@ -5,7 +5,7 @@ export function Statement() {
   return (
     <section aria-labelledby="statement-title" className="relative bg-paper py-28 md:py-44">
       <div className="container-x">
-        <SectionLabel index="00">Kenapa perlu aplikasi sendiri</SectionLabel>
+        <SectionLabel>Kenapa perlu aplikasi sendiri</SectionLabel>
 
         <h2 id="statement-title" className="sr-only">
           Masalah sehari-hari yang kami bantu selesaikan

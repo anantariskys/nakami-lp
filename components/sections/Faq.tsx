@@ -15,7 +15,7 @@ export function Faq() {
     <section id="faq" aria-labelledby="faq-title" className="bg-paper py-28 md:py-40">
       <div className="container-x grid gap-14 lg:grid-cols-[minmax(0,26rem)_1fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <SectionLabel index="05">Tanya jawab</SectionLabel>
+          <SectionLabel>Tanya jawab</SectionLabel>
           <h2
             id="faq-title"
             data-split

@@ -14,7 +14,7 @@ export function Pricing() {
       <div className="container-x">
         <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
           <div>
-            <SectionLabel index="04">Biaya</SectionLabel>
+            <SectionLabel>Biaya</SectionLabel>
             <h2
               id="investasi-title"
               data-split

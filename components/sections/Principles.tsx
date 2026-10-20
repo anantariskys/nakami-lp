@@ -6,7 +6,7 @@ export function Principles() {
   return (
     <section aria-labelledby="prinsip-title" className="relative overflow-hidden bg-paper py-28 md:py-40">
       <div className="container-x">
-        <SectionLabel index="03">Janji kami</SectionLabel>
+        <SectionLabel>Janji kami</SectionLabel>
         <h2
           id="prinsip-title"
           data-split

@@ -78,6 +78,16 @@
   animation: drop-in 1.2s var(--ease-out-expo) 0.5s backwards;
 }
 
+/* Section numbers: 00 for the first labelled section, then 01, 02… */
+main {
+  counter-reset: section -1;
+}
+
+.section-index::before {
+  counter-increment: section;
+  content: counter(section, decimal-leading-zero);
+}
+
 @keyframes dash {
   to {
     stroke-dashoffset: -20;

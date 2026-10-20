@@ -83,7 +83,7 @@ export function Contact() {
 
       <div className="container-x grid gap-16 lg:grid-cols-[1fr_minmax(0,34rem)] lg:gap-20">
         <div className="flex flex-col">
-          <SectionLabel index="06" tone="dark">
+          <SectionLabel tone="dark">
             Mulai dari obrolan
           </SectionLabel>
           <h2

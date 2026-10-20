@@ -1,9 +1,172 @@
-export const NAV_LINKS = [
+/* ------------------------------------------------------------------ */
+/* Portfolio                                                           */
+/* ------------------------------------------------------------------ */
+
+export interface Project {
+  /** Unique slug, e.g. "kasir-kopi-senja". */
+  id: string;
+  /** Business name as the client agreed to show it. */
+  client: string;
+  sector: string;
+  /** What was built, in plain words. */
+  title: string;
+  /** Situation before, one or two sentences. */
+  problem: string;
+  /** What changed after, one or two sentences. */
+  result: string;
+  /** Optional headline number, e.g. { value: "5 menit", label: "rekap harian, dari 2 jam" }. */
+  highlight?: { value: string; label: string };
+  /** Screenshot in /public/portfolio, ideally 1600×1000 WebP. */
+  image: { src: string; alt: string };
+  tags: string[];
+  year: number;
+  /** Optional public link to the live app or website. */
+  url?: string;
+  testimonial?: { quote: string; name: string; role: string };
+}
+
+/**
+ * Real, client-approved projects only. The Portfolio section and its nav
+ * link stay hidden in production until this list has at least one entry.
+ */
+export const PROJECTS: Project[] = [];
+
+/**
+ * Placeholder entries so the layout can be reviewed in `next dev`.
+ * Never rendered in production builds, and visibly labelled as examples.
+ */
+export const SAMPLE_PROJECTS: Project[] = [
+  {
+    id: "contoh-kasir",
+    client: "Nama usaha klien",
+    sector: "Kafe & Restoran",
+    title: "Aplikasi kasir & stok untuk 3 cabang",
+    problem: "Ceritakan kondisi sebelum ada aplikasi, misalnya stok dicatat manual di buku tiap malam.",
+    result: "Ceritakan perubahan setelahnya, misalnya laporan harian langsung jadi tanpa rekap manual.",
+    highlight: { value: "00 menit", label: "contoh angka hasil" },
+    image: { src: "/services/kasir-stok.webp", alt: "Contoh tampilan aplikasi kasir" },
+    tags: ["Kasir", "Stok", "Multi cabang"],
+    year: 2026,
+  },
+  {
+    id: "contoh-booking",
+    client: "Nama usaha klien",
+    sector: "Klinik & Kesehatan",
+    title: "Sistem booking online",
+    problem: "Kondisi sebelum.",
+    result: "Hasil setelahnya.",
+    image: { src: "/services/booking-online.webp", alt: "Contoh tampilan sistem booking" },
+    tags: ["Booking", "Pembayaran DP"],
+    year: 2026,
+  },
+  {
+    id: "contoh-kantor",
+    client: "Nama usaha klien",
+    sector: "Jasa & Konsultan",
+    title: "Aplikasi pengajuan dana kantor",
+    problem: "Kondisi sebelum.",
+    result: "Hasil setelahnya.",
+    image: { src: "/services/operasional-kantor.webp", alt: "Contoh tampilan aplikasi kantor" },
+    tags: ["Aplikasi kantor", "Persetujuan"],
+    year: 2026,
+  },
+];
+
+export const SHOW_PORTFOLIO = PROJECTS.length > 0 || process.env.NODE_ENV !== "production";
+
+export const NAV_LINKS: ReadonlyArray<{ href: string; label: string }> = [
   { href: "#layanan", label: "Layanan" },
+  { href: "#panduan", label: "Panduan" },
   { href: "#proses", label: "Cara Kerja" },
+  ...(SHOW_PORTFOLIO ? [{ href: "#portfolio", label: "Portfolio" }] : []),
   { href: "#investasi", label: "Biaya" },
   { href: "#faq", label: "Tanya Jawab" },
-] as const;
+];
+
+/* ------------------------------------------------------------------ */
+/* Guide: website vs web app vs mobile app                             */
+/* ------------------------------------------------------------------ */
+
+export type AppKind = "website" | "webapp" | "mobile";
+
+export const APP_KINDS: Array<{ id: AppKind; name: string; analogy: string; example: string }> = [
+  {
+    id: "website",
+    name: "Website",
+    analogy: "Ibarat etalase toko. Orang datang, melihat-lihat, lalu menghubungi Anda.",
+    example: "Profil usaha, katalog produk, halaman promo",
+  },
+  {
+    id: "webapp",
+    name: "Aplikasi Web",
+    analogy: "Ibarat kantor yang bisa dibuka dari browser mana saja. Tempat tim bekerja setiap hari.",
+    example: "Kasir, stok, booking, pengajuan dana, laporan",
+  },
+  {
+    id: "mobile",
+    name: "Aplikasi HP",
+    analogy: "Ibarat kartu member di saku pelanggan. Selalu ada di HP dan bisa menyapa lewat notifikasi.",
+    example: "Pesan-antar, member & poin, aplikasi kurir",
+  },
+];
+
+/** level: 1–3 drives the dot meter; text is what's shown. */
+export const APP_COMPARISON: Array<{
+  label: string;
+  hint?: string;
+  values: Record<AppKind, { text: string; level?: 1 | 2 | 3; ok?: boolean }>;
+}> = [
+  {
+    label: "Cara membuka",
+    values: {
+      website: { text: "Lewat browser" },
+      webapp: { text: "Lewat browser, perlu login" },
+      mobile: { text: "Diunduh dari Play Store / App Store" },
+    },
+  },
+  {
+    label: "Perlu install?",
+    values: {
+      website: { text: "Tidak", ok: true },
+      webapp: { text: "Tidak", ok: true },
+      mobile: { text: "Ya", ok: false },
+    },
+  },
+  {
+    label: "Bisa dipakai tanpa internet",
+    values: {
+      website: { text: "Tidak", ok: false },
+      webapp: { text: "Sebagian fitur", ok: true },
+      mobile: { text: "Ya", ok: true },
+    },
+  },
+  {
+    label: "Kirim notifikasi ke HP",
+    values: {
+      website: { text: "Tidak", ok: false },
+      webapp: { text: "Lewat WhatsApp / email", ok: true },
+      mobile: { text: "Ya, langsung muncul di HP", ok: true },
+    },
+  },
+  {
+    label: "Biaya pembuatan",
+    hint: "Perbandingan kasar, bukan harga pasti",
+    values: {
+      website: { text: "Paling hemat", level: 1 },
+      webapp: { text: "Menengah", level: 2 },
+      mobile: { text: "Paling besar", level: 3 },
+    },
+  },
+  {
+    label: "Lama pembuatan",
+    hint: "Perkiraan umum",
+    values: {
+      website: { text: "1–2 minggu", level: 1 },
+      webapp: { text: "3–6 minggu", level: 2 },
+      mobile: { text: "6–12 minggu", level: 3 },
+    },
+  },
+];
 
 export interface Service {
   id: string;
