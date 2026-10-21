@@ -171,6 +171,106 @@ export const APP_COMPARISON: Array<{
   },
 ];
 
+/* ------------------------------------------------------------------ */
+/* Guide: system map (which system solves which problem)               */
+/* ------------------------------------------------------------------ */
+
+export type SystemId = "pos" | "inventory" | "booking" | "crm" | "erp" | "integration";
+export type BusinessScale = "kecil" | "menengah" | "perusahaan";
+
+export interface BusinessSystem {
+  id: SystemId;
+  name: string;
+  short: string;
+  /** One-sentence definition in plain words. */
+  what: string;
+  solves: string[];
+  features: string[];
+  fits: string[];
+  scale: BusinessScale[];
+}
+
+export const SYSTEMS: BusinessSystem[] = [
+  {
+    id: "pos",
+    name: "Sistem Kasir (POS)",
+    short: "Kasir",
+    what: "Mencatat setiap transaksi penjualan di titik pembayaran, mulai dari pesanan hingga struk dan rekap harian.",
+    solves: ["Antrean pembayaran yang lambat", "Rekap penjualan harian dilakukan manual", "Selisih uang kas di akhir hari"],
+    features: ["Pembayaran tunai, QRIS & kartu", "Cetak struk", "Diskon & promo", "Laporan penjualan harian"],
+    fits: ["Kafe & restoran", "Toko retail", "Apotek"],
+    scale: ["kecil", "menengah"],
+  },
+  {
+    id: "inventory",
+    name: "Sistem Inventori",
+    short: "Inventori",
+    what: "Memantau jumlah dan pergerakan stok di gudang maupun cabang, sehingga persediaan selalu sesuai catatan.",
+    solves: ["Stok fisik tidak sesuai catatan", "Barang habis tanpa diketahui", "Sulit memantau stok antar cabang"],
+    features: ["Stok terbarui otomatis", "Peringatan stok menipis", "Mutasi antar gudang", "Stock opname"],
+    fits: ["Retail & distributor", "F&B dengan bahan baku", "Manufaktur skala kecil"],
+    scale: ["kecil", "menengah", "perusahaan"],
+  },
+  {
+    id: "booking",
+    name: "Sistem Reservasi",
+    short: "Reservasi",
+    what: "Memungkinkan pelanggan memilih dan memesan jadwal secara mandiri, lengkap dengan kuota dan pembayaran uang muka.",
+    solves: ["Jadwal pelanggan sering bentrok", "Admin kewalahan membalas chat reservasi", "Pelanggan batal tanpa kabar"],
+    features: ["Kalender slot real-time", "Pembayaran DP online", "Pengingat via WhatsApp", "Pengaturan kuota"],
+    fits: ["Klinik & dokter gigi", "Salon & barbershop", "Studio & rental"],
+    scale: ["kecil", "menengah"],
+  },
+  {
+    id: "crm",
+    name: "CRM (Manajemen Pelanggan)",
+    short: "CRM",
+    what: "Menyimpan data dan riwayat setiap pelanggan agar tim dapat menindaklanjuti, menawarkan promo, dan menjaga loyalitas.",
+    solves: ["Data pelanggan tidak tercatat rapi", "Pelanggan lama jarang kembali", "Tindak lanjut penawaran terlewat"],
+    features: ["Riwayat transaksi pelanggan", "Segmentasi pelanggan", "Program poin & member", "Pengingat tindak lanjut"],
+    fits: ["Bisnis jasa", "Retail dengan member", "Tim penjualan B2B"],
+    scale: ["menengah", "perusahaan"],
+  },
+  {
+    id: "erp",
+    name: "ERP (Sistem Terpadu)",
+    short: "ERP",
+    what: "Menyatukan keuangan, pembelian, persediaan, dan operasional antar divisi dalam satu sistem dengan satu sumber data.",
+    solves: ["Data antar divisi tidak sinkron", "Persetujuan dokumen berjalan lambat", "Laporan perusahaan sulit disusun"],
+    features: ["Alur persetujuan bertingkat", "Pembelian & penagihan", "Akuntansi terintegrasi", "Laporan lintas divisi"],
+    fits: ["Perusahaan multi-divisi", "Distributor", "Kontraktor & proyek"],
+    scale: ["perusahaan"],
+  },
+  {
+    id: "integration",
+    name: "Integrasi Sistem",
+    short: "Integrasi",
+    what: "Menghubungkan aplikasi yang sudah Anda gunakan agar data berpindah otomatis tanpa perlu diinput ulang.",
+    solves: ["Data diinput berulang di banyak aplikasi", "Pesanan marketplace dicatat manual", "Notifikasi ke pelanggan dikirim satu per satu"],
+    features: ["Sinkronisasi data otomatis", "Koneksi marketplace & pembayaran", "Pencatatan ke akuntansi", "Notifikasi WhatsApp"],
+    fits: ["Bisnis dengan banyak kanal penjualan", "Tim yang memakai beberapa aplikasi"],
+    scale: ["kecil", "menengah", "perusahaan"],
+  },
+];
+
+/** Everyday problems, each pointing at the system that solves it. */
+export const PROBLEMS: Array<{ label: string; system: SystemId }> = [
+  { label: "Stok sering selisih", system: "inventory" },
+  { label: "Rekap penjualan masih manual", system: "pos" },
+  { label: "Jadwal pelanggan bentrok", system: "booking" },
+  { label: "Pelanggan lama jarang kembali", system: "crm" },
+  { label: "Data antar divisi tidak sinkron", system: "erp" },
+  { label: "Input data berulang di banyak aplikasi", system: "integration" },
+  { label: "Admin kewalahan membalas chat reservasi", system: "booking" },
+  { label: "Persetujuan dokumen lambat", system: "erp" },
+];
+
+export const SCALE_LABELS: Record<BusinessScale, string> = {
+  kecil: "Usaha kecil",
+  menengah: "Usaha menengah",
+  perusahaan: "Perusahaan",
+};
+
 export interface Service {
   id: string;
   title: string;
