@@ -1,30 +1,18 @@
-import Image from "next/image";
-import { ArrowUpRight, Quote } from "lucide-react";
-import { PROJECTS, SAMPLE_PROJECTS, type Project } from "@/lib/content";
-import { cn } from "@/lib/cn";
+import { CreditCard, Cpu, LayoutDashboard, TabletSmartphone, type LucideIcon } from "lucide-react";
+import { PROJECTS, type Project } from "@/lib/content";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { CaseStage } from "./portfolio/CaseStage";
+import { CaseGallery } from "./portfolio/CaseGallery";
 
-/**
- * Real projects from PROJECTS. In development, while the list is empty,
- * labelled SAMPLE_PROJECTS fill the layout; production renders nothing
- * (see SHOW_PORTFOLIO in lib/content).
- */
+const COMPONENT_ICONS: LucideIcon[] = [TabletSmartphone, Cpu, CreditCard, LayoutDashboard];
+
 export function Portfolio() {
-  const isSample = PROJECTS.length === 0;
-  const projects = isSample ? SAMPLE_PROJECTS : PROJECTS;
-  const [featured, ...rest] = projects;
+  const [featured, ...rest] = PROJECTS;
+  if (!featured) return null;
 
   return (
-    <section id="portfolio" aria-labelledby="portfolio-title" className="border-t border-line bg-paper-2 py-28 md:py-40">
+    <section id="portfolio" aria-labelledby="portfolio-title" className="bg-paper-2 py-28 md:py-40">
       <div className="container-x">
-        {isSample && (
-          <p className="mb-10 rounded-2xl border border-dashed border-orange/50 bg-orange/[0.06] px-5 py-4 text-sm text-orange-ink">
-            Mode development: ini contoh tata letak. Isi <code className="font-mono">PROJECTS</code> di{" "}
-            <code className="font-mono">lib/content.ts</code> dengan proyek asli. Section ini tidak tampil di
-            production sampai ada isinya.
-          </p>
-        )}
-
         <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <SectionLabel>Portfolio</SectionLabel>
@@ -37,21 +25,22 @@ export function Portfolio() {
             </h2>
           </div>
           <p data-reveal className="max-w-sm text-muted">
-            Sejumlah proyek yang telah kami selesaikan, beserta dampaknya bagi operasional klien.
+            Sistem yang sudah berjalan dan digunakan setiap hari, dari perangkat di lokasi hingga dashboard di ponsel
+            pemiliknya.
           </p>
         </div>
 
-        {featured && (
-          <div data-reveal className="mt-16 md:mt-20">
-            <ProjectCard project={featured} featured sample={isSample} />
-          </div>
-        )}
+        <div data-reveal className="mt-16 md:mt-20">
+          <CaseStage project={featured} />
+        </div>
+
+        <CaseDetail project={featured} />
 
         {rest.length > 0 && (
-          <ul data-reveal-group className="mt-4 grid gap-4 md:grid-cols-2">
+          <ul data-reveal-group className="mt-24 grid gap-4 md:grid-cols-2">
             {rest.map((p) => (
               <li key={p.id} data-reveal>
-                <ProjectCard project={p} sample={isSample} />
+                <CaseStage project={p} />
               </li>
             ))}
           </ul>
@@ -61,86 +50,103 @@ export function Portfolio() {
   );
 }
 
-function ProjectCard({ project: p, featured = false, sample }: { project: Project; featured?: boolean; sample: boolean }) {
-  const Wrapper = p.url ? "a" : "article";
-  const linkProps = p.url ? { href: p.url, target: "_blank", rel: "noopener noreferrer" } : {};
-
+function CaseDetail({ project: p }: { project: Project }) {
   return (
-    <Wrapper
-      {...linkProps}
-      className={cn(
-        "group relative grid h-full overflow-hidden rounded-[1.75rem] border border-line bg-paper transition-[translate,box-shadow] duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.25)]",
-        featured && "lg:grid-cols-[1.2fr_1fr]",
-      )}
-    >
-      <div className={cn("relative overflow-hidden bg-paper-3", featured ? "aspect-[16/10] lg:aspect-auto" : "aspect-[16/10]")}>
-        <Image
-          src={p.image.src}
-          alt={p.image.alt}
-          fill
-          sizes={featured ? "(min-width: 1024px) 55vw, 100vw" : "(min-width: 768px) 45vw, 100vw"}
-          className="object-cover object-top transition-transform duration-700 ease-out-expo group-hover:scale-[1.03]"
-        />
-        {sample && (
-          <span className="absolute left-4 top-4 rounded-full bg-ink px-3 py-1 text-[11px] font-medium text-paper">
-            Contoh
-          </span>
-        )}
-      </div>
-
-      <div className={cn("flex flex-col p-7", featured && "md:p-10")}>
-        <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-faint">
-          <span>{p.sector}</span>
-          <span aria-hidden>·</span>
-          <span>{p.year}</span>
-        </p>
-        <h3 className={cn("mt-3 font-display font-semibold tracking-tight", featured ? "text-3xl" : "text-2xl")}>
-          {p.title}
-        </h3>
-        <p className="mt-1 text-sm text-muted">{p.client}</p>
-
-        <dl className="mt-6 grid gap-4 text-[0.95rem] leading-relaxed">
-          <div>
-            <dt className="text-xs font-medium uppercase tracking-wider text-faint">Tantangan</dt>
-            <dd className="mt-1 text-muted">{p.problem}</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-medium uppercase tracking-wider text-orange-ink">Hasil</dt>
-            <dd className="mt-1 text-ink">{p.result}</dd>
-          </div>
-        </dl>
-
-        {p.highlight && (
-          <p className="mt-6 flex items-baseline gap-3 border-t border-line pt-6">
-            <span className="font-display text-4xl font-semibold tracking-[-0.04em]">{p.highlight.value}</span>
-            <span className="text-sm text-muted">{p.highlight.label}</span>
-          </p>
-        )}
-
-        {featured && p.testimonial && (
-          <blockquote className="mt-6 rounded-2xl bg-paper-2 p-5">
-            <Quote className="size-5 text-orange" aria-hidden />
-            <p className="mt-2 text-[0.95rem] leading-relaxed">{p.testimonial.quote}</p>
-            <footer className="mt-3 text-xs text-muted">
-              {p.testimonial.name} · {p.testimonial.role}
-            </footer>
-          </blockquote>
-        )}
-
-        <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-6">
-          {p.tags.map((t) => (
-            <span key={t} className="rounded-full bg-paper-2 px-3 py-1 text-[11px] text-muted ring-1 ring-line">
-              {t}
-            </span>
-          ))}
-          {p.url && (
-            <ArrowUpRight
-              className="ml-auto size-5 text-faint transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink"
-              aria-hidden
-            />
-          )}
+    <div id={`${p.id}-detail`} className="mt-20 md:mt-28">
+      {/* Challenge → solution → scope */}
+      <div data-reveal-group className="grid gap-10 md:grid-cols-3 md:gap-8">
+        <div data-reveal>
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">Tantangan</p>
+          <p className="mt-4 text-lg leading-relaxed text-muted">{p.problem}</p>
         </div>
+        <div data-reveal>
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-orange-ink">Solusi</p>
+          <p className="mt-4 text-lg leading-relaxed text-ink">{p.result}</p>
+        </div>
+        {p.scope && (
+          <div data-reveal>
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">Ruang lingkup</p>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {p.scope.map((s) => (
+                <li key={s} className="rounded-full bg-paper px-3.5 py-1.5 text-sm ring-1 ring-line">
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
-    </Wrapper>
+
+      {/* What we built */}
+      {p.components && (
+        <div className="mt-20 md:mt-24">
+          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <h3
+              data-split
+              className="max-w-[20ch] font-display text-[clamp(1.75rem,3.4vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.035em]"
+            >
+              Empat aplikasi yang bekerja sebagai satu sistem.
+            </h3>
+            <p data-reveal className="max-w-sm text-sm text-muted">
+              Setiap bagian dibangun terpisah agar mudah dirawat, lalu disatukan sehingga data mengalir otomatis dari
+              booth ke dashboard.
+            </p>
+          </div>
+
+          <ol data-reveal-group className="relative mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {/* Connector line behind the step icons on wide screens */}
+            <span
+              aria-hidden
+              data-grow
+              className="pointer-events-none absolute left-[12%] right-[12%] top-[3.25rem] hidden h-px bg-gradient-to-r from-orange/0 via-orange/50 to-orange/0 lg:block"
+            />
+            {p.components.map((c, i) => {
+              const Icon = COMPONENT_ICONS[i % COMPONENT_ICONS.length];
+              return (
+                <li
+                  key={c.title}
+                  data-reveal
+                  data-spotlight
+                  className="spotlight group relative flex flex-col rounded-[1.75rem] border border-line bg-paper p-7 transition-[translate,border-color] duration-500 ease-out-expo hover:-translate-y-1 hover:border-orange/40"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="relative z-10 grid size-12 place-items-center rounded-2xl bg-ink text-paper transition-colors duration-500 group-hover:bg-orange">
+                      <Icon className="size-5" aria-hidden />
+                    </span>
+                    <span className="font-mono text-xs text-faint">{String(i + 1).padStart(2, "0")}</span>
+                  </div>
+                  <h4 className="mt-8 font-display text-xl font-semibold leading-snug tracking-tight">{c.title}</h4>
+                  <p className="mt-3 text-[0.95rem] leading-relaxed text-muted">{c.body}</p>
+                  <ul className="mt-auto flex flex-wrap gap-1.5 pt-6">
+                    {c.tech.map((t) => (
+                      <li key={t} className="rounded-full bg-paper-2 px-2.5 py-1 font-mono text-[11px] text-muted ring-1 ring-line">
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      )}
+
+      {p.gallery && p.gallery.length > 0 && (
+        <div data-reveal className="mt-20 md:mt-24">
+          <CaseGallery images={p.gallery} label={`Tampilan ${p.client}`} />
+        </div>
+      )}
+
+      {p.testimonial && (
+        <blockquote data-reveal className="mt-20 max-w-3xl">
+          <p className="font-display text-[clamp(1.5rem,3vw,2.25rem)] font-medium leading-snug tracking-tight">
+            “{p.testimonial.quote}”
+          </p>
+          <footer className="mt-5 text-sm text-muted">
+            {p.testimonial.name} · {p.testimonial.role}
+          </footer>
+        </blockquote>
+      )}
+    </div>
   );
 }

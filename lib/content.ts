@@ -2,77 +2,111 @@
 /* Portfolio                                                           */
 /* ------------------------------------------------------------------ */
 
+export interface ProjectImage {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
 export interface Project {
-  /** Unique slug, e.g. "kasir-kopi-senja". */
+  /** Unique slug, e.g. "rekaruang". */
   id: string;
-  /** Business name as the client agreed to show it. */
+  /** Product or business name, as approved for publication. */
   client: string;
   sector: string;
-  /** What was built, in plain words. */
+  year: number;
+  /** One-line positioning of what was built. */
   title: string;
   /** Situation before, one or two sentences. */
   problem: string;
   /** What changed after, one or two sentences. */
   result: string;
-  /** Optional headline number, e.g. { value: "5 menit", label: "rekap harian, dari 2 jam" }. */
-  highlight?: { value: string; label: string };
-  /** Screenshot in /public/portfolio, ideally 1600×1000 WebP. */
-  image: { src: string; alt: string };
   tags: string[];
-  year: number;
-  /** Optional public link to the live app or website. */
+  /** Public link to the live product or website. */
   url?: string;
+  /** Square brand mark in /public/portfolio. */
+  logo?: string;
+  /** Brand accent used to tint the showcase. */
+  brandColor?: string;
+  /** Hero composition: a desktop screen plus an optional phone screen. */
+  hero: { desktop: ProjectImage; phone?: ProjectImage };
+  /** Facts about the build (not client outcome claims). */
+  facts?: Array<{ value: string; label: string }>;
+  /** What we delivered, as separate pieces of the system. */
+  components?: Array<{ title: string; body: string; tech: string[] }>;
+  gallery?: ProjectImage[];
+  scope?: string[];
   testimonial?: { quote: string; name: string; role: string };
 }
 
 /**
- * Real, client-approved projects only. The Portfolio section and its nav
- * link stay hidden in production until this list has at least one entry.
+ * Real projects only, in display order. The first one is shown as the
+ * featured case study. The section and its nav link are hidden while empty.
  */
-export const PROJECTS: Project[] = [];
-
-/**
- * Placeholder entries so the layout can be reviewed in `next dev`.
- * Never rendered in production builds, and visibly labelled as examples.
- */
-export const SAMPLE_PROJECTS: Project[] = [
+export const PROJECTS: Project[] = [
   {
-    id: "contoh-kasir",
-    client: "Nama usaha klien",
-    sector: "Kafe & Restoran",
-    title: "Sistem kasir & inventori untuk 3 cabang",
-    problem: "Ceritakan kondisi sebelum ada aplikasi, misalnya stok dicatat manual di buku tiap malam.",
-    result: "Ceritakan perubahan setelahnya, misalnya laporan harian langsung jadi tanpa rekap manual.",
-    highlight: { value: "00 menit", label: "contoh angka hasil" },
-    image: { src: "/services/kasir-stok.webp", alt: "Contoh tampilan aplikasi kasir" },
-    tags: ["Kasir", "Inventori", "Multi cabang"],
+    id: "rekaruang",
+    client: "RekaRuang",
+    sector: "Photobooth & hiburan",
     year: 2026,
-  },
-  {
-    id: "contoh-booking",
-    client: "Nama usaha klien",
-    sector: "Klinik & Kesehatan",
-    title: "Sistem reservasi online",
-    problem: "Kondisi sebelum.",
-    result: "Hasil setelahnya.",
-    image: { src: "/services/booking-online.webp", alt: "Contoh tampilan sistem booking" },
-    tags: ["Reservasi", "Pembayaran DP"],
-    year: 2026,
-  },
-  {
-    id: "contoh-kantor",
-    client: "Nama usaha klien",
-    sector: "Jasa & Konsultan",
-    title: "Aplikasi pengajuan dana kantor",
-    problem: "Kondisi sebelum.",
-    result: "Hasil setelahnya.",
-    image: { src: "/services/operasional-kantor.webp", alt: "Contoh tampilan aplikasi operasional" },
-    tags: ["Aplikasi operasional", "Persetujuan"],
-    year: 2026,
+    title: "Platform bisnis photobox multi-outlet",
+    problem:
+      "Pemilik photobox harus menunggui booth seharian, mencatat omzet secara manual, dan baru mengetahui kertas habis atau printer bermasalah setelah pelanggan mengeluh.",
+    result:
+      "Kiosk kini melayani pelanggan secara mandiri dengan pembayaran QRIS otomatis, sementara pemilik memantau omzet, stok kertas, dan kondisi setiap booth dari satu dashboard.",
+    tags: ["Aplikasi kiosk", "Dashboard multi-outlet", "Pembayaran QRIS", "Integrasi kamera & printer"],
+    url: "https://www.rekaruang.my.id",
+    logo: "/portfolio/rekaruang/icon.svg",
+    brandColor: "#DF301C",
+    hero: {
+      desktop: {
+        src: "/portfolio/rekaruang/dashboard.webp",
+        alt: "Dashboard RekaRuang: pendapatan hari ini, sesi, grafik pendapatan, dan status kiosk tiap outlet",
+      },
+      phone: {
+        src: "/portfolio/rekaruang/m-dashboard.webp",
+        alt: "Dashboard RekaRuang di ponsel dengan peringatan stok kertas menipis",
+      },
+    },
+    facts: [
+      { value: "4", label: "aplikasi dalam satu ekosistem" },
+      { value: "QRIS", label: "pembayaran otomatis di kiosk" },
+      { value: "Real-time", label: "status kamera, printer & kertas" },
+    ],
+    components: [
+      {
+        title: "Aplikasi kiosk layar sentuh",
+        body: "Alur pelanggan dari pilih paket, bayar, berpose, memilih frame, hingga cetak, tanpa perlu dibantu petugas.",
+        tech: ["Flutter", "Windows"],
+      },
+      {
+        title: "Layanan perangkat keras",
+        body: "Menghubungkan kiosk dengan kamera DSLR dan printer foto, termasuk pemantauan kondisi perangkat.",
+        tech: [".NET 8", "Canon EDSDK"],
+      },
+      {
+        title: "Backend & pembayaran",
+        body: "Mengelola sesi, paket, dan transaksi QRIS, lalu mengirim pembaruan ke kiosk dan dashboard secara instan.",
+        tech: ["Laravel 11", "Midtrans", "WebSocket"],
+      },
+      {
+        title: "Dashboard pemilik & portal unduh",
+        body: "Pemilik mengatur paket, frame, dan outlet dari mana saja. Pelanggan mengunduh softcopy cukup dengan memindai QR.",
+        tech: ["Next.js", "Cloudflare R2"],
+      },
+    ],
+    gallery: [
+      { src: "/portfolio/rekaruang/website.webp", alt: "Halaman utama website RekaRuang", caption: "Website produk" },
+      { src: "/portfolio/rekaruang/reports.webp", alt: "Laporan penjualan RekaRuang per outlet dan paket", caption: "Laporan penjualan" },
+      { src: "/portfolio/rekaruang/sessions.webp", alt: "Riwayat sesi foto pelanggan RekaRuang", caption: "Riwayat sesi" },
+      { src: "/portfolio/rekaruang/outlets.webp", alt: "Pengelolaan outlet dan kiosk RekaRuang", caption: "Outlet & kiosk" },
+      { src: "/portfolio/rekaruang/templates.webp", alt: "Katalog template frame foto RekaRuang", caption: "Template frame" },
+    ],
+    scope: ["Riset kebutuhan", "Desain UI/UX", "Aplikasi kiosk", "Integrasi perangkat keras", "Backend & pembayaran", "Dashboard web"],
   },
 ];
 
-export const SHOW_PORTFOLIO = PROJECTS.length > 0 || process.env.NODE_ENV !== "production";
+export const SHOW_PORTFOLIO = PROJECTS.length > 0;
 
 export const NAV_LINKS: ReadonlyArray<{ href: string; label: string }> = [
   { href: "#layanan", label: "Layanan" },
